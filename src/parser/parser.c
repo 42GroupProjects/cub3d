@@ -21,25 +21,12 @@ static int count_lines(char *filename)
     return (count);
 }
 
-static int check_extension(char *filename)
-{
-    int len;
-
-    len = ft_strlen(filename);
-    if (len < 4)
-        return (0);
-    return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
-}
-
-char **parse_map(char *filename)
+char **load_map(char *filename)
 {
     int fd;
-    int i;
     int lines;
     char **map;
-
-    if (!check_extension(filename))
-        return (NULL);
+    int i;
 
     lines = count_lines(filename);
     if (lines <= 0)
@@ -51,15 +38,50 @@ char **parse_map(char *filename)
 
     fd = open(filename, O_RDONLY);
     if (fd < 0)
+    {
+        free(map);
         return (NULL);
+    }
 
     i = 0;
     while (i < lines)
     {
         map[i] = get_next_line(fd);
+        if (!map[i])
+        {
+            free_map(map);
+            close(fd);
+            return (NULL);
+        }
         i++;
     }
     map[i] = NULL;
     close(fd);
+    return (map);
+}
+
+char **parse_map(char *filename)
+{
+    char **map;
+
+    if (!validate_file(filename))
+        return (NULL);
+
+    map = load_map(filename);
+    if (!map)
+        return (NULL);
+
+    if (!validate_characters(map))
+    {
+        free_map(map);
+        return (NULL);
+    }
+
+    if (validate_player_count(map) != 1)
+    {
+        free_map(map);
+        return (NULL);
+    }
+
     return (map);
 }

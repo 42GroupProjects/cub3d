@@ -25,5 +25,8 @@ typedef struct s_game
 char **parse_map(char *filename);
 void print_map(char **map);
 void free_map(char **map);
+int validate_characters(char **map);
+int validate_player_count(char **map);
+int validate_file(char *file);
 
 #endif
