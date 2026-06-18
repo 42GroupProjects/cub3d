@@ -1,24 +1,56 @@
 #include "cub3d.h"
 
+char **append_line(char **map, char *line)
+{
+    char **new_map;
+    int i;
+    int size;
+
+    size = 0;
+    while (map && map[size])
+        size++;
+
+    new_map = malloc(sizeof(char *) * (size + 2));
+    if (!new_map)
+        return (NULL);
+
+    i = 0;
+    while (i < size)
+    {
+        new_map[i] = map[i];
+        i++;
+    }
+
+    new_map[i] = ft_strdup(line);
+    new_map[i + 1] = NULL;
+
+    free(map);
+    return (new_map);
+}
+
 char **load_map(char *file)
 {
-    int fd;
-    char *line;
-    char **map;
+    int     fd;
+    char    *line;
+    char    **map;
+    char    **tmp;
 
     map = NULL;
     fd = open(file, O_RDONLY);
     if (fd < 0)
         return (NULL);
-
-    line = get_next_line(fd);
-    while (line)
+    while ((line = get_next_line(fd)))
     {
-        map = append_line(map, line);
+        tmp = append_line(map, line);
         free(line);
-        line = get_next_line(fd);
+        if (!tmp)
+        {
+            free_map(map);
+            close(fd);
+            return (NULL);
+        }
+        map = tmp;
     }
-
     close(fd);
     return (map);
 }
