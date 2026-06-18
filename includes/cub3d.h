@@ -8,13 +8,6 @@
 #include <fcntl.h>
 #include "../libft/libft.h"
 
-char **parse_map(char *filename);
-void print_map(char **map);
-void free_map(char **map);
-
-#define SCREEN_W 800
-#define SCREEN_H 600
-
 typedef struct s_game
 {
 	char **map;
@@ -22,11 +15,12 @@ typedef struct s_game
 	int height;
 } t_game;
 
-char **parse_map(char *filename);
+char **parse_map(char *file);
 void print_map(char **map);
 void free_map(char **map);
 int validate_characters(char **map);
 int validate_player_count(char **map);
 int validate_file(char *file);
+char **append_line(char **map, char *line);
 
 #endif
