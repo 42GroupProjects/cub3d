@@ -17,7 +17,7 @@ Run every test in `tests/valid/` and `tests/invalid/` before ticking any box.
 
 ## Phase 2 — Parser: Valid Maps (must all PASS)
 
-Run each file in `tests/valid/` and confirm the window opens and the player starts in the correct orientation.
+Run each file in `maps/m_valid/` and confirm the window opens and the player starts in the correct orientation.
 
 - [ ] `01_minimal_N.cub` — player faces North on startup
 - [ ] `02_large_S.cub` — player faces South on startup
@@ -31,7 +31,7 @@ Run each file in `tests/valid/` and confirm the window opens and the player star
 
 ## Phase 3 — Parser: Invalid Maps (must all REJECT with `Error\n`)
 
-Run each file in `tests/invalid/` and confirm it prints `Error\n` (and a message) without crashing or opening a window.
+Run each file in `maps/m_invalid/` and confirm it prints `Error\n` (and a message) without crashing or opening a window.
 
 - [ ] `01_no_spawn.cub` — rejected: no spawn point
 - [ ] `02_double_spawn.cub` — rejected: two spawn points
