@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+error_exit(char *message)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	ft_putchar_fd('\n', 2);
+	exit(EXIT_FAILURE);
+}
 static int validate_arguments(int argc, char **argv)
 {
 	char *ext;
@@ -8,7 +15,7 @@ static int validate_arguments(int argc, char **argv)
 
 	if (argc != 2)
 		error_exit(ERR_INVALID_ARG);
-	ext = ".ber";
+	ext = ".cub";
 	name = ft_strrchr(argv[1], '/');
 	if (name)
 		name++;
@@ -32,7 +39,7 @@ int main(int argc, char **argv)
 		printf("Usage: ./cub3D <map.cub>\n");
 		return (1);
 	}
-
+	validate_arguments(argc, argv);
 	map = parse_map(argv[1]);
 	if (!map)
 	{
