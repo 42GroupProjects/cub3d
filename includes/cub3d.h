@@ -6,13 +6,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
+#include "../libft/libft.h"
 
-char	**parse_map(char *filename);
-void	print_map(char **map);
-void	free_map(char **map);
-
+char **parse_map(char *filename);
+void print_map(char **map);
+void free_map(char **map);
 
 #define SCREEN_W 800
 #define SCREEN_H 600
