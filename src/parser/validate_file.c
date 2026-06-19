@@ -1,21 +1,21 @@
 #include "cub3d.h"
 
-/* File must end in ".cub" (and have something before the extension). */
+/** TRUE if `file` ends in ".cub" with at least one char before it. */
 static int	check_extension(char *file)
 {
 	int	len;
 
 	if (!file)
-		return (0);
+		return (FALSE);
 	len = ft_strlen(file);
-	if (len <= 4)
-		return (0);
-	if (ft_strncmp(file + len - 4, ".cub", 4) != 0)
-		return (0);
-	return (1);
+	if (len <= FILE_EXT_LENGTH)
+		return (FALSE);
+	if (ft_strncmp(file + len - FILE_EXT_LENGTH, ".cub", FILE_EXT_LENGTH) != 0)
+		return (FALSE);
+	return (TRUE);
 }
 
-/* Reject directories: open() succeeds on a dir but read() returns -1. */
+/** TRUE if `file` is a regular readable file (a directory read()s as -1). */
 static int	check_not_directory(char *file)
 {
 	int		fd;
@@ -24,15 +24,15 @@ static int	check_not_directory(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (FALSE);
 	ret = read(fd, &buffer, 1);
 	close(fd);
 	if (ret < 0)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
-/* Extension + openable + not-a-directory. Prints the precise error. */
+/** Extension + openable + not a directory. SUCCESS / FAILURE. */
 int	validate_file(char *file)
 {
 	int	fd;
@@ -45,5 +45,5 @@ int	validate_file(char *file)
 	close(fd);
 	if (!check_not_directory(file))
 		return (parse_error(ERR_FILE_READ));
-	return (1);
+	return (SUCCESS);
 }
