@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-/* Longest row length across the whole grid. */
+/** Longest row length across the whole grid. */
 static int	max_width(char **map)
 {
 	int	i;
@@ -19,7 +19,7 @@ static int	max_width(char **map)
 	return (max);
 }
 
-/* Rebuild one row padded to `width` with trailing spaces. */
+/** Rebuild one row padded to `width` with trailing spaces. SUCCESS / OOM. */
 static int	pad_row(char **row, int width)
 {
 	char	*new_row;
@@ -29,7 +29,7 @@ static int	pad_row(char **row, int width)
 	len = ft_strlen(*row);
 	new_row = malloc(width + 1);
 	if (!new_row)
-		return (0);
+		return (OOM);
 	i = 0;
 	while (i < len)
 	{
@@ -41,10 +41,14 @@ static int	pad_row(char **row, int width)
 	new_row[i] = '\0';
 	free(*row);
 	*row = new_row;
-	return (1);
+	return (SUCCESS);
 }
 
-/* Copy the map block (lines[map_start..]) into game->map, set height. */
+/**
+ * Copy the map block (lines[map_start..]) into game->map and set height.
+ * Returns SUCCESS, FAILURE (no map content) or OOM. On OOM mid-copy the
+ * partial grid is freed and game->map reset to NULL.
+ */
 int	extract_map(t_game *game, char **lines, int map_start)
 {
 	int	count;
@@ -57,21 +61,20 @@ int	extract_map(t_game *game, char **lines, int map_start)
 		return (parse_error(ERR_NO_MAP));
 	game->map = ft_calloc(count + 1, sizeof(char *));
 	if (!game->map)
-		return (parse_error(ERR_MALLOC));
+		return (oom_error());
 	i = 0;
 	while (i < count)
 	{
 		game->map[i] = ft_strdup(lines[map_start + i]);
 		if (!game->map[i])
-			return (free_map(game->map), game->map = NULL,
-				parse_error(ERR_MALLOC));
+			return (free_strarr(&game->map), oom_error());
 		i++;
 	}
 	game->height = count;
-	return (1);
+	return (SUCCESS);
 }
 
-/* Normalize: pad all rows to the max width so grid[y][x] is always safe. */
+/** Pad all rows to the max width so grid[y][x] is always safe. SUCCESS / OOM. */
 int	normalize_map(t_game *game)
 {
 	int	i;
@@ -81,10 +84,10 @@ int	normalize_map(t_game *game)
 	i = 0;
 	while (game->map[i])
 	{
-		if (!pad_row(&game->map[i], width))
-			return (parse_error(ERR_MALLOC));
+		if (pad_row(&game->map[i], width) != SUCCESS)
+			return (oom_error());
 		i++;
 	}
 	game->width = width;
-	return (1);
+	return (SUCCESS);
 }
