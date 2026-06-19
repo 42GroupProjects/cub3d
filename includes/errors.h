@@ -32,4 +32,13 @@
 #define ERR_MLX_IMAGE "Failed to load asset"
 #define ERR_INVALID_EXT "Invalid file extension (must be .cub)"
 
+/* Header (textures + colors) errors */
+#define ERR_DUP_TEX "Duplicate texture identifier (NO/SO/WE/EA)"
+#define ERR_EMPTY_TEX "Empty texture path"
+#define ERR_MISSING_TEX "Missing texture identifier (need NO, SO, WE, EA)"
+#define ERR_DUP_COLOR "Duplicate color identifier (F/C)"
+#define ERR_BAD_COLOR "Invalid color (expected R,G,B with each 0-255)"
+#define ERR_MISSING_COLOR "Missing floor (F) or ceiling (C) color"
+#define ERR_NO_MAP "Map content is missing"
+
 #endif

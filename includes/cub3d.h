@@ -25,17 +25,46 @@
 
 typedef struct s_game
 {
-	char **map;
-	int width;
-	int height;
-} t_game;
+	char	*no_tex;
+	char	*so_tex;
+	char	*we_tex;
+	char	*ea_tex;
+	int		floor[3];
+	int		ceiling[3];
+	int		has_floor;
+	int		has_ceiling;
+	char	**map;
+	int		width;
+	int		height;
+}	t_game;
 
-char **parse_map(char *file);
-void print_map(char **map);
-void free_map(char **map);
-int validate_characters(char **map);
-int validate_player_count(char **map);
-int validate_file(char *file);
-char **append_line(char **map, char *line);
+/* orchestrator */
+int		parse_config(t_game *game, char *file);
+
+/* file / header */
+int		validate_file(char *file);
+int		parse_header(t_game *game, char **lines, int *map_start);
+int		set_texture(char **dst, char *value);
+int		set_color(int *rgb, char *value, int *flag);
+
+/* map */
+char	**append_line(char **map, char *line);
+int		extract_map(t_game *game, char **lines, int map_start);
+int		normalize_map(t_game *game);
+int		validate_map_layout(t_game *game);
+int		validate_characters(char **map);
+int		validate_player_count(char **map);
+
+/* output / cleanup */
+void	print_config(t_game *game);
+void	print_map(char **map);
+void	free_config(t_game *game);
+void	free_map(char **map);
+
+/* utils */
+int		parse_error(char *msg);
+char	*skip_spaces(char *s);
+int		match_id(char *line, char *id);
+int		is_blank(char *line);
 
 #endif
