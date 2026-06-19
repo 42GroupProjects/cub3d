@@ -51,22 +51,5 @@ int	validate_player_count(char **map)
 	return (count == 1);
 }
 
-/**
- * STUB — the map is treated as valid for now (returns SUCCESS).
- *
- * This is YOUR hook. Implement the layout checks here, returning FAILURE
- * (via parse_error) when the map is rejected, e.g.:
- *   if (!validate_characters(game->map))
- *       return (parse_error(ERR_MAP_INVALID));
- *   if (!validate_player_count(game->map))
- *       return (parse_error(ERR_MAP_NO_PLAYER));
- *   flood fill / closure check to ensure the map is sealed by walls.
- *
- * The grid is already normalized (rectangular, space-padded), so
- * game->map[y][x] is safe for 0 <= y < height, 0 <= x < width.
- */
-int	validate_map_layout(t_game *game)
-{
-	(void)game;
-	return (SUCCESS);
-}
+/* validate_map_layout() now lives in flood_fill.c (it calls the two
+ * helpers above plus the DFS enclosure check). */

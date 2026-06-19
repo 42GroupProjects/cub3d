@@ -21,7 +21,7 @@
 #define ERR_MAP_NOT_RECT "Map is not rectangular"
 #define ERR_MAP_NOT_CLOSED "Map must be closed by walls"
 #define ERR_MAP_INVALID "Map is invalid"
-#define ERR_MAP_NO_PLAYER "Map must contain exactly one player (P)"
+#define ERR_MAP_NO_PLAYER "Map must contain exactly one player (N/S/E/W)"
 #define ERR_MAP_NO_EXIT "Map must contain exactly one exit (E)"
 #define ERR_MAP_NO_COLLECT "Map must contain at least one collectible (C)"
 #define ERR_MAP_NO_PATH "Map must have a valid path"
