@@ -2,3 +2,6 @@
 *.pdf
 *.swp
 *.out
+/libft
+/obj
+cub3d
