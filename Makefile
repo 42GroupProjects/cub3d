@@ -1,49 +1,47 @@
-SRC := main.c
-	
-OBJ := $(SRC:.c=.o)
+NAME        = cub3d
 
-CC := cc
-CFLAGS := -Wall -Wextra -Werror
-INCLUDES := -Imlx -I Libft/include -I ft_printf/include -I ft_gnl/include
-LDLIBS := -lmlx -lXext -lX11 -lm
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror
 
-NAME := cub3d
-LIBFT_DIR := Libft
-LIBFT := $(LIBFT_DIR)/libft.a
-FT_PRINTF_DIR := ft_printf
-FT_PRINTF := $(FT_PRINTF_DIR)/libftprintf.a
-FT_GNL_DIR := ft_gnl
-FT_GNL := $(FT_GNL_DIR)/gnl.a
+SRC_DIR     = src
+OBJ_DIR     = obj
+INC_DIR     = includes
+LIBFT_DIR   = libft
 
-all: $(LIBFT) $(FT_PRINTF) $(FT_GNL) $(NAME)
+INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR)
+
+LIBFT       = $(LIBFT_DIR)/libft.a
+LIBS        = $(LIBFT) -lmlx -lXext -lX11 -lm
+
+SRCS 		= $(shell find $(SRC_DIR) -name "*.c")
+
+OBJS        = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 $(LIBFT):
-			@$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(FT_PRINTF):
-			@$(MAKE) -C $(FT_PRINTF_DIR)
-
-$(FT_GNL):
-			@$(MAKE) -C $(FT_GNL_DIR)
-
-%.o: %.c
-			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(NAME): $(OBJ)
-			$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(FT_PRINTF) $(FT_GNL) $(LSLIBS) -o $(NAME)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-			@rm -f $(OBJ)
-			@$(MAKE) -C $(FT_GNL_DIR) clean
-			@$(MAKE) -C $(FT_PRINTF_DIR) clean
-			@$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) clean -C $(LIBFT_DIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-			@rm -f $(NAME)
-			@$(MAKE) -C $(FT_GNL_DIR) fclean
-			@$(MAKE) -C $(FT_PRINTF_DIR) fclean
-			@$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	rm -f $(NAME)
+
+debug: CFLAGS += -g
+
+demo: all clean
+	./$(NAME) maps/demo.cub
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug demo
