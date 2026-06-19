@@ -6,13 +6,16 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 15:19:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/18 20:13:50 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/06/18 20:52:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <math.h>
+#include <stdio.h>
 #define TILE 32
+#define ARROW_LEFT 65361
+#define ARROW_RIGHT 65363
 
 typedef struct s_img
 {
@@ -31,14 +34,16 @@ typedef struct s_player
 }	t_player;
 
 char	*map[] = {
-	"11111",
-	"10001",
-	"10001",
-	"10101",
-	"10001",
-	"10P01",
-	"10001",
-	"11111",
+	"1111111",
+	"1111111",
+	"1100011",
+	"1100011",
+	"1101011",
+	"1100011",
+	"110P011",
+	"1100011",
+	"1111111",
+	"1111111"
 };
 
 void	put_pixel(t_img *img, int x, int y, int color)
@@ -94,6 +99,39 @@ void	draw_direction(t_img *img, t_player *p)
 		put_pixel(img, p->x + dir_x * i, p->y + dir_y * i, 0x00FF00);
 }
 
+void	cast_ray(t_img *img, t_player *p)
+{
+	float	ray_x;
+	float	ray_y;
+	float	dir_x;
+	float	dir_y;
+
+	ray_x = p->x;
+	ray_y = p->y;
+	dir_x = cos(p->angle);
+	dir_y = sin(p->angle);
+	while (1)
+	{
+		ray_x += dir_x;
+		ray_y += dir_y;
+		int	map_x = ray_x / TILE;
+		int	map_y = ray_y / TILE;
+		if (map[map_y][map_x] == '1')
+			break;
+		put_pixel(img, ray_x, ray_y, 0xFFFFFF);
+	}
+}
+
+int	key_hook(int keycode, t_player *p)
+{
+//	(void)p;
+//	printf("keycode = %d\n", keycode);
+	if (keycode == ARROW_LEFT)
+		p->angle -= 0.1;
+	if (keycode == ARROW_RIGHT)
+		p->angle += 0.1;
+	return (0);
+}
 int	main(void)
 {
 	void	*mlx;
@@ -107,8 +145,10 @@ int	main(void)
 	img.img = mlx_new_image(mlx, 400, 400);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
 	draw_map(&img, &player);
+	cast_ray(&img, &player);
 	draw_player(&img, &player);
-	draw_direction(&img, &player);
+	//draw_direction(&img, &player);
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
+	mlx_key_hook(win, key_hook, &player);
 	mlx_loop(mlx);
 }
