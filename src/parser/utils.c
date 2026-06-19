@@ -1,16 +1,31 @@
 #include "cub3d.h"
 
-/* Print "Error\n<msg>" to stderr and return 0 so callers can do:
- *   return (parse_error(ERR_...));                                          */
+/**
+ * Print "Error\n<msg>" to stderr and return FAILURE, so a caller can write:
+ *   return (parse_error(ERR_...));   // bad input / invalid map
+ */
 int	parse_error(char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putchar_fd('\n', 2);
-	return (0);
+	return (FAILURE);
 }
 
-/* Advance past leading spaces/tabs and return the new position. */
+/**
+ * Print the allocation-failure message and return OOM, kept distinct from
+ * parse_error so the caller can tell "out of memory" from "bad input":
+ *   return (oom_error());
+ */
+int	oom_error(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(ERR_MALLOC, 2);
+	ft_putchar_fd('\n', 2);
+	return (OOM);
+}
+
+/** Advance past leading spaces/tabs and return the new position. */
 char	*skip_spaces(char *s)
 {
 	while (*s == ' ' || *s == '\t')
@@ -18,21 +33,23 @@ char	*skip_spaces(char *s)
 	return (s);
 }
 
-/* Return 1 if line begins with identifier `id` followed by a space/tab.
- * Guards against "NORTH" being mistaken for the "NO" identifier.          */
+/**
+ * TRUE if `line` begins with `id` followed by a space/tab. Guards against
+ * "NORTH" being mistaken for the "NO" identifier.
+ */
 int	match_id(char *line, char *id)
 {
 	int	len;
 
 	len = ft_strlen(id);
 	if (ft_strncmp(line, id, len) != 0)
-		return (0);
+		return (FALSE);
 	if (line[len] != ' ' && line[len] != '\t')
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
-/* Return 1 if line is empty or only whitespace. */
+/** TRUE if `line` is empty or contains only whitespace. */
 int	is_blank(char *line)
 {
 	int	i;
@@ -41,8 +58,8 @@ int	is_blank(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\t')
-			return (0);
+			return (FALSE);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
