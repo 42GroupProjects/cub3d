@@ -7,7 +7,7 @@ The 42 cub3D subject has very specific requirements. Read every section here bef
 ## Mandatory Requirements
 
 | Requirement | Exact specification |
-|-------------|-------------------|
+|-------------|---------------------|
 | Library | Must use **MiniLibX** only |
 | Window | Must not freeze, minimize correctly, support ESC and red-X close |
 | Textures | N/S/E/W walls must each use a **different** texture |
@@ -22,6 +22,7 @@ The 42 cub3D subject has very specific requirements. Read every section here bef
 ## What Needs To Be Rejected
 
 Your parser must reject:
+
 - Missing or duplicate header identifiers (`NO`, `SO`, `WE`, `EA`, `F`, `C`)
 - RGB values outside 0–255 or containing non-numeric characters
 - Maps with no spawn point or more than one spawn point
@@ -37,6 +38,7 @@ Your parser must reject:
 ## What Is Bonus (Only After Mandatory Is Perfect)
 
 Official bonus list (subject verbatim):
+
 1. Wall collisions (sliding, not wall-stop)
 2. A minimap
 3. Doors
@@ -84,12 +86,14 @@ make
 ## AI Usage Policy
 
 From the 42 subject AI section:
+
 1. Use AI only for content you **fully understand**
 2. Seek **peer review systematically**
 3. **Declare** AI assistance explicitly
 4. Evaluators **may ask you to explain or modify** any AI-assisted code
 
 **In practice:**
+
 - Log every AI session in `docs/journal/ai_usage_log.md`
 - Both partners review every AI output before it enters any source file
 - Never commit code you cannot explain line-by-line under oral questioning

@@ -7,7 +7,7 @@ Use this table to drive your sessions. Do not proceed to the next row until the 
 ## Intensive 12-Day Timeline
 
 | Day | Module | Goal | ✅ Checkpoint |
-|-----|--------|------|--------------|
+|-----|--------|------|---------------|
 | **1 AM** | 01-foundation | Window opens, ESC + X button close cleanly | Black window with no crash |
 | **1 PM** | 01-foundation | Image buffer + colored rectangle renders | Red square visible on screen |
 | **2 AM** | 01-foundation | Direction vector visualized — arrow rotates with left/right | Line segment changes direction |
@@ -31,13 +31,14 @@ Use this table to drive your sessions. Do not proceed to the next row until the 
 Copy this block into your journal when you start each day. Check off items as you go.
 
 ```
+
 [ ] Window opens                    (Day 1 AM)
 [ ] Buffer renders a pixel          (Day 1 PM)
 [ ] Direction arrow rotates         (Day 2 AM)
 [ ] 2D grid canvas done             (Day 2 PM)
-[ ] Header parsed correctly         (Day 3)
-[ ] Map extracted + padded          (Day 4 AM)
-[ ] All 15 invalid maps rejected    (Day 4 PM)
+[x] Header parsed correctly         (Day 3)
+[x] Map extracted + padded          (Day 4 AM)
+[x] All 15 invalid maps rejected    (Day 4 PM)
 [ ] Center debug ray visible        (Day 5)
 [ ] Flat-color walls render         (Day 6)
 [ ] No fisheye on long corridor     (Day 7)

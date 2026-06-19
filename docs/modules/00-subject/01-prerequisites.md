@@ -7,9 +7,11 @@ Complete every item before opening the first lesson. This is not optional.
 ## Read First: Theory Resources
 
 ### 1. Lode's Raycasting Tutorial (MANDATORY)
-**URL:** https://lodev.org/cgtutor/raycasting.html
+
+**URL:** <https://lodev.org/cgtutor/raycasting.html>
 
 Work through Parts 1–3:
+
 - Part 1: Basic DDA raycasting with flat-colored walls
 - Part 2: Floor and ceiling casting
 - Part 3: Sprite casting (needed for Module 08)
@@ -17,9 +19,11 @@ Work through Parts 1–3:
 **What to extract:** Understand `deltaDistX`, `sideDistX`, `perpWallDist`, and why we use the camera plane. You will implement these formulas yourself. Read, do not copy.
 
 ### 2. Permadi's Tutorial (RECOMMENDED)
-**URL:** https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
+
+**URL:** <https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/>
 
 This gives the visual intuition that Lode's tutorial assumes. Permadi explains:
+
 - How a ray hits a wall geometrically
 - The fish-eye problem with a diagram
 - The relationship between viewing angle and distance
@@ -27,11 +31,13 @@ This gives the visual intuition that Lode's tutorial assumes. Permadi explains:
 Read sections 1–9 for the geometric foundation.
 
 ### 3. MiniLibX Documentation
-**URL:** https://harm-smits.github.io/42docs/libs/minilibx
+
+**URL:** <https://harm-smits.github.io/42docs/libs/minilibx>
 
 Reference for all MLX function signatures, hook event codes, and image buffer usage. Keep this open while working on Module 01.
 
 **macOS key event codes** you will need:
+
 ```c
 #define KEY_ESC     53
 #define KEY_W       13
@@ -45,14 +51,17 @@ Reference for all MLX function signatures, hook event codes, and image buffer us
 ```
 
 ### 4. Aurelien Brabant MLX Guide (RECOMMENDED)
-**URL:** https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx
+
+**URL:** <https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx>
 
 Explains the offscreen image buffer pattern that is the core rendering technique for this project. After reading, you should understand why `mlx_pixel_put` is wrong and `mlx_put_image_to_window` on an offscreen buffer is right.
 
 ### 5. Game Engine Black Book: Wolfenstein 3D (OPTIONAL but inspiring)
-**URL:** https://fabiensanglard.net/gebbwolf3d/
+
+**URL:** <https://fabiensanglard.net/gebbwolf3d/>
 
 The Game Engine Black Book documents how John Carmack built the raycasting engine in Wolfenstein 3D. Chapter 5 is particularly relevant:
+
 - Why integer/fixed-point arithmetic was used instead of floats (speed)
 - How texture mapping was implemented
 - The optical tricks used to create depth

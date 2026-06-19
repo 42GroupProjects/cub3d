@@ -1,6 +1,7 @@
 # 01 — MLX Basics: Window, Hooks, and the Game Loop
 
 ## Outcome
+
 You can open a window, register keyboard hooks properly, and run a controlled game loop that executes at a fixed timestep.
 
 ---
@@ -37,6 +38,7 @@ int main(void)
     return (0);
 }
 ```
+
 `mlx_loop` is a blocking infinite loop. Any code below it never executes.
 
 **Mistake 2: Not checking return values**
@@ -90,8 +92,6 @@ int main(void)
     return (0);
 }
 ```
-
-
 
 ## 2. The Hook System
 

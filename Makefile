@@ -1,7 +1,7 @@
 NAME        = cub3d
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror
 
 SRC_DIR     = src
 OBJ_DIR     = obj
@@ -37,6 +37,11 @@ fclean: clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
 	rm -f $(NAME)
 
+debug: CFLAGS += -g
+
+demo: all clean
+	./$(NAME) maps/demo.cub
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug demo

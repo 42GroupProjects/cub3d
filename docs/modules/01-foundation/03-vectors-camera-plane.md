@@ -1,6 +1,7 @@
 # 03 — Vectors and Camera Plane
 
 ## Outcome
+
 You understand the two vectors that drive all of Cub3D's rendering: the player's **direction vector** and the **camera plane**. You can set them from a spawn direction and rotate them correctly.
 
 ---
@@ -10,11 +11,12 @@ You understand the two vectors that drive all of Cub3D's rendering: the player's
 Cub3D rendering lives entirely in 2D vector math. You never use angles directly during raycasting. Instead, you keep two 2D vectors that describe where the player is and where the camera looks.
 
 | Vector | What it is | Example (facing East) |
-|--------|-----------|----------------------|
+|--------|-----------|------------------------|
 | `dir` | Unit vector pointing in the player's facing direction | `(1, 0)` |
 | `plane` | Camera plane: perpendicular to `dir`, scaled by FOV | `(0, 0.66)` |
 
 The length of `plane` relative to `dir` sets the Field of View:
+
 - `|plane| = 0.66` → ~66° FOV (the standard Lode tutorial value)
 
 > [!IMPORTANT]
