@@ -1,22 +1,25 @@
 #include "cub3d.h"
 
+/** Print the command-line usage to stderr. */
 static void	usage(void)
 {
 	ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2);
 }
 
+/**
+ * Entry point. Validates argc, runs the parser, prints the parsed config.
+ * free_config runs on BOTH the success and the error path, so a failure
+ * partway through parsing never leaks the work already allocated.
+ */
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
 	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
-	{
-		usage();
-		return (1);
-	}
-	if (!parse_config(&game, argv[1]))
-		return (1);
+		return (usage(), 1);
+	if (parse_config(&game, argv[1]) != SUCCESS)
+		return (free_config(&game), 1);
 	print_config(&game);
 	free_config(&game);
 	return (0);
