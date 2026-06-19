@@ -1,7 +1,10 @@
 #include "cub3d.h"
 
-/* Store one texture path. Rejects a second occurrence (*dst already set)
- * so a duplicate NO/SO/WE/EA does not silently leak the first path.       */
+/**
+ * Store one texture path into *dst. A second occurrence is rejected so a
+ * duplicate NO/SO/WE/EA cannot silently leak the first path.
+ * Returns SUCCESS, FAILURE (duplicate / empty path) or OOM (strdup failed).
+ */
 int	set_texture(char **dst, char *value)
 {
 	char	*path;
@@ -13,7 +16,7 @@ int	set_texture(char **dst, char *value)
 		return (parse_error(ERR_EMPTY_TEX));
 	path = ft_strdup(value);
 	if (!path)
-		return (parse_error(ERR_MALLOC));
+		return (oom_error());
 	*dst = path;
-	return (1);
+	return (SUCCESS);
 }
