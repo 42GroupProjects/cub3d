@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-/* Count entries in a NULL-terminated array. */
+/** Count entries in a NULL-terminated array. */
 static int	count_words(char **words)
 {
 	int	n;
@@ -11,44 +11,47 @@ static int	count_words(char **words)
 	return (n);
 }
 
-/* Valid byte = non-empty, all digits, value in [0, 255]. */
+/** TRUE if `s` is a non-empty all-digit value in [0, RGB_MAX]. */
 static int	is_valid_byte(char *s)
 {
 	int	i;
 
 	if (!s[0])
-		return (0);
+		return (FALSE);
 	i = 0;
 	while (s[i])
 	{
 		if (!ft_isdigit((unsigned char)s[i]))
-			return (0);
+			return (FALSE);
 		i++;
 	}
-	if (ft_atoi(s) < 0 || ft_atoi(s) > 255)
-		return (0);
-	return (1);
+	if (ft_atoi(s) < 0 || ft_atoi(s) > RGB_MAX)
+		return (FALSE);
+	return (TRUE);
 }
 
-/* Validate exactly 3 byte components and store them into rgb[0..2]. */
+/** TRUE when `parts` holds exactly RGB_COUNT valid bytes; stores into rgb. */
 static int	fill_rgb(int *rgb, char **parts)
 {
 	int	i;
 
-	if (count_words(parts) != 3)
-		return (0);
+	if (count_words(parts) != RGB_COUNT)
+		return (FALSE);
 	i = 0;
-	while (i < 3)
+	while (i < RGB_COUNT)
 	{
 		if (!is_valid_byte(parts[i]))
-			return (0);
+			return (FALSE);
 		rgb[i] = ft_atoi(parts[i]);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
-/* Parse "R,G,B" into rgb. *flag guards against a duplicate F/C line. */
+/**
+ * Parse "R,G,B" from `value` into rgb; *flag guards against a duplicate F/C.
+ * Returns SUCCESS, FAILURE (duplicate / invalid color) or OOM (split failed).
+ */
 int	set_color(int *rgb, char *value, int *flag)
 {
 	char	**parts;
@@ -58,10 +61,10 @@ int	set_color(int *rgb, char *value, int *flag)
 	value = skip_spaces(value);
 	parts = ft_split(value, ',');
 	if (!parts)
-		return (parse_error(ERR_MALLOC));
+		return (oom_error());
 	if (!fill_rgb(rgb, parts))
-		return (free_map(parts), parse_error(ERR_BAD_COLOR));
-	free_map(parts);
-	*flag = 1;
-	return (1);
+		return (free_strarr(&parts), parse_error(ERR_BAD_COLOR));
+	free_strarr(&parts);
+	*flag = TRUE;
+	return (SUCCESS);
 }
