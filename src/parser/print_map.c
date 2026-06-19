@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-/* Print each row + newline (newlines were stripped during loading). */
+/** Print each row + newline (newlines were stripped during loading). */
 void	print_map(char **map)
 {
 	int	i;
@@ -13,7 +13,7 @@ void	print_map(char **map)
 	}
 }
 
-/* Debug dump of the fully parsed config: textures, colors, then the grid. */
+/** Debug dump of the fully parsed config: textures, colors, then the grid. */
 void	print_config(t_game *game)
 {
 	int	*f;
