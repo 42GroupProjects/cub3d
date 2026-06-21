@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 15:19:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/18 20:52:03 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/06/19 16:54:15 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int	key_hook(int keycode, t_player *p)
 		p->angle -= 0.1;
 	if (keycode == ARROW_RIGHT)
 		p->angle += 0.1;
+	printf("%f\n", p->angle);
 	return (0);
 }
 int	main(void)
@@ -144,11 +145,11 @@ int	main(void)
 	win = mlx_new_window(mlx, 400, 400, "Raycaster");
 	img.img = mlx_new_image(mlx, 400, 400);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
+	mlx_key_hook(win, key_hook, &player);
 	draw_map(&img, &player);
 	cast_ray(&img, &player);
 	draw_player(&img, &player);
 	//draw_direction(&img, &player);
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-	mlx_key_hook(win, key_hook, &player);
 	mlx_loop(mlx);
 }
