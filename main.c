@@ -5,90 +5,110 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 20:18:11 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/10 20:42:44 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/06/18 15:19:37 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/06/18 20:13:50 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <mlx.h>
+#include <math.h>
+#define TILE 32
 
-static void	free_map(char **arr, int i)
+typedef struct s_img
 {
-	if (i <= 0)
-		return ;
-	while (i >= 0)
-	{
-		free(arr[i]);
-		i--;
-	}
-	free(arr);
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+}	t_player;
+
+char	*map[] = {
+	"11111",
+	"10001",
+	"10001",
+	"10101",
+	"10001",
+	"10P01",
+	"10001",
+	"11111",
+};
+
+void	put_pixel(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len) + (x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-static char	**get_map(int h, int w)
+void	draw_square(t_img *img, int x, int y, int size, int color)
 {
-	char	**map;
-	int		i;
-	int		j;
-	map = malloc(sizeof(char *) * (h + 1));
-	if (!map)
-		return (NULL);
-	i = -1;
-	while (++i < h)
+	for (int y0 = 0; y0 < size; y0++)
 	{
-		j = -1;
-		map[i] = malloc(sizeof(char) * (w + 1));
-		if (!map[i])
-			return (free_map(map, i), NULL);	//need to free this
-		while (++j < w)
-		{
-			if (i == 0 || i == h - 1)
-				map[i][j] = '1';
-			else if (j == 0 || j == w - 1)
-				map[i][j] = '1';
-			else
-				map[i][j] = '0';
-		}
-		if (j == w)
-			map[i][j] = '\0';
+		for (int x0 = 0; x0 < size; x0++)
+			put_pixel(img, x + x0, y + y0, color);
 	}
-	if (i == h)
-		map[i] = NULL;
-	return (map);
+}
+
+void	draw_map(t_img *img, t_player *p)
+{
+	for (int y = 0; map[y]; y++)
+	{
+		for (int x = 0; map[y][x]; x++)
+		{
+			if (map[y][x] == '1')
+				draw_square(img, x * TILE, y * TILE, TILE, 0xFF0000);
+			else if (map[y][x] == '0')
+				draw_square(img, x * TILE, y * TILE, TILE, 0x000000);
+			else if (map[y][x] == 'P')
+			{
+				p->x = x * TILE + TILE / 2;
+				p->y = y * TILE + TILE / 2;
+				draw_square(img, x * TILE, y * TILE, TILE, 0xFFFF00);
+			}
+		}
+	}
+}
+
+void	draw_player(t_img *img, t_player *p)
+{
+	draw_square(img, p->x - 3, p->y - 3, 6, 0x00FFFF);
+}
+
+void	draw_direction(t_img *img, t_player *p)
+{
+	float	dir_x;
+	float	dir_y;
+
+	dir_x = cos(p->angle);
+	dir_y = sin(p->angle);
+	for (int i = 0; i < 30; i++)
+		put_pixel(img, p->x + dir_x * i, p->y + dir_y * i, 0x00FF00);
 }
 
 int	main(void)
 {
-	t_cub	*cub;
-	int		i;
-	int		j;
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	t_player	player;
 
-	cub = malloc(sizeof(t_cub) * 1);
-	if (!cub)
-		return (1);
-	cub->mlx = NULL;
-	cub->win = NULL;
-	cub->map = NULL;
-	cub->map_h = 8;
-	cub->map_w = 8;
-	cub->map = get_map(cub->map_h, cub->map_w);
-	if (!cub->map)
-		return (3);
-	if (init_images(&cub) != 0)
-		return (4);
-	cub->mlx = mlx_init();
-	if (!cub->mlx)
-		return (1);	//free_everything
-	cub->win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "TEST");
-	if (!cub->win)
-		return (2);	//free everything
-	//mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
-	mlx_loop_hook(cub->mlx, render_next_frame, &cub);
-	//mlx_hook(cub.win, 17, 0, on_x, &cub);
-	mlx_loop(cub->mlx);
-	//i = 0;
-	//while (cub->map[i])
-	//	printf("%s\n", cub->map[i++]);
+	player.angle = 0;
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 400, 400, "Raycaster");
+	img.img = mlx_new_image(mlx, 400, 400);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
+	draw_map(&img, &player);
+	draw_player(&img, &player);
+	draw_direction(&img, &player);
+	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
+	mlx_loop(mlx);
 }

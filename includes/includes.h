@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "../libft/include/libft.h"
 # include "errors.h"
 
 #endif
