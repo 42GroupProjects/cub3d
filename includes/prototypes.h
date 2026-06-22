@@ -65,5 +65,6 @@ char	*skip_spaces(char *s);
 int		match_id(char *line, char *id);
 /** TRUE if `line` is empty or only whitespace. */
 int		is_blank(char *line);
-
+/** TRUE if initializing of struct successful. */
+int		init_game(t_cub *c, t_game *g);
 #endif

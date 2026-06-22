@@ -31,4 +31,13 @@
 # define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
+/* Window size and tile sizes */
+# define WIDTH 400
+# define HEIGHT 400
+# define TS 32
+
+/* Navigation input (arrow, wasd,..) */
+# define ARROW_LEFT 65361
+# define ARROW_RIGHT 65363
+
 #endif
