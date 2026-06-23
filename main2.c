@@ -6,45 +6,9 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 15:19:37 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/19 16:54:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/06/21 14:51:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <mlx.h>
-#include <math.h>
-#include <stdio.h>
-#define TILE 32
-#define ARROW_LEFT 65361
-#define ARROW_RIGHT 65363
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_img;
-
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	float	angle;
-}	t_player;
-
-char	*map[] = {
-	"1111111",
-	"1111111",
-	"1100011",
-	"1100011",
-	"1101011",
-	"1100011",
-	"110P011",
-	"1100011",
-	"1111111",
-	"1111111"
-};
 
 void	put_pixel(t_img *img, int x, int y, int color)
 {
