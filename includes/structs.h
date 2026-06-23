@@ -73,8 +73,8 @@ typedef struct s_cub
 	int				bpp;
 	int				line_len;
 	int				endian;
-	struct s_game	config;			//naming?!
-	struct s_player	player;
-	struct s_ray	ray;
+	struct s_game	*config;			//naming?!
+	struct s_player	*player;
+	struct s_ray	*ray;
 }	t_cub;
 #endif
