@@ -75,4 +75,6 @@ void	print_player_struct(t_player *player);
 void	print_ray_struct(t_ray *ray);
 /** Free the overall struct */
 void	free_cub_struct(t_cub *cub);
+/** Return SUCCESS while running. Improvment for ESC and X with FAILURE */
+int		render(t_cub *cub);
 #endif

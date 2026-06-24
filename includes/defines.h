@@ -32,8 +32,8 @@
 # define RESET "\033[0m"
 
 /* Window size and tile sizes */
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 600
+# define HEIGHT 600
 # define TS 32
 
 /* Navigation input (arrow, wasd,..) */
