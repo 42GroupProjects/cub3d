@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 14:53:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/23 15:21:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:36:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	free_cub_struct(t_cub *cub)
 	if (cub->img)
 	{
 		mlx_destroy_image(cub->mlx, cub->img);
-		free(cub->img);
 		cub->img = NULL;
 	}
 	if (cub->win)
@@ -56,6 +55,7 @@ void	free_cub_struct(t_cub *cub)
 	if (cub->mlx)
 	{
 		mlx_destroy_display(cub->mlx);
+		free(cub->mlx);
 		cub->mlx = NULL;
 	}
 	if (cub->addr)
