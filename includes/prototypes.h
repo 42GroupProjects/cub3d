@@ -65,5 +65,16 @@ char	*skip_spaces(char *s);
 int		match_id(char *line, char *id);
 /** TRUE if `line` is empty or only whitespace. */
 int		is_blank(char *line);
-
+/** TRUE if game struct successfully initialized. */
+int		init_game(t_cub *c, t_game *g);
+/** TRUE if player struct is successfully initalized. */
+int		init_player(t_cub *c);
+/** Display player struct values */
+void	print_player_struct(t_player *player);
+/** Display raw struct values */
+void	print_ray_struct(t_ray *ray);
+/** Free the overall struct */
+void	free_cub_struct(t_cub *cub);
+/** Return SUCCESS while running. Improvment for ESC and X with FAILURE */
+int		render(t_cub *cub);
 #endif

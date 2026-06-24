@@ -7,3 +7,4 @@ will be to make a dynamic view inside a maze, where you will have to find your w
 ## Resources:
 
  - [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html)
+ - [F. Permadi's Ray-Casting Tutorial For Game Dev.](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)

@@ -4,9 +4,10 @@
 # include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "../libft/include/libft.h"
 # include "errors.h"
 
 #endif

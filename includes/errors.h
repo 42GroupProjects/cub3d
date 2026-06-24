@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 00:00:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/06/18 21:49:27 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/06/22 18:18:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #define ERR_MLX_INIT "MLX initialization failed"
 #define ERR_MLX_WINDOW "MLX window creation failed"
 #define ERR_MLX_IMAGE "Failed to load asset"
+#define ERR_MLX_DATA "Failed to get data address"
 #define ERR_INVALID_EXT "Invalid file extension (must be .cub)"
 
 /* Header (textures + colors) errors */

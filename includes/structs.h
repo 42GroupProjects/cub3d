@@ -24,4 +24,57 @@ typedef struct s_game
 	int		height;
 }	t_game;
 
+/*
+** Player configuration:
+**	float for x and y position in map
+**	float for player direction
+*/
+typedef struct s_player
+{
+	char	c;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
+
+/*
+** Raycast struct:
+*/
+typedef struct	s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	perp_wall_dist;
+}	t_ray;
+
+/*
+** Main struct for raycaster and game.
+*/
+typedef struct s_cub
+{
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+	struct s_game	*config;			//naming?!
+	struct s_player	*player;
+	struct s_ray	*ray;
+}	t_cub;
 #endif

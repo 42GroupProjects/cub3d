@@ -14,6 +14,7 @@ static void	usage(void)
 int	main(int argc, char **argv)
 {
 	t_game	game;
+	t_cub	cub;
 
 	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
@@ -21,6 +22,12 @@ int	main(int argc, char **argv)
 	if (parse_config(&game, argv[1]) != SUCCESS)
 		return (free_config(&game), 1);
 	print_config(&game);
+	ft_bzero(&cub, sizeof(t_cub));
+	if (init_game(&cub, &game) != SUCCESS)
+		return (free_config(&game), 1);	//need to free &cub in both ways
+	mlx_loop_hook(cub.mlx, render, &cub);
+	mlx_loop(cub.mlx);
+	free_cub_struct(&cub);
 	free_config(&game);
 	return (0);
 }
