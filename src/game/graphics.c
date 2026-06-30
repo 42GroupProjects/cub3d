@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/24 18:12:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/06/30 19:22:09 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,24 @@ void	draw_map(t_cub *cub)
 	}
 }
 
+//void	draw_line(t_cub *cub, int x0, int y0, int x1, int y1, int color)
+//{
+//	int	y;
+//	int	x;
+//
+//	y = 0;
+//	while (y0 + y < y1)
+//	{
+//		x = 0;
+//		while (x0 + x < x1)
+//		{
+//			put_pixel(cub, x0 + x, y0 + y, color);
+//			x++;
+//		}
+//		y++;
+//	}
+//}
+
 void	draw_player(t_cub *cub)
 {
 	int	screen_x;
@@ -87,8 +105,17 @@ void	draw_player(t_cub *cub)
 
 int	render(t_cub *cub)
 {
-	draw_map(cub);
-	draw_player(cub);
+	int	x;
+
+	x = 0;
+//	draw_map(cub);
+//	draw_player(cub);
+//	cast_single_ray(cub);
+	while (x < WIDTH)
+	{
+		cast_ray(cub, x);
+		x++;
+	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (SUCCESS);
 }

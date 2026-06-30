@@ -77,4 +77,10 @@ void	print_ray_struct(t_ray *ray);
 void	free_cub_struct(t_cub *cub);
 /** Return SUCCESS while running. Improvment for ESC and X with FAILURE */
 int		render(t_cub *cub);
+/** Draw a single ray */
+void	cast_single_ray(t_cub *cub);
+/** Put pixel to canvas */
+void	put_pixel(t_cub *cub, int x, int y, int color);
+/** Cast a ray */
+void	cast_ray(t_cub *c, int x);
 #endif

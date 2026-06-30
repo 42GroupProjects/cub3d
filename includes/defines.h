@@ -40,4 +40,6 @@
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 
+/* Raycast defines */
+# define STEP 0.1
 #endif
