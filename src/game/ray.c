@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:07:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/30 19:24:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/01 22:47:41 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,41 @@ void	perform_dda(t_cub *c, t_ray *r)
 	}
 }
 
+void	calculate_perp_wall_dist(t_cub *cub, t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		ray->perp_wall_dist = (ray->map_x - cub->player->x + (1 - ray->step_x) / 2.0) / ray->ray_dir_x;
+	}
+	else
+	{	
+		ray->perp_wall_dist = (ray->map_y - cub->player->y + (1 - ray->step_y) / 2.0) / ray->ray_dir_y;
+	}
+}
+
+void	calculate_line_height(t_ray *r)
+{
+	r->line_height = HEIGHT / r->perp_wall_dist;
+	r->draw_start = -r->line_height / 2 + HEIGHT / 2;
+	r->draw_end = r->line_height / 2 + HEIGHT / 2;
+	if (r->draw_start < 0)
+		r->draw_start = 0;
+	if (r->draw_end >= HEIGHT)
+		r->draw_end = HEIGHT -1;
+}
+
+void	draw_vertical_line(t_cub *cub, t_ray *r, int x)
+{
+	int	y;
+
+	y = r->draw_start;
+	while (y <= r->draw_end)
+	{
+		put_pixel(cub, x, y, 0xFFFFFF);
+		y++;
+	}
+}
+
 void	cast_ray(t_cub *c, int x)
 {
 	t_ray r;
@@ -96,4 +131,7 @@ void	cast_ray(t_cub *c, int x)
 	init_ray(c, &r, x);
 	calculate_step(c, &r);
 	perform_dda(c, &r);
+	calculate_perp_wall_dist(c, &r);
+	calculate_line_height(&r);
+	draw_vertical_line(c, &r, x);
 }
