@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:07:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/01 22:47:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/05 18:19:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,13 @@ void	calculate_line_height(t_ray *r)
 void	draw_vertical_line(t_cub *cub, t_ray *r, int x)
 {
 	int	y;
+	int	color;
 
 	y = r->draw_start;
 	while (y <= r->draw_end)
 	{
-		put_pixel(cub, x, y, 0xFFFFFF);
+		color = get_wall_color(r);
+		put_pixel(cub, x, y, color);
 		y++;
 	}
 }
