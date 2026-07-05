@@ -85,4 +85,6 @@ void	put_pixel(t_cub *cub, int x, int y, int color);
 void	cast_ray(t_cub *c, int x);
 /** Get wall color -> updated to input */
 int		get_wall_color(t_ray *r);
+/** Handle pressed key input */
+int		handle_keypress(int keycode, t_cub *c);
 #endif
