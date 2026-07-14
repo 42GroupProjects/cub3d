@@ -91,4 +91,6 @@ int		handle_keypress(int keycode, t_cub *c);
 void	on_close(t_cub *c);
 /** Handle windows X to close the game */
 int		on_x(t_cub *c);
+/** Rotating FOV */
+void	rotate_player(t_cub *c, double angle);
 #endif
