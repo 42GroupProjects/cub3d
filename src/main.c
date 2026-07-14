@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 		return (free_config(&game), 1);	//need to free &cub in both ways
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
+	mlx_hook(cub.win, 17, 0, on_x, &cub);
 	mlx_loop(cub.mlx);
 	free_cub_struct(&cub);
 	free_config(&game);

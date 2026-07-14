@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/01 18:00:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/14 17:43:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,33 @@ void	draw_player(t_cub *cub)
 	}
 }
 
+static int	rgbToInt(int rgb[3])
+{
+	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
+}
+
+void	draw_background(t_cub *cub)
+{
+	int	y;
+	int	x;
+	int color;
+
+	color = rgbToInt(cub->config->ceiling);
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		if ((y == (HEIGHT / 2) - 1) && x == 0)
+			color = rgbToInt(cub->config->floor);
+		while (x < WIDTH)
+		{
+			put_pixel(cub, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	render(t_cub *cub)
 {
 	int	x;
@@ -111,6 +138,7 @@ int	render(t_cub *cub)
 //	draw_map(cub);
 //	draw_player(cub);
 //	cast_single_ray(cub);
+	draw_background(cub);
 	while (x < WIDTH)
 	{
 		cast_ray(cub, x);

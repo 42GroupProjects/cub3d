@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/05 18:14:31 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/13 16:40:45 by lwittwer         ###   ########.fr       */
+/*   Created: 2026/07/14 17:56:18 by lwittwer          #+#    #+#             */
+/*   Updated: 2026/07/14 18:05:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_wall_color(t_ray *r)
+int	on_x(t_cub *c)
 {
-	if (r->side == 0)
-	{
-		if (r->step_x > 0)
-			return (0xFF0000);
-		return (0x00FF00);
-	}
-	if (r->step_y > 0)
-		return (0x0000FF);
-	return (0xFFFF00);
+	on_close(c);
+	return (0);
+}
+
+void	on_close(t_cub *c)
+{
+	free_cub_struct(c);
+	exit(1);
 }

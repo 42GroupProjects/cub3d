@@ -87,4 +87,8 @@ void	cast_ray(t_cub *c, int x);
 int		get_wall_color(t_ray *r);
 /** Handle pressed key input */
 int		handle_keypress(int keycode, t_cub *c);
+/** Handle ESC to close the game */
+void	on_close(t_cub *c);
+/** Handle windows X to close the game */
+int		on_x(t_cub *c);
 #endif
