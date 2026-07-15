@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 20:25:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/14 23:13:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/15 16:45:11 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -56,9 +56,27 @@ int	handle_keypress(int keycode, t_cub *c)
 		}
 	}
 	else if (keycode == 65361 || keycode == 97)
+	{
 		printf("LEFT: %d pressed\n", keycode);
+		new_x = c->player->x + c->player->dir_y * MOVE_SPEED;
+		new_y = c->player->y - c->player->dir_x * MOVE_SPEED;
+		if (is_walkable(c, new_y, new_x))
+		{
+			c->player->x = new_x;
+			c->player->y = new_y;
+		}
+	}
 	else if (keycode == 65363 || keycode == 100)
+	{
 		printf("RIGHT: %d pressed\n", keycode);
+		new_x = c->player->x - c->player->dir_y * MOVE_SPEED;
+		new_y = c->player->y + c->player->dir_x * MOVE_SPEED;
+		if (is_walkable(c, new_y, new_x))
+		{
+			c->player->x = new_x;
+			c->player->y = new_y;
+		}
+	}
 	else if (keycode == 113)	//left
 		rotate_player(c, -ROT_SPEED);
 	else if (keycode == 101)	//right
