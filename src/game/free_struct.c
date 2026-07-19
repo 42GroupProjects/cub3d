@@ -58,6 +58,7 @@ void	free_cub_struct(t_cub *cub)
 		free(cub->mlx);
 		cub->mlx = NULL;
 	}
+	// FIXME: missing braces — addr check does nothing; null addr and free config if you own it here
 	if (cub->addr)
 	cub->bpp = 0;
 	cub->line_len = 0;
@@ -74,6 +75,6 @@ void	free_cub_struct(t_cub *cub)
 		free_ray_struct(cub->ray);
 		cub->ray = NULL;
 	}
-	cub = NULL;
+	cub = NULL; // FIXME: no-op — cub is a local pointer copy, does not clear caller's struct
 }
 
