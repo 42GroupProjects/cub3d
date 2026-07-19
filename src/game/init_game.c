@@ -21,6 +21,7 @@ static int	init_ray(t_cub *c)
 		return (FAILURE);
 	ft_memset(ray, 0, sizeof(t_ray));
 	print_ray_struct(ray);
+	// FIXME: heap ray is unused — cast_ray uses a stack t_ray; free this or use it
 	c->ray = ray;
 	return (SUCCESS);
 }
@@ -40,6 +41,7 @@ int	init_game(t_cub *c, t_game *g)
 	c->addr = mlx_get_data_addr(c->img, &c->bpp, &c->line_len, &c->endian);
 	if (!c->addr)
 		return (parse_error(ERR_MLX_DATA));
+	// FIXME: on any fail below, destroy mlx/win/img and return FAILURE (still returns SUCCESS)
 	if (init_player(c) != SUCCESS)
 		printf("%s failed\n", __func__);
 	if (init_ray(c) != SUCCESS)
