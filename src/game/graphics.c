@@ -103,7 +103,7 @@ void	draw_player(t_cub *cub)
 	}
 }
 
-static int	rgbToInt(int rgb[3])
+static int	rgbToInt(int rgb[3]) // FIXME: rename to snake_case for norm (e.g. rgb_to_int)
 {
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
