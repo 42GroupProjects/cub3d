@@ -6,13 +6,12 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:12 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:03:06 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/19 19:14:04 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/** Count entries in a NULL-terminated array. */
 static int count_words(char **words)
 {
 	int n;
@@ -23,7 +22,6 @@ static int count_words(char **words)
 	return (n);
 }
 
-/** TRUE if `s` is a non-empty all-digit value in [0, RGB_MAX]. */
 static int is_valid_byte(char *s)
 {
 	int i;
@@ -42,7 +40,6 @@ static int is_valid_byte(char *s)
 	return (TRUE);
 }
 
-/** TRUE when `parts` holds exactly RGB_COUNT valid bytes; stores into rgb. */
 static int fill_rgb(int *rgb, char **parts)
 {
 	int i;
@@ -60,10 +57,6 @@ static int fill_rgb(int *rgb, char **parts)
 	return (TRUE);
 }
 
-/**
- * Parse "R,G,B" from `value` into rgb; *flag guards against a duplicate F/C.
- * Returns SUCCESS, FAILURE (duplicate / invalid color) or OOM (split failed).
- */
 int set_color(int *rgb, char *value, int *flag)
 {
 	char **parts;
@@ -75,7 +68,10 @@ int set_color(int *rgb, char *value, int *flag)
 	if (!parts)
 		return (oom_error());
 	if (!fill_rgb(rgb, parts))
-		return (free_strarr(&parts), parse_error(ERR_BAD_COLOR));
+	{
+		free_strarr(&parts);
+		return (parse_error(ERR_BAD_COLOR));
+	}
 	free_strarr(&parts);
 	*flag = TRUE;
 	return (SUCCESS);
