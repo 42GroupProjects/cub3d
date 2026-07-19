@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
+/*   Updated: 2026/07/19 20:55:00 by thanh-ng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -43,7 +55,7 @@ typedef struct s_player
 /*
 ** Raycast struct:
 */
-typedef struct	s_ray
+typedef struct s_ray
 {
 	double	camera_x;
 	double	camera_y;
@@ -77,7 +89,7 @@ typedef struct s_cub
 	int				bpp;
 	int				line_len;
 	int				endian;
-	struct s_game	*config;			//naming?!
+	struct s_game	*config;
 	struct s_player	*player;
 	struct s_ray	*ray;
 }	t_cub;
