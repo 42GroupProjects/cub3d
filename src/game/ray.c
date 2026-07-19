@@ -36,9 +36,11 @@ void	init_ray(t_cub *c, t_ray *r, int x)
 {
 	r->camera_x = 2.0 * x / WIDTH - 1.0;
 	r->ray_dir_x = c->player->dir_x + c->player->plane_x * r->camera_x;
+	// BUG: use camera_x here (camera_y is never set → vertical FOV broken)
 	r->ray_dir_y = c->player->dir_y + c->player->plane_y * r->camera_y;
 	r->map_x = (int)c->player->x;
 	r->map_y = (int)c->player->y;
+	// FIXME: guard ray_dir_* == 0 before divide (delta_dist → inf/nan)
 	r->delta_dist_x = fabs(1.0 / r->ray_dir_x);
 	r->delta_dist_y = fabs(1.0 / r->ray_dir_y);
 	r->hit = 0;
@@ -84,6 +86,7 @@ void	perform_dda(t_cub *c, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
+		// FIXME: bounds-check map_x/map_y vs width/height before indexing (OOB crash on open maps)
 		if (c->config->map[r->map_y][r->map_x] == '1')
 			r->hit = 1;
 	}
