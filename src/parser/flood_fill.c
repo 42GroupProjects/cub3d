@@ -78,8 +78,6 @@ int validate_map_layout(t_game *game)
         return (parse_error(ERR_MAP_INVALID));
     if (!validate_player_count(game->map))
         return (parse_error(ERR_MAP_NO_PLAYER));
-    if (!validate_map_borders(game))
-        return (parse_error(ERR_MAP_NOT_CLOSED));
     copy = dup_map(game->map, game->height);
     if (!copy)
         return (oom_error());
