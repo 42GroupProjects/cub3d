@@ -101,6 +101,7 @@ int	init_player(t_cub *c)
 	player = malloc(sizeof(t_player) * 1);
 	if (!player)
 		return (FAILURE);
+	// FIXME: free(player) before return on failure — currently leaks the malloc
 	if (find_player_pos(c->config, player) != SUCCESS)
 		return (FAILURE);
 	get_player_direction(player);
