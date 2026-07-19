@@ -6,13 +6,12 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:03 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:02:42 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/19 19:14:04 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/** free(*s) then set *s = NULL (single string). Safe on NULL. */
 void free_str(char **s)
 {
 	if (s && *s)
@@ -22,10 +21,6 @@ void free_str(char **s)
 	}
 }
 
-/**
- * Free a NULL-terminated string array (map rows, split words, file lines)
- * and set *arr = NULL so the freed pointer cannot be reused by mistake.
- */
 void free_strarr(char ***arr)
 {
 	char **a;
@@ -44,7 +39,6 @@ void free_strarr(char ***arr)
 	*arr = NULL;
 }
 
-/** Free every allocation owned by `game` and NULL each field. Safe on NULL. */
 void free_config(t_game *game)
 {
 	if (!game)
