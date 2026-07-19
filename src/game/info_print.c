@@ -18,6 +18,7 @@
  */
 void	print_player_struct(t_player *player)
 {
+	// FIXME: drop these debug prints (and callers in init) before evaluation
 	printf("----------------------------------------------\n");
 	printf("Player position: [%f][%f]\n", player->y, player->x);
 	printf("Player direction: [%f][%f]\n", player->dir_y, player->dir_x);
