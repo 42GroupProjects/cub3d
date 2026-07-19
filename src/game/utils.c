@@ -14,6 +14,7 @@
 
 int	get_wall_color(t_ray *r)
 {
+	// FIXME: mandatory — load NO/SO/WE/EA xpm from config and sample texture (not flat colors)
 	if (r->side == 0)
 	{
 		if (r->step_x > 0)
