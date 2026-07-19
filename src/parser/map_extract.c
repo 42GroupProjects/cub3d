@@ -6,13 +6,12 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:07 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:02:43 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/19 19:54:43 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/** Longest row length across the whole grid. */
 static int max_width(char **map)
 {
 	int i;
@@ -31,7 +30,6 @@ static int max_width(char **map)
 	return (max);
 }
 
-/** Rebuild one row padded to `width` with trailing spaces. SUCCESS / OOM. */
 static int pad_row(char **row, int width)
 {
 	char *new_row;
@@ -56,11 +54,20 @@ static int pad_row(char **row, int width)
 	return (SUCCESS);
 }
 
-/**
- * Copy the map block (lines[map_start..]) into game->map and set height.
- * Returns SUCCESS, FAILURE (no map content) or OOM. On OOM mid-copy the
- * partial grid is freed and game->map reset to NULL.
- */
+static void seal_map_corners(t_game *game)
+{
+	if (!game->map || game->height <= 0 || game->width <= 0)
+		return;
+	if (game->map[0][0] == ' ')
+		game->map[0][0] = '1';
+	if (game->map[0][game->width - 1] == ' ')
+		game->map[0][game->width - 1] = '1';
+	if (game->map[game->height - 1][0] == ' ')
+		game->map[game->height - 1][0] = '1';
+	if (game->map[game->height - 1][game->width - 1] == ' ')
+		game->map[game->height - 1][game->width - 1] = '1';
+}
+
 int extract_map(t_game *game, char **lines, int map_start)
 {
 	int count;
@@ -79,14 +86,16 @@ int extract_map(t_game *game, char **lines, int map_start)
 	{
 		game->map[i] = ft_strdup(lines[map_start + i]);
 		if (!game->map[i])
-			return (free_strarr(&game->map), oom_error());
+		{
+			free_strarr(&game->map);
+			return (oom_error());
+		}
 		i++;
 	}
 	game->height = count;
 	return (SUCCESS);
 }
 
-/** Pad all rows to the max width so grid[y][x] is always safe. SUCCESS / OOM. */
 int normalize_map(t_game *game)
 {
 	int i;
@@ -101,5 +110,6 @@ int normalize_map(t_game *game)
 		i++;
 	}
 	game->width = width;
+	seal_map_corners(game);
 	return (SUCCESS);
 }
