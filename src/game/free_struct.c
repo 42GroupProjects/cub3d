@@ -12,16 +12,8 @@
 
 #include "cub3d.h"
 
-/*
-** Frees MLX resources + player/ray heap. Does NOT free t_game (config) —
-** call free_config / clean_exit for that. Safe on NULL / partial init.
-** When you add wall texture images later, mlx_destroy_image them here
-** before mlx_destroy_display.
-*/
-void	free_cub_struct(t_cub *cub)
+static void	free_mlx(t_cub *cub)
 {
-	if (!cub)
-		return ;
 	if (cub->mlx && cub->img)
 	{
 		mlx_destroy_image(cub->mlx, cub->img);
@@ -39,6 +31,14 @@ void	free_cub_struct(t_cub *cub)
 		cub->mlx = NULL;
 	}
 	cub->addr = NULL;
+}
+
+/* Destroy texture images here later, before free_mlx / destroy_display. */
+void	free_cub_struct(t_cub *cub)
+{
+	if (!cub)
+		return ;
+	free_mlx(cub);
 	cub->bpp = 0;
 	cub->line_len = 0;
 	cub->endian = 0;
