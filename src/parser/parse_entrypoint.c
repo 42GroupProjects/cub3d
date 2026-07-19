@@ -105,5 +105,8 @@ int parse_config(t_game *game, char *file)
 	status = normalize_map(game);
 	if (status != SUCCESS)
 		return (cleanup_parse_failure(game, NULL, status));
-	return (validate_map_layout(game));
+	status = validate_map_layout(game);
+	if (status != SUCCESS)
+		return (cleanup_parse_failure(game, NULL, status));
+	return (SUCCESS);
 }
