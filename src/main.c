@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:42 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:03:22 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/19 19:52:58 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /** Print the command-line usage to stderr. */
 static void usage(void)
 {
-	ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2);
+	ft_putstr_fd("Error\nUsage: ./cub3d <map.cub>\n", 2);
 }
 
 /**
@@ -32,11 +32,11 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (usage(), 1);
 	if (parse_config(&game, argv[1]) != SUCCESS)
-		return (free_config(&game), 1);
+		return (1);
 	print_config(&game);
 	ft_bzero(&cub, sizeof(t_cub));
 	if (init_game(&cub, &game) != SUCCESS)
-		return (free_config(&game), 1); // need to free &cub in both ways
+		return (free_config(&game), 1); /* cub is not yet initialized here */
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
