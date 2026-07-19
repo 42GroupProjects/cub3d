@@ -1,96 +1,98 @@
 #ifndef PROTOTYPES_H
-# define PROTOTYPES_H
+#define PROTOTYPES_H
 
 /* --- parser.c (orchestrator) --- */
 /** Run the full parse pipeline into `game`. SUCCESS / FAILURE / OOM. */
-int		parse_config(t_game *game, char *file);
+int parse_config(t_game *game, char *file);
 /** Append a dup of `line` to a NULL-terminated array. NULL on alloc fail. */
-char	**append_line(char **map, char *line);
+char **append_line(char **map, char *line);
 
 /* --- validate_file.c --- */
 /** Check extension + openable + not a directory. SUCCESS / FAILURE. */
-int		validate_file(char *file);
+int validate_file(char *file);
 
 /* --- parse_header.c --- */
 /** Consume header lines until the map; *map_start gets the map index.
  *  SUCCESS / FAILURE (missing/dup) / OOM. */
-int		parse_header(t_game *game, char **lines, int *map_start);
+int parse_header(t_game *game, char **lines, int *map_start);
 
 /* --- parse_textures.c --- */
 /** Store one texture path into *dst (rejects duplicates).
  *  SUCCESS / FAILURE (dup/empty) / OOM. */
-int		set_texture(char **dst, char *value);
+int set_texture(char **dst, char *value);
 
 /* --- parse_colors.c --- */
 /** Parse "R,G,B" into rgb; *flag guards duplicates.
  *  SUCCESS / FAILURE (dup/invalid) / OOM. */
-int		set_color(int *rgb, char *value, int *flag);
+int set_color(int *rgb, char *value, int *flag);
 
 /* --- map_extract.c --- */
 /** Copy the map block into game->map, set height. SUCCESS / FAILURE / OOM. */
-int		extract_map(t_game *game, char **lines, int map_start);
+int extract_map(t_game *game, char **lines, int map_start);
 /** Pad every row to max width with spaces. SUCCESS / OOM. */
-int		normalize_map(t_game *game);
+int normalize_map(t_game *game);
 
 /* --- validate_map.c --- */
 /** STUB: map layout is treated as valid (your flood-fill hook). SUCCESS. */
-int		validate_map_layout(t_game *game);
+int validate_map_layout(t_game *game);
 /** TRUE if every cell is one of 0 1 N S E W space. */
-int		validate_characters(char **map);
+int validate_characters(char **map);
 /** TRUE if there is exactly one spawn (N/S/E/W). */
-int		validate_player_count(char **map);
+int validate_player_count(char **map);
+/** TRUE if the outer border is fully sealed by walls. */
+int validate_map_borders(t_game *game);
 
 /* --- print_map.c --- */
 /** Print every row followed by a newline. */
-void	print_map(char **map);
+void print_map(char **map);
 /** Debug dump of the parsed config (textures, colors, grid). */
-void	print_config(t_game *game);
+void print_config(t_game *game);
 
 /* --- free_map.c --- */
 /** free(*s) then *s = NULL. Safe on NULL. */
-void	free_str(char **s);
+void free_str(char **s);
 /** Free a NULL-terminated string array and set *arr = NULL. Safe on NULL. */
-void	free_strarr(char ***arr);
+void free_strarr(char ***arr);
 /** Free everything owned by `game` and NULL the fields. Safe on NULL. */
-void	free_config(t_game *game);
+void free_config(t_game *game);
 
 /* --- utils.c --- */
 /** Print "Error\n<msg>" to stderr; returns FAILURE for return-chaining. */
-int		parse_error(char *msg);
+int parse_error(char *msg);
 /** Print the OOM message to stderr; returns OOM for return-chaining. */
-int		oom_error(void);
+int oom_error(void);
 /** Advance past leading spaces/tabs. */
-char	*skip_spaces(char *s);
+char *skip_spaces(char *s);
 /** TRUE if `line` starts with id followed by a space/tab. */
-int		match_id(char *line, char *id);
+int match_id(char *line, char *id);
 /** TRUE if `line` is empty or only whitespace. */
-int		is_blank(char *line);
+int is_blank(char *line);
 /** TRUE if game struct successfully initialized. */
-int		init_game(t_cub *c, t_game *g);
+int init_game(t_cub *c, t_game *g);
 /** TRUE if player struct is successfully initalized. */
-int		init_player(t_cub *c);
+int init_player(t_cub *c);
 /** Display player struct values */
-void	print_player_struct(t_player *player);
+void print_player_struct(t_player *player);
 /** Display raw struct values */
-void	print_ray_struct(t_ray *ray);
+void print_ray_struct(t_ray *ray);
 /** Free the overall struct */
-void	free_cub_struct(t_cub *cub);
+void free_cub_struct(t_cub *cub);
 /** Return SUCCESS while running. Improvment for ESC and X with FAILURE */
-int		render(t_cub *cub);
+int render(t_cub *cub);
 /** Draw a single ray */
-void	cast_single_ray(t_cub *cub);
+void cast_single_ray(t_cub *cub);
 /** Put pixel to canvas */
-void	put_pixel(t_cub *cub, int x, int y, int color);
+void put_pixel(t_cub *cub, int x, int y, int color);
 /** Cast a ray */
-void	cast_ray(t_cub *c, int x);
+void cast_ray(t_cub *c, int x);
 /** Get wall color -> updated to input */
-int		get_wall_color(t_ray *r);
+int get_wall_color(t_ray *r);
 /** Handle pressed key input */
-int		handle_keypress(int keycode, t_cub *c);
+int handle_keypress(int keycode, t_cub *c);
 /** Handle ESC to close the game */
-void	on_close(t_cub *c);
+void on_close(t_cub *c);
 /** Handle windows X to close the game */
-int		on_x(t_cub *c);
+int on_x(t_cub *c);
 /** Rotating FOV */
-void	rotate_player(t_cub *c, double angle);
+void rotate_player(t_cub *c, double angle);
 #endif
