@@ -49,3 +49,22 @@ void	free_config(t_game *game)
 	free_str(&game->ea_tex);
 	free_strarr(&game->map);
 }
+
+/*
+** Full teardown for ESC / window X: free MLX + parsed config, then exit.
+** Friend: call clean_exit(c, 0) from on_close — do not free piecemeal.
+*/
+void	clean_exit(t_cub *c, int code)
+{
+	t_game	*cfg;
+
+	cfg = NULL;
+	if (c)
+	{
+		cfg = c->config;
+		free_cub_struct(c);
+	}
+	if (cfg)
+		free_config(cfg);
+	exit(code);
+}
