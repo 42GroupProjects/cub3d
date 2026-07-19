@@ -41,10 +41,11 @@ int	init_game(t_cub *c, t_game *g)
 	c->addr = mlx_get_data_addr(c->img, &c->bpp, &c->line_len, &c->endian);
 	if (!c->addr)
 		return (parse_error(ERR_MLX_DATA));
-	// FIXME: on any fail below, destroy mlx/win/img and return FAILURE (still returns SUCCESS)
+	// FIXME: load NO/SO/WE/EA via mlx_xpm_file_to_image here (paths in c->config)
 	if (init_player(c) != SUCCESS)
 		printf("%s failed\n", __func__);
 	if (init_ray(c) != SUCCESS)
 		printf("%s failed\n", __func__);
+	// FIXME: on any fail above, destroy mlx/win/img and return FAILURE (still returns SUCCESS)
 	return (SUCCESS);
 }
