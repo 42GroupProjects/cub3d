@@ -32,21 +32,22 @@ Copy this block into your journal when you start each day. Check off items as yo
 
 ```
 
-[ ] Window opens                    (Day 1 AM)
-[ ] Buffer renders a pixel          (Day 1 PM)
-[ ] Direction arrow rotates         (Day 2 AM)
-[ ] 2D grid canvas done             (Day 2 PM)
+[x] Window opens                    (Day 1 AM)
+[x] Buffer renders a pixel          (Day 1 PM)
+[x] Direction / FOV rotates         (Day 2 AM)  — 3D rotate works (←/→ still wrong keybind)
+[ ] 2D grid canvas done             (Day 2 PM)  — draw_map exists but commented out of render
 [x] Header parsed correctly         (Day 3)
 [x] Map extracted + padded          (Day 4 AM)
-[x] All 15 invalid maps rejected    (Day 4 PM)
-[ ] Center debug ray visible        (Day 5)
-[ ] Flat-color walls render         (Day 6)
-[ ] No fisheye on long corridor     (Day 7)
-[ ] Textured walls correct          (Day 8)
-[ ] Floor + ceiling + WASD          (Day 9)
-[ ] No wall clipping                (Day 10)
-[ ] Norminette clean                (Day 11)
+[x] All 15 invalid maps rejected    (Day 4 PM)  — 14 in m_invalid + suites; #13 optional
+[ ] Center debug ray visible        (Day 5)     — skipped / commented
+[x] Flat-color walls render         (Day 6)
+[x] No fisheye on long corridor     (Day 7)     — perp_wall_dist used; camera_y bug still open
+[ ] Textured walls correct          (Day 8)     — XPMs on disk; game does not load them yet
+[x] Floor + ceiling + WASD          (Day 9)     — F/C + WASD ok; arrows must rotate (not strafe)
+[x] No wall clipping (basic stop)   (Day 10)    — stops on '1'; OOB/' ' still weak
+[ ] Norminette clean                (Day 11)    — parser/main OK; game + headers not
 [ ] Both pass oral defense drill    (Day 12)
+
 ```
 
 ---

@@ -11,6 +11,7 @@ This module teaches you the discipline of **self-sufficient debugging** — how 
 | File | Topic |
 |------|-------|
 | [`01-valgrind-gdb-profiling.md`](./01-valgrind-gdb-profiling.md) | Full workflow: Valgrind, LLDB/GDB, AddressSanitizer, FPS profiling |
+| [`02-valgrind-cheat-sheet.md`](./02-valgrind-cheat-sheet.md) | Short cub3D commands + `clean_exit` teardown notes |
 
 ## Key Skills Learned
 

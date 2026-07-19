@@ -20,15 +20,15 @@
 
 ## Exit Checkpoint
 
-- [ ] All 4 textures load — NULL return handled with `Error\n` + exit
+- [ ] All 4 textures load — NULL return handled with `Error\n` + exit — XPMs ready in `textures/`; load not implemented
 - [ ] North texture appears on North-facing walls (not South, not East)
 - [ ] South/East/West textures on correct respective walls — verified on all 4 movement directions
 - [ ] No texture stretching at close range
-- [ ] Floor fills with correct parsed RGB color
-- [ ] Ceiling fills with correct parsed RGB color
-- [ ] WASD moves in correct directions
-- [ ] Player cannot walk through walls (wall-stop at minimum)
-- [ ] Left/right arrows rotate view correctly
+- [x] Floor fills with correct parsed RGB color
+- [x] Ceiling fills with correct parsed RGB color
+- [x] WASD moves in correct directions
+- [x] Player cannot walk through walls (wall-stop at minimum) — basic `'1'` stop only
+- [ ] Left/right arrows rotate view correctly — currently Q/E; arrows strafe
 - [ ] ESC and window X button exit cleanly — textures freed before destroy
 
 ---

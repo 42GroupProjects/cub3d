@@ -32,11 +32,12 @@ What you rewrite: everything parser-specific.
 
 ## Exit Checkpoint
 
-- [ ] All 7 maps in `tests/mandatory_valid/` open a window with correct player orientation
-- [ ] All 15 maps in `tests/mandatory_invalid/` print `Error\n` + message and exit non-zero
-- [ ] No segfault on any test case — including maps with varying row lengths
-- [ ] No memory leaks when parser exits on an invalid map
-- [ ] Parsed `t_map` struct has correct: `grid`, `width`, `height`, `spawn_x`, `spawn_y`, `spawn_dir`
+- [x] Valid maps under `maps/m_valid/` parse successfully (`make test-maps`)
+- [x] Invalid maps under `maps/m_invalid/` print `Error\n` + message and exit non-zero
+- [x] No segfault on tested cases — including maps with varying row lengths / L-shape
+- [x] No memory leaks on parser failure / parse-only success (`make valgrind-parser`)
+- [x] Parsed `t_game` has textures paths, F/C RGB, padded `map`, `width`, `height` (spawn stays on grid for game)
+- [ ] Window + correct facing verified interactively for every valid map (game side)
 
 ---
 

@@ -2,6 +2,10 @@
 
 **Branch:** `main` | **Days:** 11–12
 
+**Why “freeze”?** You stop adding features (no minimap, no sprites, no “just one more
+tweak”) and only polish what is already there: Norm, leaks, errors, README, oral
+defense. Feature work freezes; quality work continues.
+
 Do not touch Module 07, 08, or any bonus until every item in this module is complete.
 
 ---
@@ -176,14 +180,15 @@ docs/journal/ai_usage_log.md for the full record.
 
 ## Exit Checkpoint (Everything)
 
-- [ ] `norminette` — zero errors on all `.c` and `.h` files
-- [ ] No global variables anywhere
-- [ ] `make` compiles with `-Wall -Wextra -Werror` with no warnings
-- [ ] `make clean`, `fclean`, `re` all work correctly
-- [ ] Leak check passes on clean exit, X-button exit, and all 15 invalid maps
-- [ ] All 7 valid maps open correctly
+- [ ] `norminette` — zero errors on all `.c` and `.h` files — parser/main done; game + includes open
+- [x] No global variables anywhere
+- [x] `make` compiles with `-Wall -Wextra -Werror` with no warnings
+- [x] `make clean`, `fclean`, `re` all work correctly
+- [x] Leak check passes on **parser** paths (invalid maps + `CUB3D_PARSE_ONLY` valid) — `make valgrind-parser`
+- [ ] Leak check passes on clean ESC / X-button exit — `clean_exit` frees MLX+config; recheck after wall textures are added
+- [x] All valid maps in `maps/m_valid/` parse correctly
 - [ ] Both students pass the full oral defense drill without reading code
-- [ ] README is final: italic first line, description, build, controls, map format, resources, AI section
+- [x] README has italic first line + description, build, controls, map format, resources — expand AI section if campus requires it
 
 ---
 

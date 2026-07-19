@@ -78,32 +78,32 @@ examples/03_map_validation/ ← Day 2 PM (2D grid view)
 Every item below must be true before moving to Module 02:
 
 **MLX and Buffer**
-- [ ] `mlx_init` and `mlx_new_window` failures print `Error\n` and exit — no crash
-- [ ] ESC and window X button both call cleanup and exit cleanly
-- [ ] Frame loop uses spin-wait with `game->dt` — stable timing at 30fps
-- [ ] Buffer cleared with `ft_memset` each frame — no pixel trails
-- [ ] `mlx_put_image_to_window` called exactly once per frame
+- [x] `mlx_init` and `mlx_new_window` failures print `Error\n` and exit — no crash
+- [ ] ESC and window X button both call cleanup and exit cleanly — hooks exist; still leak config
+- [ ] Frame loop uses spin-wait with `game->dt` — stable timing at 30fps — not implemented (mlx_loop_hook only)
+- [ ] Buffer cleared with `ft_memset` each frame — no pixel trails — redraw via background + rays
+- [x] `mlx_put_image_to_window` called exactly once per frame
 
 **Color and Pixels**
-- [ ] `put_pixel` uses `line_length` correctly — no out-of-bounds writes
-- [ ] `draw_rect` fills cleanly with correct color
-- [ ] Color encoding produces correct R/G/B on screen (not swapped)
+- [x] `put_pixel` uses `line_length` correctly — no out-of-bounds writes
+- [ ] `draw_rect` fills cleanly with correct color — N/A / unused path
+- [x] Color encoding produces correct R/G/B on screen (floor/ceiling)
 
 **Input**
-- [ ] WASD and arrow keys tracked via key-down + key-up flag pair
+- [ ] WASD and arrow keys tracked via key-down + key-up flag pair — keypress only
 - [ ] `mlx_do_key_autorepeatoff` is called
 - [ ] ESC calls cleanup + `exit(0)` — clean exit, no leaks
 
 **Vectors**
-- [ ] `dir` and `plane` initialized correctly for all 4 spawn directions (N/S/E/W)
-- [ ] `rotate_player` updates both `dir` and `plane` simultaneously
-- [ ] After 360° rotation vectors are within floating-point tolerance of start
+- [x] `dir` and `plane` initialized correctly for all 4 spawn directions (N/S/E/W)
+- [x] `rotate_player` updates both `dir` and `plane` simultaneously
+- [ ] After 360° rotation vectors are within floating-point tolerance of start — not formally checked
 
 **2D Canvas**
-- [ ] Map cells draw at correct screen positions
+- [ ] Map cells draw at correct screen positions — helpers exist; not in live render
 - [ ] Player dot tracks float `(pos_x, pos_y)` smoothly
 - [ ] Direction arrow points correctly and rotates with keys
-- [ ] WASD moves player — collision stops movement at wall cells
+- [x] WASD moves player — collision stops movement at wall cells (basic)
 
 ---
 
