@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libx11-dev \
+            libxext-dev \
+            libbsd-dev \
+            libcriterion-dev \
+            valgrind \
+            xvfb
+
+      - name: Build cub3d
+        run: make
+
+      - name: Clone Cub3D tester
+        run: |
+          git clone --depth 1 https://github.com/VestaManuyko/Cub3D_tester.git tester
+          sed -i 's#./cub3D#../cub3d#g' tester/tests/tester.h
+          make -C tester
+
+      - name: Run Cub3D tester invalid suite
+        run: make -C tester invalid
