@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:36 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:02:37 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/19 19:03:21 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
  * Helper for your future layout check: TRUE if every cell is one of
  * 0 1 N S E W space. Kept ready to call from validate_map_layout.
  */
-int	validate_characters(char **map)
+int validate_characters(char **map)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	while (map[i])
@@ -27,10 +27,7 @@ int	validate_characters(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1'
-				&& map[i][j] != 'N' && map[i][j] != 'S'
-				&& map[i][j] != 'E' && map[i][j] != 'W'
-				&& map[i][j] != ' ')
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
 				return (FALSE);
 			j++;
 		}
@@ -40,11 +37,11 @@ int	validate_characters(char **map)
 }
 
 /** Helper: TRUE if there is exactly one spawn (N/S/E/W). */
-int	validate_player_count(char **map)
+int validate_player_count(char **map)
 {
-	int	i;
-	int	j;
-	int	count;
+	int i;
+	int j;
+	int count;
 
 	count = 0;
 	i = 0;
@@ -53,8 +50,7 @@ int	validate_player_count(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'E' || map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
 				count++;
 			j++;
 		}

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/19 19:02:42 by thanh-ng          #+#    #+#             */
+/*   Updated: 2026/07/19 19:03:22 by thanh-ng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /** Print the command-line usage to stderr. */
-static void	usage(void)
+static void usage(void)
 {
 	ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2);
 }
@@ -11,10 +23,10 @@ static void	usage(void)
  * free_config runs on BOTH the success and the error path, so a failure
  * partway through parsing never leaks the work already allocated.
  */
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game	game;
-	t_cub	cub;
+	t_game game;
+	t_cub cub;
 
 	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
@@ -24,7 +36,7 @@ int	main(int argc, char **argv)
 	print_config(&game);
 	ft_bzero(&cub, sizeof(t_cub));
 	if (init_game(&cub, &game) != SUCCESS)
-		return (free_config(&game), 1);	//need to free &cub in both ways
+		return (free_config(&game), 1); // need to free &cub in both ways
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
