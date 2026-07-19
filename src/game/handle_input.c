@@ -9,6 +9,7 @@
 /*   Updated: 2026/07/15 16:54:05 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "cub3d.h"
 static int	is_walkable(t_cub *c, int y, int x)
 {
