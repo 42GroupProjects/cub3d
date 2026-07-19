@@ -27,6 +27,7 @@ void	rotate_player(t_cub *c, double angle)
 	old_plane_x = c->player->plane_x;
 	c->player->plane_x = c->player->plane_x * cos_angle - c->player->plane_y * sin_angle;	
 	c->player->plane_y = old_plane_x * sin_angle + c->player->plane_y * cos_angle;
+	// FIXME: remove debug printf before evaluation
 	printf("dir = (%f, %f)\n", c->player->dir_x, c->player->dir_y);
 	printf("plane = (%f, %f)\n", c->player->plane_x, c->player->plane_y);
 	printf("length: %f\n", sqrt(c->player->dir_x * c->player->dir_x + c->player->dir_y * c->player->dir_y));
