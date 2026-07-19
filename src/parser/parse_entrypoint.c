@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-char **append_line(char **map, char *line)
+char	**append_line(char **map, char *line)
 {
-	char **new_map;
-	int i;
-	int size;
+	char	**new_map;
+	int		i;
+	int		size;
 
 	size = 0;
 	while (map && map[size])
@@ -41,21 +41,21 @@ char **append_line(char **map, char *line)
 	return (new_map);
 }
 
-static void rstrip_newline(char *s)
+static void	rstrip_newline(char *s)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(s);
 	if (len > 0 && s[len - 1] == '\n')
 		s[len - 1] = '\0';
 }
 
-static char **load_lines(char *file)
+static char	**load_lines(char *file)
 {
-	int fd;
-	char *line;
-	char **lines;
-	char **tmp;
+	int		fd;
+	char	*line;
+	char	**lines;
+	char	**tmp;
 
 	lines = NULL;
 	fd = open(file, O_RDONLY);
@@ -76,18 +76,18 @@ static char **load_lines(char *file)
 	return (lines);
 }
 
-static int cleanup_parse_failure(t_game *game, char **lines, int status)
+static int	cleanup_parse_failure(t_game *game, char **lines, int status)
 {
 	free_strarr(&lines);
 	free_config(game);
 	return (status);
 }
 
-int parse_config(t_game *game, char *file)
+int	parse_config(t_game *game, char *file)
 {
-	char **lines;
-	int map_start;
-	int status;
+	char	**lines;
+	int		map_start;
+	int		status;
 
 	status = validate_file(file);
 	if (status != SUCCESS)

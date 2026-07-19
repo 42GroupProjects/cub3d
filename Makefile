@@ -8,10 +8,10 @@ OBJ_DIR     = obj
 INC_DIR     = includes
 LIBFT_DIR   = libft
 
-INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR)
+INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I/usr/local/include
 
 LIBFT       = $(LIBFT_DIR)/libft.a
-LIBS        = $(LIBFT) -lmlx -lXext -lX11 -lm
+LIBS        = $(LIBFT) -L/usr/local/lib -lmlx -lXext -lX11 -lm
 
 SRCS 		= $(shell find $(SRC_DIR) -name "*.c")
 

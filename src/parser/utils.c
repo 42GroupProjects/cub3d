@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int parse_error(char *msg)
+int	parse_error(char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
@@ -20,7 +20,7 @@ int parse_error(char *msg)
 	return (FAILURE);
 }
 
-int oom_error(void)
+int	oom_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(ERR_MALLOC, 2);
@@ -28,16 +28,16 @@ int oom_error(void)
 	return (OOM);
 }
 
-char *skip_spaces(char *s)
+char	*skip_spaces(char *s)
 {
 	while (*s == ' ' || *s == '\t')
 		s++;
 	return (s);
 }
 
-int match_id(char *line, char *id)
+int	match_id(char *line, char *id)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(id);
 	if (ft_strncmp(line, id, len) != 0)
@@ -47,9 +47,9 @@ int match_id(char *line, char *id)
 	return (TRUE);
 }
 
-int is_blank(char *line)
+int	is_blank(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])

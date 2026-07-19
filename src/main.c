@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 /** Print the command-line usage to stderr. */
-static void usage(void)
+static void	usage(void)
 {
 	ft_putstr_fd("Error\nUsage: ./cub3d <map.cub>\n", 2);
 }
@@ -23,11 +23,11 @@ static void usage(void)
  * Set CUB3D_PARSE_ONLY=1 to skip MLX (for map suites / valgrind).
  * Parse failures free partial state inside parse_config.
  */
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_game game;
-	t_cub cub;
-	char *parse_only;
+	t_game	game;
+	t_cub	cub;
+	char	*parse_only;
 
 	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)

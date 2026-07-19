@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-static int check_extension(char *file)
+static int	check_extension(char *file)
 {
-	int len;
+	int	len;
 
 	if (!file)
 		return (FALSE);
@@ -26,11 +26,11 @@ static int check_extension(char *file)
 	return (TRUE);
 }
 
-static int check_not_directory(char *file)
+static int	check_not_directory(char *file)
 {
-	int fd;
-	char buffer;
-	int ret;
+	int		fd;
+	char	buffer;
+	int		ret;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -42,9 +42,9 @@ static int check_not_directory(char *file)
 	return (TRUE);
 }
 
-int validate_file(char *file)
+int	validate_file(char *file)
 {
-	int fd;
+	int	fd;
 
 	if (!check_extension(file))
 		return (parse_error(ERR_INVALID_EXT));

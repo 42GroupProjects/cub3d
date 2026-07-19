@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void free_str(char **s)
+void	free_str(char **s)
 {
 	if (s && *s)
 	{
@@ -21,13 +21,13 @@ void free_str(char **s)
 	}
 }
 
-void free_strarr(char ***arr)
+void	free_strarr(char ***arr)
 {
-	char **a;
-	int i;
+	char	**a;
+	int		i;
 
 	if (!arr || !*arr)
-		return;
+		return ;
 	a = *arr;
 	i = 0;
 	while (a[i])
@@ -39,10 +39,10 @@ void free_strarr(char ***arr)
 	*arr = NULL;
 }
 
-void free_config(t_game *game)
+void	free_config(t_game *game)
 {
 	if (!game)
-		return;
+		return ;
 	free_str(&game->no_tex);
 	free_str(&game->so_tex);
 	free_str(&game->we_tex);

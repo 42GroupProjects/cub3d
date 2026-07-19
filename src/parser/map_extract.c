@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-static int max_width(char **map)
+static int	max_width(char **map)
 {
-	int i;
-	int len;
-	int max;
+	int	i;
+	int	len;
+	int	max;
 
 	max = 0;
 	i = 0;
@@ -30,11 +30,11 @@ static int max_width(char **map)
 	return (max);
 }
 
-static int pad_row(char **row, int width)
+static int	pad_row(char **row, int width)
 {
-	char *new_row;
-	int len;
-	int i;
+	char	*new_row;
+	int		len;
+	int		i;
 
 	len = ft_strlen(*row);
 	new_row = malloc(width + 1);
@@ -54,10 +54,10 @@ static int pad_row(char **row, int width)
 	return (SUCCESS);
 }
 
-static void seal_map_corners(t_game *game)
+static void	seal_map_corners(t_game *game)
 {
 	if (!game->map || game->height <= 0 || game->width <= 0)
-		return;
+		return ;
 	if (game->map[0][0] == ' ')
 		game->map[0][0] = '1';
 	if (game->map[0][game->width - 1] == ' ')
@@ -68,10 +68,10 @@ static void seal_map_corners(t_game *game)
 		game->map[game->height - 1][game->width - 1] = '1';
 }
 
-int extract_map(t_game *game, char **lines, int map_start)
+int	extract_map(t_game *game, char **lines, int map_start)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	count = 0;
 	while (lines[map_start + count])
@@ -96,10 +96,10 @@ int extract_map(t_game *game, char **lines, int map_start)
 	return (SUCCESS);
 }
 
-int normalize_map(t_game *game)
+int	normalize_map(t_game *game)
 {
-	int i;
-	int width;
+	int	i;
+	int	width;
 
 	width = max_width(game->map);
 	i = 0;

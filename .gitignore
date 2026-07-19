@@ -3,9 +3,15 @@
 *.swp
 *.out
 *old*
-/libft
 /obj
 cub3d
 tester/
+mlx/
+.deps/
 err.tmp
 vg.tmp
+
+# libft sources are tracked; ignore build products only
+libft/*.o
+libft/*.a
+libft/**/*.o

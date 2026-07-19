@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-static int count_words(char **words)
+static int	count_words(char **words)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	while (words[n])
@@ -22,9 +22,9 @@ static int count_words(char **words)
 	return (n);
 }
 
-static int is_valid_byte(char *s)
+static int	is_valid_byte(char *s)
 {
-	int i;
+	int	i;
 
 	if (!s[0])
 		return (FALSE);
@@ -40,9 +40,9 @@ static int is_valid_byte(char *s)
 	return (TRUE);
 }
 
-static int fill_rgb(int *rgb, char **parts)
+static int	fill_rgb(int *rgb, char **parts)
 {
-	int i;
+	int	i;
 
 	if (count_words(parts) != RGB_COUNT)
 		return (FALSE);
@@ -57,9 +57,9 @@ static int fill_rgb(int *rgb, char **parts)
 	return (TRUE);
 }
 
-int set_color(int *rgb, char *value, int *flag)
+int	set_color(int *rgb, char *value, int *flag)
 {
-	char **parts;
+	char	**parts;
 
 	if (*flag)
 		return (parse_error(ERR_DUP_COLOR));

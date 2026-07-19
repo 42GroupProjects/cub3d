@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-void print_map(char **map)
+void	print_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -24,10 +24,10 @@ void print_map(char **map)
 	}
 }
 
-void print_config(t_game *game)
+void	print_config(t_game *game)
 {
-	int *f;
-	int *c;
+	int	*f;
+	int	*c;
 
 	f = game->floor;
 	c = game->ceiling;
