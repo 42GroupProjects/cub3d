@@ -6,75 +6,51 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 14:53:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/24 17:36:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/19 20:55:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	free_player_struct(t_player *p)
-{
-	p->c = 0;
-	p->x = 0;
-	p->y = 0;
-	p->dir_x = 0;
-	p->dir_y = 0;
-	p->plane_x = 0;
-	p->plane_y = 0;
-	free(p);
-}
-
-static void	free_ray_struct(t_ray *r)
-{
-	r->camera_x = 0;
-	r->ray_dir_x = 0;
-	r->ray_dir_y = 0;
-	r->map_x = 0;
-	r->map_y = 0;
-	r->side_dist_x = 0;
-	r->side_dist_y = 0;
-	r->delta_dist_x = 0;
-	r->delta_dist_y = 0;
-	r->step_x = 0;
-	r->step_y = 0;
-	r->hit = 0;
-	r->side = 0;
-	r->perp_wall_dist = 0;
-	free(r);
-}
-
+/*
+** Frees MLX resources + player/ray heap. Does NOT free t_game (config) —
+** call free_config / clean_exit for that. Safe on NULL / partial init.
+** When you add wall texture images later, mlx_destroy_image them here
+** before mlx_destroy_display.
+*/
 void	free_cub_struct(t_cub *cub)
 {
-	if (cub->img)
+	if (!cub)
+		return ;
+	if (cub->mlx && cub->img)
 	{
 		mlx_destroy_image(cub->mlx, cub->img);
 		cub->img = NULL;
 	}
-	if (cub->win)
+	if (cub->mlx && cub->win)
+	{
 		mlx_destroy_window(cub->mlx, cub->win);
+		cub->win = NULL;
+	}
 	if (cub->mlx)
 	{
 		mlx_destroy_display(cub->mlx);
 		free(cub->mlx);
 		cub->mlx = NULL;
 	}
-	// FIXME: missing braces — addr check does nothing; null addr and free config if you own it here
-	if (cub->addr)
+	cub->addr = NULL;
 	cub->bpp = 0;
 	cub->line_len = 0;
 	cub->endian = 0;
-	if (cub->config)
-		cub->config = NULL;	//gets already freed
+	cub->config = NULL;
 	if (cub->player)
 	{
-		free_player_struct(cub->player);
+		free(cub->player);
 		cub->player = NULL;
 	}
 	if (cub->ray)
 	{
-		free_ray_struct(cub->ray);
+		free(cub->ray);
 		cub->ray = NULL;
 	}
-	cub = NULL; // FIXME: no-op — cub is a local pointer copy, does not clear caller's struct
 }
-
