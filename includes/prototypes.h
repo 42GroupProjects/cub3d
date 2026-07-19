@@ -32,15 +32,13 @@ int extract_map(t_game *game, char **lines, int map_start);
 /** Pad every row to max width with spaces. SUCCESS / OOM. */
 int normalize_map(t_game *game);
 
-/* --- validate_map.c --- */
-/** STUB: map layout is treated as valid (your flood-fill hook). SUCCESS. */
+/* --- validate_map.c / flood_fill.c --- */
+/** Characters, single spawn, flood-fill enclosure. SUCCESS / FAILURE / OOM. */
 int validate_map_layout(t_game *game);
 /** TRUE if every cell is one of 0 1 N S E W space. */
 int validate_characters(char **map);
 /** TRUE if there is exactly one spawn (N/S/E/W). */
 int validate_player_count(char **map);
-/** TRUE if the outer border is fully sealed by walls. */
-int validate_map_borders(t_game *game);
 
 /* --- print_map.c --- */
 /** Print every row followed by a newline. */
