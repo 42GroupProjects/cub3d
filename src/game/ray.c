@@ -131,7 +131,7 @@ void	draw_vertical_line(t_cub *cub, t_ray *r, int x)
 
 void	cast_ray(t_cub *c, int x)
 {
-	t_ray r;
+	t_ray	r;
 
 	init_ray(c, &r, x);
 	calculate_step(c, &r);

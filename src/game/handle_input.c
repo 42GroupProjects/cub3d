@@ -40,7 +40,6 @@ static void	move(t_cub *c, double dx, double dy)
 
 int	handle_keypress(int keycode, t_cub *c)
 {
-
 	if (keycode == 65307)
 	{
 		printf("ESC: %d pressed\n", keycode);
