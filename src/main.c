@@ -20,13 +20,14 @@ static void usage(void)
 
 /**
  * Entry point. Validates argc, runs the parser, prints the parsed config.
- * free_config runs on BOTH the success and the error path, so a failure
- * partway through parsing never leaks the work already allocated.
+ * Set CUB3D_PARSE_ONLY=1 to skip MLX (for map suites / valgrind).
+ * Parse failures free partial state inside parse_config.
  */
 int main(int argc, char **argv)
 {
 	t_game game;
 	t_cub cub;
+	char *parse_only;
 
 	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
@@ -34,9 +35,12 @@ int main(int argc, char **argv)
 	if (parse_config(&game, argv[1]) != SUCCESS)
 		return (1);
 	print_config(&game);
+	parse_only = getenv("CUB3D_PARSE_ONLY");
+	if (parse_only && parse_only[0] == '1' && parse_only[1] == '\0')
+		return (free_config(&game), 0);
 	ft_bzero(&cub, sizeof(t_cub));
 	if (init_game(&cub, &game) != SUCCESS)
-		return (free_config(&game), 1); /* cub is not yet initialized here */
+		return (free_config(&game), 1);
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
