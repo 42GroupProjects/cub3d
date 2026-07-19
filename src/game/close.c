@@ -20,6 +20,7 @@ int	on_x(t_cub *c)
 
 void	on_close(t_cub *c)
 {
+	// FIXME: also free_config(c->config) before exit, or return to main — this path leaks textures/map
 	free_cub_struct(c);
 	exit(1);
 }
