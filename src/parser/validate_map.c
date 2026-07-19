@@ -5,59 +5,89 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/19 19:02:36 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:03:21 by thanh-ng         ###   ########.fr       */
+/*   Created: 2026/07/19 19:02:22 by thanh-ng          #+#    #+#             */
+/*   Updated: 2026/07/19 19:47:22 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/**
- * Helper for your future layout check: TRUE if every cell is one of
- * 0 1 N S E W space. Kept ready to call from validate_map_layout.
- */
+static int is_valid_cell(char c)
+{
+    if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ')
+        return (TRUE);
+    return (FALSE);
+}
+
 int validate_characters(char **map)
 {
-	int i;
-	int j;
+    int i;
+    int j;
 
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != ' ')
-				return (FALSE);
-			j++;
-		}
-		i++;
-	}
-	return (TRUE);
+    i = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (!is_valid_cell(map[i][j]))
+                return (FALSE);
+            j++;
+        }
+        i++;
+    }
+    return (TRUE);
 }
 
-/** Helper: TRUE if there is exactly one spawn (N/S/E/W). */
+static int is_spawn_cell(char c)
+{
+    if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+        return (TRUE);
+    return (FALSE);
+}
+
 int validate_player_count(char **map)
 {
-	int i;
-	int j;
-	int count;
+    int i;
+    int j;
+    int count;
 
-	count = 0;
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count == 1);
+    count = 0;
+    i = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (is_spawn_cell(map[i][j]))
+                count++;
+            j++;
+        }
+        i++;
+    }
+    return (count == 1);
 }
 
-/* validate_map_layout() now lives in flood_fill.c (it calls the two
- * helpers above plus the DFS enclosure check). */
+int validate_map_borders(t_game *game)
+{
+    int x;
+    int y;
+
+    if (!game->map || game->height <= 0 || game->width <= 0)
+        return (FALSE);
+    x = 0;
+    while (x < game->width)
+    {
+        if (game->map[0][x] != '1' || game->map[game->height - 1][x] != '1')
+            return (FALSE);
+        x++;
+    }
+    y = 0;
+    while (y < game->height)
+    {
+        if (game->map[y][0] != '1' || game->map[y][game->width - 1] != '1')
+            return (FALSE);
+        y++;
+    }
+    return (TRUE);
+}

@@ -6,13 +6,12 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:25 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:03:11 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/19 19:14:04 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/** Print each row + newline (newlines were stripped during loading). */
 void print_map(char **map)
 {
 	int i;
@@ -25,7 +24,6 @@ void print_map(char **map)
 	}
 }
 
-/** Debug dump of the fully parsed config: textures, colors, then the grid. */
 void print_config(t_game *game)
 {
 	int *f;
