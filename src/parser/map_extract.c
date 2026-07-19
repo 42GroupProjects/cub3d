@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_extract.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/19 19:02:07 by thanh-ng          #+#    #+#             */
+/*   Updated: 2026/07/19 19:02:43 by thanh-ng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /** Longest row length across the whole grid. */
-static int	max_width(char **map)
+static int max_width(char **map)
 {
-	int	i;
-	int	len;
-	int	max;
+	int i;
+	int len;
+	int max;
 
 	max = 0;
 	i = 0;
@@ -20,11 +32,11 @@ static int	max_width(char **map)
 }
 
 /** Rebuild one row padded to `width` with trailing spaces. SUCCESS / OOM. */
-static int	pad_row(char **row, int width)
+static int pad_row(char **row, int width)
 {
-	char	*new_row;
-	int		len;
-	int		i;
+	char *new_row;
+	int len;
+	int i;
 
 	len = ft_strlen(*row);
 	new_row = malloc(width + 1);
@@ -49,10 +61,10 @@ static int	pad_row(char **row, int width)
  * Returns SUCCESS, FAILURE (no map content) or OOM. On OOM mid-copy the
  * partial grid is freed and game->map reset to NULL.
  */
-int	extract_map(t_game *game, char **lines, int map_start)
+int extract_map(t_game *game, char **lines, int map_start)
 {
-	int	count;
-	int	i;
+	int count;
+	int i;
 
 	count = 0;
 	while (lines[map_start + count])
@@ -75,10 +87,10 @@ int	extract_map(t_game *game, char **lines, int map_start)
 }
 
 /** Pad all rows to the max width so grid[y][x] is always safe. SUCCESS / OOM. */
-int	normalize_map(t_game *game)
+int normalize_map(t_game *game)
 {
-	int	i;
-	int	width;
+	int i;
+	int width;
 
 	width = max_width(game->map);
 	i = 0;

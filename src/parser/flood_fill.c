@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/19 19:01:57 by thanh-ng          #+#    #+#             */
+/*   Updated: 2026/07/19 19:02:42 by thanh-ng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /**
  * Deep-copy the grid so flood fill can mutate it ('V' markers) without
  * touching the real map used for rendering. NULL on allocation failure.
  */
-static char	**dup_map(char **map, int height)
+static char **dup_map(char **map, int height)
 {
-	char	**copy;
-	int		i;
+	char **copy;
+	int i;
 
 	copy = ft_calloc(height + 1, sizeof(char *));
 	if (!copy)
@@ -24,10 +36,10 @@ static char	**dup_map(char **map, int height)
 }
 
 /** Locate the single spawn cell (guaranteed to exist by player-count check). */
-static void	find_player(char **map, int *px, int *py)
+static void find_player(char **map, int *px, int *py)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = 0;
 	while (map[y])
@@ -35,12 +47,11 @@ static void	find_player(char **map, int *px, int *py)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'N' || map[y][x] == 'S'
-				|| map[y][x] == 'E' || map[y][x] == 'W')
+			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W')
 			{
 				*px = x;
 				*py = y;
-				return ;
+				return;
 			}
 			x++;
 		}
@@ -53,7 +64,7 @@ static void	find_player(char **map, int *px, int *py)
  * FALSE the moment it leaks off the edge or into a void (' ') cell.
  * Visited floor is marked 'V'; walls ('1') and 'V' are safe stops.
  */
-static int	flood_fill(char **map, int x, int y, t_game *game)
+static int flood_fill(char **map, int x, int y, t_game *game)
 {
 	if (x < 0 || y < 0 || x >= game->width || y >= game->height)
 		return (FALSE);
@@ -62,8 +73,7 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (TRUE);
 	map[y][x] = 'V';
-	if (!flood_fill(map, x, y - 1, game) || !flood_fill(map, x, y + 1, game)
-		|| !flood_fill(map, x - 1, y, game) || !flood_fill(map, x + 1, y, game))
+	if (!flood_fill(map, x, y - 1, game) || !flood_fill(map, x, y + 1, game) || !flood_fill(map, x - 1, y, game) || !flood_fill(map, x + 1, y, game))
 		return (FALSE);
 	return (TRUE);
 }
@@ -73,11 +83,11 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
  * spawn's reachable area sealed by walls (flood fill on a duplicate).
  * Returns SUCCESS, FAILURE (rejected map) or OOM (duplicate failed).
  */
-int	validate_map_layout(t_game *game)
+int validate_map_layout(t_game *game)
 {
-	char	**copy;
-	int		px;
-	int		py;
+	char **copy;
+	int px;
+	int py;
 
 	if (!validate_characters(game->map))
 		return (parse_error(ERR_MAP_INVALID));

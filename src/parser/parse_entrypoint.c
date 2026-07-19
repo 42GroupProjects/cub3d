@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_entrypoint.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/19 19:02:16 by thanh-ng          #+#    #+#             */
+/*   Updated: 2026/07/19 19:03:06 by thanh-ng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /**
@@ -5,11 +17,11 @@
  * the new array is freed (the old rows still belong to `map`, so the caller
  * can free `map`) and NULL is returned. NULL on any allocation failure.
  */
-char	**append_line(char **map, char *line)
+char **append_line(char **map, char *line)
 {
-	char	**new_map;
-	int		i;
-	int		size;
+	char **new_map;
+	int i;
+	int size;
 
 	size = 0;
 	while (map && map[size])
@@ -32,9 +44,9 @@ char	**append_line(char **map, char *line)
 }
 
 /** Remove a single trailing '\n' so width/padding math stays clean. */
-static void	rstrip_newline(char *s)
+static void rstrip_newline(char *s)
 {
-	int	len;
+	int len;
 
 	len = ft_strlen(s);
 	if (len > 0 && s[len - 1] == '\n')
@@ -46,12 +58,12 @@ static void	rstrip_newline(char *s)
  * Returns NULL on open failure or any allocation failure; partial work is
  * freed before returning.
  */
-static char	**load_lines(char *file)
+static char **load_lines(char *file)
 {
-	int		fd;
-	char	*line;
-	char	**lines;
-	char	**tmp;
+	int fd;
+	char *line;
+	char **lines;
+	char **tmp;
 
 	lines = NULL;
 	fd = open(file, O_RDONLY);
@@ -77,11 +89,11 @@ static char	**load_lines(char *file)
  * normalize map, then the (stubbed) layout check. Frees `lines` on every
  * path. Returns SUCCESS, FAILURE (bad input) or OOM (allocation failure).
  */
-int	parse_config(t_game *game, char *file)
+int parse_config(t_game *game, char *file)
 {
-	char	**lines;
-	int		map_start;
-	int		status;
+	char **lines;
+	int map_start;
+	int status;
 
 	status = validate_file(file);
 	if (status != SUCCESS)
