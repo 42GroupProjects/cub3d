@@ -17,6 +17,7 @@ static int	is_walkable(t_cub *c, int y, int x)
 
 	map_x = (int)x;
 	map_y = (int)y;
+	// FIXME: reject OOB / ' ' cells too — only checking '1' lets you walk off the map
 	if (c->config->map[map_y][map_x] == '1')
 		return (0);
 	return (1);
@@ -54,6 +55,7 @@ int	handle_keypress(int keycode, t_cub *c)
 		printf("DOWN: %d pressed\n", keycode);
 		move(c, -c->player->dir_x * MOVE_SPEED, -c->player->dir_y * MOVE_SPEED);
 	}
+	// FIXME: subject wants ←/→ to rotate look; arrows currently strafe — swap with Q/E or drop Q/E
 	else if (keycode == 65361 || keycode == 97)
 	{
 		printf("LEFT: %d pressed\n", keycode);
@@ -69,6 +71,6 @@ int	handle_keypress(int keycode, t_cub *c)
 	else if (keycode == 101)	//right
 		rotate_player(c, ROT_SPEED);
 	else
-		printf("UNDEFINED INPUT: %d pressed\n", keycode);
+		printf("UNDEFINED INPUT: %d pressed\n", keycode); // FIXME: strip all debug printf before eval
 	return (0);
 }
