@@ -67,27 +67,3 @@ int validate_player_count(char **map)
     }
     return (count == 1);
 }
-
-int validate_map_borders(t_game *game)
-{
-    int x;
-    int y;
-
-    if (!game->map || game->height <= 0 || game->width <= 0)
-        return (FALSE);
-    x = 0;
-    while (x < game->width)
-    {
-        if (game->map[0][x] != '1' || game->map[game->height - 1][x] != '1')
-            return (FALSE);
-        x++;
-    }
-    y = 0;
-    while (y < game->height)
-    {
-        if (game->map[y][0] != '1' || game->map[y][game->width - 1] != '1')
-            return (FALSE);
-        y++;
-    }
-    return (TRUE);
-}
