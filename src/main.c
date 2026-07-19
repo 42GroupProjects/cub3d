@@ -45,7 +45,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
 	mlx_loop(cub.mlx);
-	free_cub_struct(&cub);
-	free_config(&game);
+	clean_exit(&cub, 0);
 	return (0);
 }
