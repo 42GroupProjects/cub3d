@@ -21,9 +21,11 @@ docs/
     09-combat-lab/       ← Weapon, parry, hit detection (combat-lab)
     10-asset-pipeline/   ← Blender → sprite sheet → XPM (combat-lab)
     11-evaluation/       ← Defense drills, templates, question bank
-  reference/             ← Formulas, glossary, crisis cards, external links
+  reference/             ← Formulas, glossary, crisis cards, methodology / oral defense
   journal/               ← Daily, pair review, AI usage, retrospective
 ```
+
+**Oral defense (start here):** [`reference/methodology-oral-defense.md`](./reference/methodology-oral-defense.md) — our pipeline, ownership, Q&A, drills.
 
 ---
 

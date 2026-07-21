@@ -107,6 +107,25 @@ valgrind-parser: $(NAME)
 	if [ $$fail -ne 0 ]; then exit 1; fi; \
 	echo "valgrind-parser: all passed"
 
+# MLX init + clean_exit under valgrind (needs X11; use xvfb-run in CI/headless).
+valgrind-mlx: $(NAME)
+	@echo "== valgrind MLX teardown maps/m_valid/01_minimal_N.cub =="; \
+	if command -v xvfb-run >/dev/null 2>&1; then \
+		xvfb-run -a env CUB3D_QUIT_AFTER_INIT=1 $(VALGRIND) \
+			./$(NAME) maps/m_valid/01_minimal_N.cub >/dev/null 2>vg.mlx.tmp; \
+	else \
+		CUB3D_QUIT_AFTER_INIT=1 $(VALGRIND) \
+			./$(NAME) maps/m_valid/01_minimal_N.cub >/dev/null 2>vg.mlx.tmp; \
+	fi; \
+	rc=$$?; \
+	if [ $$rc -eq 42 ]; then \
+		echo "FAIL: valgrind reported issues"; cat vg.mlx.tmp; rm -f vg.mlx.tmp; exit 1; \
+	elif [ $$rc -ne 0 ]; then \
+		echo "FAIL: expected success (rc=$$rc)"; cat vg.mlx.tmp; rm -f vg.mlx.tmp; exit 1; \
+	fi; \
+	rm -f vg.mlx.tmp; \
+	echo "valgrind-mlx: OK (ignore X11 still-reachable if any in manual runs)"
+
 re: fclean all
 
-.PHONY: all clean fclean re debug demo test-maps valgrind-parser
+.PHONY: all clean fclean re debug demo test-maps valgrind-parser valgrind-mlx

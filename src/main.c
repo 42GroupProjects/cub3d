@@ -18,16 +18,24 @@ static void	usage(void)
 	ft_putstr_fd("Error\nUsage: ./cub3d <map.cub>\n", 2);
 }
 
+static int	env_flag_on(char *name)
+{
+	char	*v;
+
+	v = getenv(name);
+	return (v && v[0] == '1' && v[1] == '\0');
+}
+
 /**
  * Entry point. Validates argc, runs the parser, prints the parsed config.
- * Set CUB3D_PARSE_ONLY=1 to skip MLX (for map suites / valgrind).
+ * CUB3D_PARSE_ONLY=1 — parse then free_config (no MLX).
+ * CUB3D_QUIT_AFTER_INIT=1 — init MLX then clean_exit (valgrind teardown).
  * Parse failures free partial state inside parse_config.
  */
 int	main(int argc, char **argv)
 {
 	t_game	game;
 	t_cub	cub;
-	char	*parse_only;
 
 	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
@@ -35,12 +43,13 @@ int	main(int argc, char **argv)
 	if (parse_config(&game, argv[1]) != SUCCESS)
 		return (1);
 	print_config(&game);
-	parse_only = getenv("CUB3D_PARSE_ONLY");
-	if (parse_only && parse_only[0] == '1' && parse_only[1] == '\0')
+	if (env_flag_on("CUB3D_PARSE_ONLY"))
 		return (free_config(&game), 0);
 	ft_bzero(&cub, sizeof(t_cub));
 	if (init_game(&cub, &game) != SUCCESS)
 		return (free_config(&game), 1);
+	if (env_flag_on("CUB3D_QUIT_AFTER_INIT"))
+		clean_exit(&cub, 0);
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
