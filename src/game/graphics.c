@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/14 21:41:29 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/21 17:47:04 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	draw_player(t_cub *cub)
 	}
 }
 
-static int	rgbToInt(int rgb[3]) // FIXME: rename to snake_case for norm (e.g. rgb_to_int)
+static int	rgb_to_int(int rgb[3])
 {
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
@@ -114,13 +114,13 @@ void	draw_background(t_cub *cub)
 	int	x;
 	int color;
 
-	color = rgbToInt(cub->config->ceiling);
+	color = rgb_to_int(cub->config->ceiling);
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		if ((y == (HEIGHT / 2) - 1) && x == 0)
-			color = rgbToInt(cub->config->floor);
+			color = rgb_to_int(cub->config->floor);
 		while (x < WIDTH)
 		{
 			put_pixel(cub, x, y, color);

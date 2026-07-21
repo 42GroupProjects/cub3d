@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:35:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/23 15:03:45 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/21 20:14:44 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int	init_game(t_cub *c, t_game *g)
 	c->addr = mlx_get_data_addr(c->img, &c->bpp, &c->line_len, &c->endian);
 	if (!c->addr)
 		return (parse_error(ERR_MLX_DATA));
-	// FIXME: load NO/SO/WE/EA via mlx_xpm_file_to_image here (paths in c->config)
+	// TODO: load NO/SO/WE/EA via mlx_xpm_file_to_image here (paths in c->config)
 	if (init_player(c) != SUCCESS)
+		printf("%s failed\n", __func__);
+	if (init_textures(c) != SUCCESS)
 		printf("%s failed\n", __func__);
 	if (init_ray(c) != SUCCESS)
 		printf("%s failed\n", __func__);

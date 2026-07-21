@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 20:25:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/15 16:54:05 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/21 17:47:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static int	is_walkable(t_cub *c, int y, int x)
 
 	map_x = (int)x;
 	map_y = (int)y;
-	// FIXME: reject OOB / ' ' cells too — only checking '1' lets you walk off the map
-	if (c->config->map[map_y][map_x] == '1')
+	if (c->config->map[map_y][map_x] == '1' || c->config->map[map_y][map_x] == ' ') // TODO: checked for ' ' 
 		return (0);
 	return (1);
 }
@@ -41,36 +40,20 @@ static void	move(t_cub *c, double dx, double dy)
 int	handle_keypress(int keycode, t_cub *c)
 {
 	if (keycode == 65307)
-	{
-		printf("ESC: %d pressed\n", keycode);
 		on_close(c);
-	}
-	else if (keycode == 65362 || keycode == 119)
-	{
-		printf("UP: %d pressed\n", keycode);
+	else if (keycode == 119)
 		move(c, c->player->dir_x * MOVE_SPEED, c->player->dir_y * MOVE_SPEED);
-	}
-	else if (keycode == 65364 || keycode == 115)
-	{
-		printf("DOWN: %d pressed\n", keycode);
+	else if (keycode == 115)
 		move(c, -c->player->dir_x * MOVE_SPEED, -c->player->dir_y * MOVE_SPEED);
-	}
-	// FIXME: subject wants ←/→ to rotate look; arrows currently strafe — swap with Q/E or drop Q/E
-	else if (keycode == 65361 || keycode == 97)
-	{
-		printf("LEFT: %d pressed\n", keycode);
+	else if (keycode == 97)
 		move(c, c->player->dir_y * MOVE_SPEED, -c->player->dir_x * MOVE_SPEED);
-	}
-	else if (keycode == 65363 || keycode == 100)
-	{
-		printf("RIGHT: %d pressed\n", keycode);
+	else if (keycode == 100)
 		move(c, -c->player->dir_y * MOVE_SPEED, c->player->dir_x * MOVE_SPEED);
-	}
-	else if (keycode == 113)	//left
+	else if (keycode == 65361)	//left
 		rotate_player(c, -ROT_SPEED);
-	else if (keycode == 101)	//right
+	else if (keycode == 65363)	//right
 		rotate_player(c, ROT_SPEED);
 	else
-		printf("UNDEFINED INPUT: %d pressed\n", keycode); // FIXME: strip all debug printf before eval
+		printf("UNDEFINED INPUT: %d pressed\n", keycode); // TODO: strip all debug printf before eval
 	return (0);
 }

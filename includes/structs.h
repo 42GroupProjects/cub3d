@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                     :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 20:55:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/21 20:01:06 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,20 @@ typedef struct s_ray
 }	t_ray;
 
 /*
+** Texture struct
+*/
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_texture;
+
+/*
 ** Main struct for raycaster and game.
 */
 typedef struct s_cub
@@ -88,7 +102,7 @@ typedef struct s_cub
 	char			*addr;
 	int				bpp;
 	int				line_len;
-	int				endian;
+	int				endian;	//TODO: check if needed
 	struct s_game	*config;
 	struct s_player	*player;
 	struct s_ray	*ray;

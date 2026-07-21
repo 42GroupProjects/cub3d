@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:07:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/14 22:26:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/21 18:51:17 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	init_ray(t_cub *c, t_ray *r, int x)
 {
 	r->camera_x = 2.0 * x / WIDTH - 1.0;
 	r->ray_dir_x = c->player->dir_x + c->player->plane_x * r->camera_x;
-	// BUG: use camera_x here (camera_y is never set → vertical FOV broken)
-	r->ray_dir_y = c->player->dir_y + c->player->plane_y * r->camera_y;
+	// TODO: use camera_x here. Thank Shawn for spotting the issues!!
+	r->ray_dir_y = c->player->dir_y + c->player->plane_y * r->camera_x;
 	r->map_x = (int)c->player->x;
 	r->map_y = (int)c->player->y;
 	// FIXME: guard ray_dir_* == 0 before divide (delta_dist → inf/nan)
