@@ -28,16 +28,16 @@ Both students without notes:
 
 ---
 
-## Question Bank (from `docs/reference/evaluation-questions.md`)
+## Question Bank (from `docs/reference/`)
 
-Practice these aloud until both partners can answer without reading:
+Primary brief (our methodology + answers + drills):
 
-- What is `perpWallDist` and what does it prevent?
-- How does your map closure algorithm work?
-- What happens when the map has spaces inside it?
-- What is the camera plane and what does its length control?
-- Walk me through what happens when an invalid map is passed — from `main()` to `exit()`.
-- Show me the cleanup function chain.
+- [`docs/reference/methodology-oral-defense.md`](../../reference/methodology-oral-defense.md)
+
+Also practice aloud from:
+
+- [`docs/reference/evaluation-questions.md`](../../reference/evaluation-questions.md)
+- [`02-defense-qna.md`](./02-defense-qna.md) (math-focused)
 
 ---
 

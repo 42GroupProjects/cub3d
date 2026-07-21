@@ -82,6 +82,17 @@ valid `.xpm` files and point the `.cub` header paths at them.
 - thanh-ng — parsing / validation
 - lwittwer — rendering / input / game loop
 
+## AI usage
+
+We use AI tools (e.g. Cursor) to help draft and maintain this **README**, the
+learning material under **`docs/`** (modules, checklists, oral-defense notes),
+and **`docs/reference/`** study sheets.
+
+All project **source code** is written and reviewed by us. AI output used for
+docs is checked against our implementation and the subject before we rely on it.
+We can explain every part of the program we submit without depending on the AI
+at evaluation time.
+
 ## Resources
 
 - [Lode's Computer Graphics Tutorial — Raycasting](https://lodev.org/cgtutor/raycasting.html)

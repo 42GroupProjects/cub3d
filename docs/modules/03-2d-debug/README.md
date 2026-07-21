@@ -29,14 +29,18 @@ When your 3D raycaster produces wrong output (mirrored walls, fisheye, wrong tex
 
 ## Exit Checkpoint
 
-- [ ] Map cells draw at correct positions using `cell_dim`, `offset_x`, `offset_y`
-- [ ] Walls darker, floors lighter, void black — correct color scheme
-- [ ] Player dot appears at the exact spawn cell on first frame
-- [ ] Direction arrow points in the correct direction for N/S/E/W spawns
-- [ ] WASD movement works — float position, collision stops at `'1'` cells
-- [ ] Left/right rotation rotates the arrow — plane stays perpendicular
-- [ ] After 360° rotation, arrow returns to original direction (no drift)
-- [ ] *(Stretch)* Yellow center debug ray stops at the correct wall cell
+Status vs current code (2026-07-21). Live `render()` runs **3D only**; 2D helpers exist but are commented out.
+
+- [ ] Map cells draw at correct positions using `cell_dim`, `offset_x`, `offset_y` — **partial:** `draw_map` uses fixed `TS` tiles, no centering/`cell_dim`; **not called** in `render`
+- [ ] Walls darker, floors lighter, void black — **partial:** walls white / else black; no distinct void vs floor; **not in live render**
+- [ ] Player dot appears at the exact spawn cell on first frame — **partial:** `draw_player` draws a small red square at float `x*TS`; **not in live render**
+- [ ] Direction arrow points in the correct direction for N/S/E/W spawns — **missing:** no 2D direction arrow drawn (only `dir`/`plane` in 3D)
+- [x] WASD movement works — float position, collision stops at `'1'` cells — works in 3D path (`handle_input` + `is_walkable`)
+- [x] Left/right rotation rotates view — plane stays perpendicular — `rotate_player` updates `dir` + `plane` (keys are Q/E today, not ←/→)
+- [ ] After 360° rotation, arrow returns to original direction (no drift) — not formally checked; no 2D arrow to verify
+- [ ] *(Stretch)* Yellow center debug ray stops at the correct wall cell — `cast_single_ray` is fully commented out
+
+**Bottom line:** Module 03 was skipped as a live debug view. You jumped to 3D. Enough movement/rotation logic exists underneath, but the 2D canvas checkpoint is **not finished** as written.
 
 ---
 
