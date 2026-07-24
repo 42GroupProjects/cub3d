@@ -7,7 +7,7 @@
 cub3D is a Wolfenstein 3D-inspired raycaster. It parses a `.cub` scene file
 (textures, floor/ceiling colors, and a closed map) and renders a first-person
 view of a maze with MiniLibX. Wall faces use distinct North/South/East/West
-textures with distance shading; movement uses WASD (hold); look uses
+textures with distance shading; movement uses WASD (hold), look uses the
 arrow keys and mouse.
 
 ## Instructions
