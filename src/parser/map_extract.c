@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:07 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 20:30:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,27 @@ static int	pad_row(char **row, int width)
 	return (SUCCESS);
 }
 
+static int	dup_map_rows(t_game *game, char **lines, int start, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		game->map[i] = ft_strdup(lines[start + i]);
+		if (!game->map[i])
+		{
+			free_strarr(&game->map);
+			return (oom_error());
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
 int	extract_map(t_game *game, char **lines, int map_start)
 {
 	int	count;
-	int	i;
 
 	count = 0;
 	while (lines[map_start + count])
@@ -71,17 +88,8 @@ int	extract_map(t_game *game, char **lines, int map_start)
 	game->map = ft_calloc(count + 1, sizeof(char *));
 	if (!game->map)
 		return (oom_error());
-	i = 0;
-	while (i < count)
-	{
-		game->map[i] = ft_strdup(lines[map_start + i]);
-		if (!game->map[i])
-		{
-			free_strarr(&game->map);
-			return (oom_error());
-		}
-		i++;
-	}
+	if (dup_map_rows(game, lines, map_start, count) != SUCCESS)
+		return (FAILURE);
 	game->height = count;
 	return (SUCCESS);
 }
