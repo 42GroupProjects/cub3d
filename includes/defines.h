@@ -73,6 +73,11 @@
 # define FOG_MIN 0.18
 # define FOG_SIDE 0.7
 
+/* Bonus: crosshair */
+# define CROSS_SIZE 8
+# define CROSS_GAP 2
+# define CROSS_COLOR 0xFFFFFF
+
 /* Bonus: minimap */
 # define KEY_M 109
 # define KEY_M_UP 77
