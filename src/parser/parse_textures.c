@@ -24,6 +24,20 @@ static void	rstrip_spaces(char *s)
 	}
 }
 
+static int	is_hidden_basename(char *path)
+{
+	char	*base;
+
+	base = path;
+	while (*path)
+	{
+		if (*path == '/')
+			base = path + 1;
+		path++;
+	}
+	return (base[0] == '.');
+}
+
 int	set_texture(char **dst, char *value)
 {
 	char	*path;
@@ -37,7 +51,7 @@ int	set_texture(char **dst, char *value)
 	if (!path)
 		return (oom_error());
 	rstrip_spaces(path);
-	if (path[0] == '\0')
+	if (path[0] == '\0' || is_hidden_basename(path))
 	{
 		free(path);
 		return (parse_error(ERR_EMPTY_TEX));

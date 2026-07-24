@@ -23,6 +23,10 @@ static int	check_extension(char *file)
 		return (FALSE);
 	if (ft_strncmp(file + len - FILE_EXT_LENGTH, ".cub", FILE_EXT_LENGTH) != 0)
 		return (FALSE);
+	/* reject bare ".cub" / "path/.cub" (no filename stem) */
+	if (file[len - FILE_EXT_LENGTH - 1] == '/'
+		|| file[len - FILE_EXT_LENGTH - 1] == '.')
+		return (FALSE);
 	return (TRUE);
 }
 
