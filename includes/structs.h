@@ -113,5 +113,6 @@ typedef struct s_cub
 	struct s_texture	south;
 	struct s_texture	west;
 	int					show_full_map;
+	int					mm_alpha;
 }	t_cub;
 #endif
