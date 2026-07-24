@@ -57,5 +57,6 @@ t_texture	*get_wall_texture(t_cub *c, t_ray *r);
 
 int			mm_tile_color(char cell);
 void		mm_put_pixel_blend(t_cub *cub, int x, int y, int color);
+void		mm_draw_dot(t_cub *cub, int cx, int cy, int size);
 
 #endif
