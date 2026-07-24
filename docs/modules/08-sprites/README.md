@@ -111,6 +111,10 @@ DEAD
 
 ## Exit Checkpoint
 
+**Status (2026-07-21): not started.** This module is **post-evaluation** (`combat-lab`).
+There is no sprite / Z-buffer / entity code in `src/` or `includes/` yet.
+Mandatory (textures, ←/→, freeze) should stay finished before any of this.
+
 - [ ] Duck sprite renders at correct screen position
 - [ ] Duck appears in front of walls when closer (Z-buffer correct)
 - [ ] Duck behind walls when farther (not drawn through walls)
