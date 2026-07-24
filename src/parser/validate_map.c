@@ -6,24 +6,17 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:22 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:47:22 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 20:40:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	is_valid_cell(char c)
+static int	validate_characters(char **map)
 {
-	if (c == '0' || c == '1' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ')
-		return (TRUE);
-	return (FALSE);
-}
-
-int	validate_characters(char **map)
-{
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	c;
 
 	i = 0;
 	while (map[i])
@@ -31,7 +24,9 @@ int	validate_characters(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (!is_valid_cell(map[i][j]))
+			c = map[i][j];
+			if (!(c == '0' || c == '1' || c == 'N' || c == 'S'
+					|| c == 'E' || c == 'W' || c == ' '))
 				return (FALSE);
 			j++;
 		}
@@ -40,14 +35,7 @@ int	validate_characters(char **map)
 	return (TRUE);
 }
 
-static int	is_spawn_cell(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (TRUE);
-	return (FALSE);
-}
-
-int	validate_player_count(char **map)
+static int	validate_player_count(char **map)
 {
 	int	i;
 	int	j;
@@ -60,7 +48,8 @@ int	validate_player_count(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (is_spawn_cell(map[i][j]))
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
 				count++;
 			j++;
 		}
@@ -69,7 +58,7 @@ int	validate_player_count(char **map)
 	return (count == 1);
 }
 
-int	validate_borders(t_game *game)
+static int	validate_borders(t_game *game)
 {
 	int		x;
 	int		y;
@@ -92,4 +81,22 @@ int	validate_borders(t_game *game)
 		y++;
 	}
 	return (TRUE);
+}
+
+int	validate_map_layout(t_game *game)
+{
+	int	closed;
+
+	if (!validate_characters(game->map))
+		return (parse_error(ERR_MAP_INVALID));
+	if (!validate_player_count(game->map))
+		return (parse_error(ERR_MAP_NO_PLAYER));
+	if (!validate_borders(game))
+		return (parse_error(ERR_MAP_NOT_CLOSED));
+	closed = check_map_closed(game);
+	if (closed == OOM)
+		return (oom_error());
+	if (!closed)
+		return (parse_error(ERR_MAP_NOT_CLOSED));
+	return (SUCCESS);
 }

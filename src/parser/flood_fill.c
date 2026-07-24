@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:22 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:54:32 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 20:40:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,27 +72,21 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 	return (TRUE);
 }
 
-int	validate_map_layout(t_game *game)
+int	check_map_closed(t_game *game)
 {
 	char	**copy;
 	int		px;
 	int		py;
 
-	if (!validate_characters(game->map))
-		return (parse_error(ERR_MAP_INVALID));
-	if (!validate_player_count(game->map))
-		return (parse_error(ERR_MAP_NO_PLAYER));
-	if (!validate_borders(game))
-		return (parse_error(ERR_MAP_NOT_CLOSED));
 	copy = dup_map(game->map, game->height);
 	if (!copy)
-		return (oom_error());
+		return (OOM);
 	find_player(copy, &px, &py);
 	if (!flood_fill(copy, px, py, game))
 	{
 		free_strarr(&copy);
-		return (parse_error(ERR_MAP_NOT_CLOSED));
+		return (FALSE);
 	}
 	free_strarr(&copy);
-	return (SUCCESS);
+	return (TRUE);
 }
