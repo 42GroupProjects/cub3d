@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:03 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:14:04 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 20:40:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,4 @@ void	free_config(t_game *game)
 	free_str(&game->we_tex);
 	free_str(&game->ea_tex);
 	free_strarr(&game->map);
-}
-
-/*
-** Full teardown for ESC / window X: free MLX + parsed config, then exit.
-** Friend: call clean_exit(c, 0) from on_close — do not free piecemeal.
-*/
-void	clean_exit(t_cub *c, int code)
-{
-	t_game	*cfg;
-
-	cfg = NULL;
-	if (c)
-	{
-		cfg = c->config;
-		free_cub_struct(c);
-	}
-	if (cfg)
-		free_config(cfg);
-	exit(code);
 }

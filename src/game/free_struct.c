@@ -54,3 +54,18 @@ void	free_cub_struct(t_cub *cub)
 		cub->ray = NULL;
 	}
 }
+
+void	clean_exit(t_cub *c, int code)
+{
+	t_game	*cfg;
+
+	cfg = NULL;
+	if (c)
+	{
+		cfg = c->config;
+		free_cub_struct(c);
+	}
+	if (cfg)
+		free_config(cfg);
+	exit(code);
+}
