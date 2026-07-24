@@ -33,13 +33,12 @@ jobs:
           sudo cp /tmp/minilibx-linux/libmlx.a /usr/local/lib/
           sudo ldconfig
 
-      - name: Build cub3d
+      - name: Build cub3D
         run: make
 
       - name: Clone Cub3D tester
         run: |
           git clone --depth 1 https://github.com/VestaManuyko/Cub3D_tester.git tester
-          sed -i 's#define PROG "../cub3D"#define PROG "../cub3d"#' tester/tests/tester.h
           make -C tester
 
       - name: Run Cub3D tester invalid suite
