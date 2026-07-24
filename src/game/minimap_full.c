@@ -30,3 +30,23 @@ static void	draw_dim_screen(t_cub *cub)
 		y++;
 	}
 }
+
+static void	fill_tile(t_cub *cub, int ox, int oy, int color)
+{
+	int	px;
+	int	py;
+	int	tile;
+
+	tile = mm_full_tile_size(cub);
+	py = 0;
+	while (py < tile)
+	{
+		px = 0;
+		while (px < tile)
+		{
+			mm_put_pixel_blend(cub, ox + px, oy + py, color);
+			px++;
+		}
+		py++;
+	}
+}
