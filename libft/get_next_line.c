@@ -6,43 +6,49 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:46:57 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/06/18 21:04:58 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char *read_line(int fd, char *buffer, char *backup)
+static char	*read_line(int fd, char *buffer, char **backup)
 {
-	int check;
-	char *temp;
+	int		check;
+	char	*temp;
 
 	check = 1;
 	while (check)
 	{
 		check = read(fd, buffer, BUFFER_SIZE);
 		if (check == -1)
+		{
+			free(*backup);
+			*backup = NULL;
 			return (NULL);
+		}
 		else if (check == 0)
-			break;
+			break ;
 		buffer[check] = '\0';
-		if (!backup)
-			backup = ft_strdup("");
-		temp = backup;
-		backup = ft_strjoin(temp, buffer);
-		if (!backup)
+		if (!*backup)
+			*backup = ft_strdup("");
+		if (!*backup)
 			return (NULL);
+		temp = *backup;
+		*backup = ft_strjoin(temp, buffer);
 		free(temp);
+		if (!*backup)
+			return (NULL);
 		if (ft_strchr(buffer, '\n'))
-			break;
+			break ;
 	}
-	return (backup);
+	return (*backup);
 }
 
-static char *extract(char *line)
+static char	*extract(char *line)
 {
-	int i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
@@ -61,18 +67,22 @@ static char *extract(char *line)
 	return (temp);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *buffer;
-	char *line;
-	static char *backup;
+	char		*buffer;
+	char		*line;
+	static char	*backup;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		free(backup);
+		backup = NULL;
 		return (NULL);
-	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	}
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	line = read_line(fd, buffer, backup);
+	line = read_line(fd, buffer, &backup);
 	free(buffer);
 	if (!line)
 		return (NULL);
