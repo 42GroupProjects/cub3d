@@ -58,5 +58,7 @@ int	handle_keypress(int keycode, t_cub *c)
 		rotate_player(c, -ROT_SPEED);
 	else if (keycode == ARROW_RIGHT)
 		rotate_player(c, ROT_SPEED);
+	else if (keycode == KEY_M || keycode == KEY_M_UP)
+		c->show_full_map = !c->show_full_map;
 	return (0);
 }
