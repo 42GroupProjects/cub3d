@@ -64,3 +64,16 @@ void	mm_draw_dot(t_cub *cub, int cx, int cy, int size)
 		dy++;
 	}
 }
+
+void	mm_draw_facing(t_cub *cub, int cx, int cy, int len)
+{
+	int	i;
+
+	i = 1;
+	while (i <= len)
+	{
+		put_pixel(cub, cx + (int)(cub->player->dir_x * i),
+			cy + (int)(cub->player->dir_y * i), MM_DIR);
+		i++;
+	}
+}
