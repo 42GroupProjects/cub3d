@@ -6,11 +6,23 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:22 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:14:04 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	rstrip_spaces(char *s)
+{
+	int	len;
+
+	len = ft_strlen(s);
+	while (len > 0 && (s[len - 1] == ' ' || s[len - 1] == '\t'))
+	{
+		s[len - 1] = '\0';
+		len--;
+	}
+}
 
 int	set_texture(char **dst, char *value)
 {
@@ -24,6 +36,12 @@ int	set_texture(char **dst, char *value)
 	path = ft_strdup(value);
 	if (!path)
 		return (oom_error());
+	rstrip_spaces(path);
+	if (path[0] == '\0')
+	{
+		free(path);
+		return (parse_error(ERR_EMPTY_TEX));
+	}
 	*dst = path;
 	return (SUCCESS);
 }
