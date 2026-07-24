@@ -1,52 +1,63 @@
+*This project has been created as part of the 42 curriculum by thanh-ng, lwittwer.*
+
 # cub3D
 
-*My first RayCaster with miniLibX*
+## Description
 
-A 42 school project inspired by Wolfenstein 3D: parse a `.cub` scene file and
-render a first-person maze view with MiniLibX (raycasting).
+cub3D is a Wolfenstein 3D-inspired raycaster. It parses a `.cub` scene file
+(textures, floor/ceiling colors, and a closed map) and renders a first-person
+view of a maze with MiniLibX. Wall faces use distinct North/South/East/West
+textures; movement uses WASD and looking uses the arrow keys.
 
-## Build
+## Instructions
+
+### Build
 
 ```bash
 make
 ```
 
-Requires MiniLibX (`libmlx`), X11, and `libft` (vendored in this repo).
+Requires MiniLibX (`libmlx`), X11, and the vendored `libft`.
 
 ```bash
 make clean    # remove object files
 make fclean   # remove objects + binary
 make re       # rebuild from scratch
+make bonus    # same as all (bonus features built into the binary)
 ```
 
-## Usage
+### Run
 
 ```bash
-./cub3d maps/m_valid/01_minimal_N.cub
+./cub3D maps/m_valid/01_minimal_N.cub
 ```
 
 Exactly one argument: path to a `.cub` map. On invalid input the program prints
 `Error` followed by a message on stderr and exits non-zero.
 
-Parser-only smoke test (no window):
+### Tests
 
 ```bash
-CUB3D_PARSE_ONLY=1 ./cub3d maps/m_valid/01_minimal_N.cub
-make test-maps
-make valgrind-parser
+make test-maps          # valid/invalid map suites (parse-only binary)
+make valgrind-parser    # same under valgrind
+make valgrind-mlx       # MLX init + clean exit under valgrind
 ```
 
-## Controls
+### Controls
 
 | Key | Action |
 |-----|--------|
 | `W` / `S` | Move forward / backward |
 | `A` / `D` | Strafe left / right |
-| `←` / `→` | Rotate view (look left / right) |
-| `ESC` | Quit |
-| Window close (X) | Quit |
+| `←` / `→` | Look left / right |
+| `M` | Toggle full-map overlay (bonus) |
+| `ESC` | Quit cleanly |
+| Window close (X) | Quit cleanly |
 
-## Map format (`.cub`)
+A small radar minimap sits in the top-left (bonus). Press `M` for a
+semi-transparent full 2D map overlay.
+
+### Map format (`.cub`)
 
 Header (any order, before the map):
 
@@ -60,41 +71,19 @@ C 225,30,0
 ```
 
 Then a closed map grid using `0` (floor), `1` (wall), spaces (void), and exactly
-one spawn among `N` `S` `E` `W`.
-
-Example maps live under `maps/m_valid/` and `maps/m_invalid/`.
-
-## Textures
-
-Placeholder wall textures (distinct N/S/E/W brick patterns) are in
-`textures/`:
-
-- `textures/north.xpm`
-- `textures/south.xpm`
-- `textures/west.xpm`
-- `textures/east.xpm`
-
-These are simple procedural XPMs for development. You may replace them with any
-valid `.xpm` files and point the `.cub` header paths at them.
-
-## Authors
-
-- thanh-ng — parsing / validation
-- lwittwer — rendering / input / game loop
-
-## AI usage
-
-We use AI tools (e.g. Cursor) to help draft and maintain this **README**, the
-learning material under **`docs/`** (modules, checklists, oral-defense notes),
-and **`docs/reference/`** study sheets.
-
-All project **source code** is written and reviewed by us. AI output used for
-docs is checked against our implementation and the subject before we rely on it.
-We can explain every part of the program we submit without depending on the AI
-at evaluation time.
+one spawn among `N` `S` `E` `W`. Example maps live under `maps/m_valid/` and
+`maps/m_invalid/`.
 
 ## Resources
 
 - [Lode's Computer Graphics Tutorial — Raycasting](https://lodev.org/cgtutor/raycasting.html)
 - [F. Permadi — Ray-Casting Tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)
 - [MiniLibX (Linux)](https://github.com/42Paris/minilibx-linux)
+
+### AI usage
+
+AI tools (e.g. Cursor) helped draft and maintain this README, the learning
+material under `docs/`, and study/reference sheets. Project source code is
+written and reviewed by us; AI-assisted text is checked against the
+implementation and the subject. We can explain every submitted part without
+depending on AI at evaluation time.
