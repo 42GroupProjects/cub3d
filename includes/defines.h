@@ -63,6 +63,7 @@
 /* Per-frame movement (held keys applied in render) */
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
+# define COLLISION_PAD 0.2
 
 /* Bonus: mouse look (radians per pixel of horizontal drift) */
 # define MOUSE_SENS 0.003
