@@ -135,6 +135,7 @@ int	render(t_cub *cub)
 	int	x;
 
 	apply_player_input(cub);
+	apply_mouse_look(cub);
 	x = 0;
 //	draw_map(cub);
 //	draw_player(cub);

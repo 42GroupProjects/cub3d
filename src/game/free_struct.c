@@ -63,7 +63,11 @@ void	clean_exit(t_cub *c, int code)
 	if (c)
 	{
 		if (c->mlx)
+		{
 			mlx_do_key_autorepeaton(c->mlx);
+			if (c->win)
+				mlx_mouse_show(c->mlx, c->win);
+		}
 		cfg = c->config;
 		free_cub_struct(c);
 	}

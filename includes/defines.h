@@ -64,6 +64,9 @@
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
 
+/* Bonus: mouse look (radians per pixel of horizontal drift) */
+# define MOUSE_SENS 0.003
+
 /* Bonus: minimap */
 # define KEY_M 109
 # define KEY_M_UP 77

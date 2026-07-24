@@ -120,5 +120,6 @@ typedef struct s_cub
 	int					key_d;
 	int					key_left;
 	int					key_right;
+	int					mouse_ready;
 }	t_cub;
 #endif

@@ -34,6 +34,7 @@ int	init_game(t_cub *c, t_game *g)
 	c->win = mlx_new_window(c->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!c->win)
 		return (free_cub_struct(c), parse_error(ERR_MLX_WINDOW));
+	mlx_mouse_hide(c->mlx, c->win);
 	c->img = mlx_new_image(c->mlx, WIDTH, HEIGHT);
 	if (!c->img)
 		return (free_cub_struct(c), parse_error(ERR_MLX_IMAGE));

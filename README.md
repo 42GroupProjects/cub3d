@@ -7,7 +7,7 @@
 cub3D is a Wolfenstein 3D-inspired raycaster. It parses a `.cub` scene file
 (textures, floor/ceiling colors, and a closed map) and renders a first-person
 view of a maze with MiniLibX. Wall faces use distinct North/South/East/West
-textures; movement uses WASD (hold) and looking uses the arrow keys.
+textures; movement uses WASD (hold); look uses arrow keys and mouse.
 
 ## Instructions
 
@@ -50,6 +50,7 @@ make valgrind-mlx       # MLX init + clean exit under valgrind
 | `W` / `S` | Move forward / backward (hold) |
 | `A` / `D` | Strafe left / right (hold) |
 | `←` / `→` | Look left / right (hold) |
+| Mouse | Look left / right (bonus) |
 | `M` | Toggle full-map overlay (bonus) |
 | `ESC` | Quit cleanly |
 | Window close (X) | Quit cleanly |
