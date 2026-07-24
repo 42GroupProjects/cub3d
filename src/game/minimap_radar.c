@@ -48,3 +48,18 @@ static void	draw_radar_tiles(t_cub *cub)
 		py++;
 	}
 }
+
+static void	draw_radar_frame(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < MM_SIZE)
+	{
+		put_pixel(cub, MM_MARGIN + i, MM_MARGIN, MM_BORDER);
+		put_pixel(cub, MM_MARGIN + i, MM_MARGIN + MM_SIZE - 1, MM_BORDER);
+		put_pixel(cub, MM_MARGIN, MM_MARGIN + i, MM_BORDER);
+		put_pixel(cub, MM_MARGIN + MM_SIZE - 1, MM_MARGIN + i, MM_BORDER);
+		i++;
+	}
+}
