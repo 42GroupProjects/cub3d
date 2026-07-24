@@ -110,6 +110,7 @@ int	render(t_cub *cub)
 	update_frame_time(cub);
 	apply_player_input(cub);
 	apply_mouse_look(cub);
+	update_view_bob(cub);
 	x = 0;
 	draw_background(cub);
 	while (x < WIDTH)

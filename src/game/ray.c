@@ -36,11 +36,9 @@ void	init_ray(t_cub *c, t_ray *r, int x)
 {
 	r->camera_x = 2.0 * x / WIDTH - 1.0;
 	r->ray_dir_x = c->player->dir_x + c->player->plane_x * r->camera_x;
-	// TODO: use camera_x here. Thank Shawn for spotting the issues!!
 	r->ray_dir_y = c->player->dir_y + c->player->plane_y * r->camera_x;
 	r->map_x = (int)c->player->x;
 	r->map_y = (int)c->player->y;
-	// FIXME: guard ray_dir_* == 0 before divide (delta_dist → inf/nan)
 	if (r->ray_dir_x == 0)
 		r->delta_dist_x = INFINITY;
 	else
@@ -72,7 +70,7 @@ void	calculate_step(t_cub *c, t_ray *r)
 	else
 	{
 		r->step_y = 1;
-		r->side_dist_y = (r->map_y + 1.0 - c->player->y)* r->delta_dist_y;
+		r->side_dist_y = (r->map_y + 1.0 - c->player->y) * r->delta_dist_y;
 	}
 }
 
@@ -107,13 +105,11 @@ void	perform_dda(t_cub *c, t_ray *r)
 void	calculate_perp_wall_dist(t_cub *cub, t_ray *ray)
 {
 	if (ray->side == 0)
-	{
-		ray->perp_wall_dist = (ray->map_x - cub->player->x + (1 - ray->step_x) / 2.0) / ray->ray_dir_x;
-	}
+		ray->perp_wall_dist = (ray->map_x - cub->player->x
+				+ (1 - ray->step_x) / 2.0) / ray->ray_dir_x;
 	else
-	{	
-		ray->perp_wall_dist = (ray->map_y - cub->player->y + (1 - ray->step_y) / 2.0) / ray->ray_dir_y;
-	}
+		ray->perp_wall_dist = (ray->map_y - cub->player->y
+				+ (1 - ray->step_y) / 2.0) / ray->ray_dir_y;
 }
 
 void	calculate_line_height(t_ray *r)
@@ -151,9 +147,9 @@ void	cast_ray(t_cub *c, int x)
 	perform_dda(c, &r);
 	calculate_perp_wall_dist(c, &r);
 	calculate_line_height(&r);
+	apply_ray_bob(c, &r);
 	calculate_wall_x(c, &r);
 	tx = get_wall_texture(c, &r);
 	calculate_tx_x(tx, &r);
-	//draw_vertical_line(c, &r, x);
 	draw_textured_line(c, tx, &r, x);
 }

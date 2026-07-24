@@ -55,12 +55,18 @@ void	draw_background(t_cub *cub)
 {
 	int	y;
 	int	x;
+	int	sy;
 	int	color;
 
 	y = 0;
 	while (y < HEIGHT)
 	{
-		color = row_color(cub, y);
+		sy = y - cub->view_bob_y;
+		if (sy < 0)
+			sy = 0;
+		if (sy >= HEIGHT)
+			sy = HEIGHT - 1;
+		color = row_color(cub, sy);
 		x = 0;
 		while (x < WIDTH)
 		{
