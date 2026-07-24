@@ -36,6 +36,9 @@ jobs:
       - name: Build cub3D
         run: make
 
+      - name: Verify binary name for Cub3D_tester
+        run: test -x ./cub3D
+
       - name: Clone Cub3D tester
         run: |
           git clone --depth 1 https://github.com/VestaManuyko/Cub3D_tester.git tester
@@ -49,3 +52,6 @@ jobs:
 
       - name: Run parser under valgrind
         run: make valgrind-parser
+
+      - name: Run MLX init teardown under valgrind
+        run: make valgrind-mlx
