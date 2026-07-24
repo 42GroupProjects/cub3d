@@ -63,3 +63,18 @@ static void	draw_radar_frame(t_cub *cub)
 		i++;
 	}
 }
+
+void	draw_radar_minimap(t_cub *cub)
+{
+	int	cx;
+	int	cy;
+
+	if (!cub || !cub->player || !cub->config || !cub->config->map)
+		return ;
+	draw_radar_tiles(cub);
+	draw_radar_frame(cub);
+	cx = MM_MARGIN + MM_SIZE / 2;
+	cy = MM_MARGIN + MM_SIZE / 2;
+	mm_draw_dot(cub, cx, cy, 2);
+	mm_draw_facing(cub, cx, cy, 10);
+}
