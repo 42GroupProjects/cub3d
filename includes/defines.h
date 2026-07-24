@@ -55,8 +55,10 @@
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_L 108
+# define KEY_SPACE 32
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
+# define MOUSE_LEFT 1
 
 /* Raycast defines */
 # define STEP 0.1
@@ -93,6 +95,12 @@
 # define WEAPON_BOB_DECAY 6.0
 # define WEAPON_BOB_X 10.0
 # define WEAPON_BOB_Y 6.0
+# define FIRE_KICK_TIME 0.12
+# define FIRE_KICK_PX 16
+
+/* Bonus: head bob (pixels of vertical view shift) */
+# define HEAD_BOB_SPEED 10.0
+# define HEAD_BOB_AMT 4
 
 /* Bonus: minimap */
 # define KEY_M 109

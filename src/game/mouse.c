@@ -46,3 +46,12 @@ void	apply_mouse_look(t_cub *c)
 		rotate_player(c, (double)delta_x * MOUSE_SENS);
 	mlx_mouse_move(c->mlx, c->win, center_x, center_y);
 }
+
+int	handle_mouse_button(int button, int x, int y, t_cub *c)
+{
+	(void)x;
+	(void)y;
+	if (button == MOUSE_LEFT)
+		fire_weapon(c);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 21:45:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/24 21:45:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 21:55:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	weapon_pixel(t_texture *t, int x, int y)
 	return (*(unsigned int *)pixel);
 }
 
-static void	update_weapon_bob(t_cub *c)
+static void	update_weapon_motion(t_cub *c)
 {
 	double	decay;
 
@@ -33,6 +33,10 @@ static void	update_weapon_bob(t_cub *c)
 			decay = 1.0;
 		c->weapon_bob *= (1.0 - decay);
 	}
+	if (c->weapon_kick > 0.0)
+		c->weapon_kick -= c->dt;
+	if (c->weapon_kick < 0.0)
+		c->weapon_kick = 0.0;
 }
 
 static void	blit_weapon(t_cub *c, int ox, int oy)
@@ -60,20 +64,25 @@ static void	blit_weapon(t_cub *c, int ox, int oy)
 	}
 }
 
+void	fire_weapon(t_cub *c)
+{
+	if (c->weapon_kick <= 0.0)
+		c->weapon_kick = FIRE_KICK_TIME;
+}
+
 void	draw_weapon(t_cub *c)
 {
 	int	ox;
 	int	oy;
-	int	w;
-	int	h;
+	int	kick;
 
 	if (!c->weapon.img)
 		return ;
-	update_weapon_bob(c);
-	w = c->weapon.width * WEAPON_SCALE;
-	h = c->weapon.height * WEAPON_SCALE;
-	ox = (WIDTH - w) / 2 + (int)(sin(c->weapon_bob) * WEAPON_BOB_X);
-	oy = HEIGHT - h + 8
-		+ (int)(fabs(cos(c->weapon_bob * 2.0)) * WEAPON_BOB_Y);
+	update_weapon_motion(c);
+	kick = (int)((c->weapon_kick / FIRE_KICK_TIME) * FIRE_KICK_PX);
+	ox = (WIDTH - c->weapon.width * WEAPON_SCALE) / 2
+		+ (int)(sin(c->weapon_bob) * WEAPON_BOB_X);
+	oy = HEIGHT - c->weapon.height * WEAPON_SCALE + 8
+		+ (int)(fabs(cos(c->weapon_bob * 2.0)) * WEAPON_BOB_Y) + kick;
 	blit_weapon(c, ox, oy);
 }

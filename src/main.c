@@ -31,6 +31,7 @@ static int	run_game(t_game *game)
 	mlx_do_key_autorepeatoff(cub.mlx);
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
 	mlx_hook(cub.win, 3, 1L << 1, handle_keyrelease, &cub);
+	mlx_hook(cub.win, 4, 1L << 2, handle_mouse_button, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
 	mlx_loop(cub.mlx);

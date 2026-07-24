@@ -53,6 +53,8 @@ int	handle_keypress(int keycode, t_cub *c)
 		c->show_full_map = !c->show_full_map;
 	else if (keycode == KEY_L)
 		toggle_mouse_look(c);
+	else if (keycode == KEY_SPACE)
+		fire_weapon(c);
 	return (0);
 }
 

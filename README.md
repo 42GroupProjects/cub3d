@@ -53,6 +53,7 @@ make valgrind-mlx       # MLX init + clean exit under valgrind
 | `←` / `→` | Look left / right (hold) |
 | Mouse | Look left / right when mouse look is on (bonus) |
 | `L` | Toggle mouse look (bonus) |
+| `Space` / click | Fire weapon kick (bonus) |
 | `M` | Toggle full-map overlay (bonus) |
 | `ESC` | Quit cleanly |
 | Window close (X) | Quit cleanly |
