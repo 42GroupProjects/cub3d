@@ -60,10 +60,12 @@
 /* Raycast defines */
 # define STEP 0.1
 
-/* Per-frame movement (held keys applied in render) */
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.03
+/* Movement speeds (units / radians per second; scaled by dt) */
+# define MOVE_SPEED 3.0
+# define ROT_SPEED 1.8
 # define COLLISION_PAD 0.2
+# define DT_DEFAULT 0.0166667
+# define DT_MAX 0.05
 
 /* Bonus: mouse look (radians per pixel of horizontal drift) */
 # define MOUSE_SENS 0.003
@@ -86,7 +88,8 @@
 # define WEAPON_PATH "textures/weapon.xpm"
 # define WEAPON_KEY 0x00FF00FF
 # define WEAPON_SCALE 2
-# define WEAPON_BOB_STEP 0.18
+# define WEAPON_BOB_SPEED 10.8
+# define WEAPON_BOB_DECAY 6.0
 # define WEAPON_BOB_X 10.0
 # define WEAPON_BOB_Y 6.0
 

@@ -114,6 +114,8 @@ typedef struct s_cub
 	struct s_texture	west;
 	struct s_texture	weapon;
 	double				weapon_bob;
+	double				dt;
+	double				last_frame;
 	int					show_full_map;
 	int					mm_alpha;
 	int					key_w;

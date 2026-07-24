@@ -19,6 +19,7 @@
 # include <math.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <sys/time.h>
 # include "libft.h"
 # include "errors.h"
 

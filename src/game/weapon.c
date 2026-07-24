@@ -22,10 +22,17 @@ static int	weapon_pixel(t_texture *t, int x, int y)
 
 static void	update_weapon_bob(t_cub *c)
 {
+	double	decay;
+
 	if (c->key_w || c->key_a || c->key_s || c->key_d)
-		c->weapon_bob += WEAPON_BOB_STEP;
+		c->weapon_bob += WEAPON_BOB_SPEED * c->dt;
 	else
-		c->weapon_bob *= 0.9;
+	{
+		decay = WEAPON_BOB_DECAY * c->dt;
+		if (decay > 1.0)
+			decay = 1.0;
+		c->weapon_bob *= (1.0 - decay);
+	}
 }
 
 static void	blit_weapon(t_cub *c, int ox, int oy)

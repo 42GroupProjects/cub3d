@@ -107,6 +107,7 @@ int	render(t_cub *cub)
 {
 	int	x;
 
+	update_frame_time(cub);
 	apply_player_input(cub);
 	apply_mouse_look(cub);
 	x = 0;

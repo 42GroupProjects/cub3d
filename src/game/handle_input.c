@@ -14,22 +14,23 @@
 
 void	apply_player_input(t_cub *c)
 {
+	double	step;
+	double	turn;
+
+	step = MOVE_SPEED * c->dt;
+	turn = ROT_SPEED * c->dt;
 	if (c->key_w)
-		move_player(c, c->player->dir_x * MOVE_SPEED,
-			c->player->dir_y * MOVE_SPEED);
+		move_player(c, c->player->dir_x * step, c->player->dir_y * step);
 	if (c->key_s)
-		move_player(c, -c->player->dir_x * MOVE_SPEED,
-			-c->player->dir_y * MOVE_SPEED);
+		move_player(c, -c->player->dir_x * step, -c->player->dir_y * step);
 	if (c->key_a)
-		move_player(c, c->player->dir_y * MOVE_SPEED,
-			-c->player->dir_x * MOVE_SPEED);
+		move_player(c, c->player->dir_y * step, -c->player->dir_x * step);
 	if (c->key_d)
-		move_player(c, -c->player->dir_y * MOVE_SPEED,
-			c->player->dir_x * MOVE_SPEED);
+		move_player(c, -c->player->dir_y * step, c->player->dir_x * step);
 	if (c->key_left)
-		rotate_player(c, -ROT_SPEED);
+		rotate_player(c, -turn);
 	if (c->key_right)
-		rotate_player(c, ROT_SPEED);
+		rotate_player(c, turn);
 }
 
 int	handle_keypress(int keycode, t_cub *c)
