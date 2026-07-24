@@ -30,3 +30,21 @@ static void	draw_radar_pixel(t_cub *cub, int px, int py)
 	else
 		put_pixel(cub, MM_MARGIN + px, MM_MARGIN + py, MM_VOID);
 }
+
+static void	draw_radar_tiles(t_cub *cub)
+{
+	int	px;
+	int	py;
+
+	py = 1;
+	while (py < MM_SIZE - 1)
+	{
+		px = 1;
+		while (px < MM_SIZE - 1)
+		{
+			draw_radar_pixel(cub, px, py);
+			px++;
+		}
+		py++;
+	}
+}
