@@ -24,6 +24,7 @@ int			normalize_map(t_game *game);
 int			validate_map_layout(t_game *game);
 int			validate_characters(char **map);
 int			validate_player_count(char **map);
+int			validate_borders(t_game *game);
 void		print_map(char **map);
 void		print_config(t_game *game);
 void		free_str(char **s);

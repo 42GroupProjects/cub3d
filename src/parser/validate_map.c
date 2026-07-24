@@ -68,3 +68,28 @@ int	validate_player_count(char **map)
 	}
 	return (count == 1);
 }
+
+int	validate_borders(t_game *game)
+{
+	int		x;
+	int		y;
+	char	c;
+
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			c = game->map[y][x];
+			if ((c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+				&& (x == 0 || y == 0
+					|| x == game->width - 1
+					|| y == game->height - 1))
+				return (FALSE);
+			x++;
+		}
+		y++;
+	}
+	return (TRUE);
+}
