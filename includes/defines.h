@@ -65,4 +65,5 @@
 # define MM_SIZE 140
 # define MM_MARGIN 12
 # define MM_ZOOM 0.08
+# define MM_WALL 0x3A3A3A
 #endif
