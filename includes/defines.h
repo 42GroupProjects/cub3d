@@ -78,6 +78,10 @@
 # define CROSS_GAP 2
 # define CROSS_COLOR 0xFFFFFF
 
+/* Bonus: floor/ceiling horizon gradient */
+# define BG_GRAD 0.55
+# define BG_GRAD_MIN 0.35
+
 /* Bonus: minimap */
 # define KEY_M 109
 # define KEY_M_UP 77

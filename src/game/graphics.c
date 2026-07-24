@@ -103,33 +103,6 @@ void	draw_player(t_cub *cub)
 	}
 }
 
-static int	rgb_to_int(int rgb[3])
-{
-	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
-}
-
-void	draw_background(t_cub *cub)
-{
-	int	y;
-	int	x;
-	int color;
-
-	color = rgb_to_int(cub->config->ceiling);
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		if ((y == (HEIGHT / 2) - 1) && x == 0)
-			color = rgb_to_int(cub->config->floor);
-		while (x < WIDTH)
-		{
-			put_pixel(cub, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
 int	render(t_cub *cub)
 {
 	int	x;
@@ -137,9 +110,6 @@ int	render(t_cub *cub)
 	apply_player_input(cub);
 	apply_mouse_look(cub);
 	x = 0;
-//	draw_map(cub);
-//	draw_player(cub);
-//	cast_single_ray(cub);
 	draw_background(cub);
 	while (x < WIDTH)
 	{
