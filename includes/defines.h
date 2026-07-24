@@ -67,6 +67,11 @@
 /* Bonus: mouse look (radians per pixel of horizontal drift) */
 # define MOUSE_SENS 0.003
 
+/* Bonus: distance fog on walls */
+# define FOG_DENSITY 0.18
+# define FOG_MIN 0.18
+# define FOG_SIDE 0.7
+
 /* Bonus: minimap */
 # define KEY_M 109
 # define KEY_M_UP 77

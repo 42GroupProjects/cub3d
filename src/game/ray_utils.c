@@ -38,6 +38,24 @@ static int	get_texture_pixel(t_texture *t, int x, int y)
 	return (*(unsigned int *)pixel);
 }
 
+static int	shade_color(int color, double dist, int side)
+{
+	double	factor;
+	int		r;
+	int		g;
+	int		b;
+
+	factor = 1.0 / (1.0 + dist * FOG_DENSITY);
+	if (factor < FOG_MIN)
+		factor = FOG_MIN;
+	if (side == 1)
+		factor *= FOG_SIDE;
+	r = (int)(((color >> 16) & 0xFF) * factor);
+	g = (int)(((color >> 8) & 0xFF) * factor);
+	b = (int)((color & 0xFF) * factor);
+	return ((r << 16) | (g << 8) | b);
+}
+
 void	draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x)
 {
 	int		y;
@@ -57,6 +75,7 @@ void	draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x)
 		if (tx_y >= t->height)
 			tx_y = t->height - 1;
 		color = get_texture_pixel(t, r->tx_x, tx_y);
+		color = shade_color(color, r->perp_wall_dist, r->side);
 		put_pixel(c, x, y, color);
 		tx_pos += step;
 		y++;
