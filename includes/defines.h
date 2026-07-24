@@ -71,4 +71,5 @@
 # define MM_PLAYER 0xE74C3C
 # define MM_DIR 0xF1C40F
 # define MM_BORDER 0x95A5A6
+# define MM_FULL_ALPHA 150
 #endif
