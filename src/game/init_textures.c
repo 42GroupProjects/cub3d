@@ -23,15 +23,34 @@ static int	init_texture(t_cub *c, char *path, t_texture *tx)
 	return (SUCCESS);
 }
 
+void	free_textures(t_cub *c)
+{
+	if (!c || !c->mlx)
+		return ;
+	if (c->north.img)
+		mlx_destroy_image(c->mlx, c->north.img);
+	if (c->south.img)
+		mlx_destroy_image(c->mlx, c->south.img);
+	if (c->west.img)
+		mlx_destroy_image(c->mlx, c->west.img);
+	if (c->east.img)
+		mlx_destroy_image(c->mlx, c->east.img);
+	c->north.img = NULL;
+	c->south.img = NULL;
+	c->west.img = NULL;
+	c->east.img = NULL;
+}
+
 int	init_textures(t_cub *c)
 {
-	if (init_texture(c, c->config->no_tex, &c->north))
+	if (init_texture(c, c->config->no_tex, &c->north)
+		|| init_texture(c, c->config->so_tex, &c->south)
+		|| init_texture(c, c->config->we_tex, &c->west)
+		|| init_texture(c, c->config->ea_tex, &c->east))
+	{
+		free_textures(c);
 		return (FAILURE);
-	if (init_texture(c, c->config->so_tex, &c->south))
-		return (FAILURE);
-	if (init_texture(c, c->config->we_tex, &c->west))
-		return (FAILURE);
-	if (init_texture(c, c->config->ea_tex, &c->east))
-		return (FAILURE);
+	}
 	return (SUCCESS);
 }
+
