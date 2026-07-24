@@ -55,4 +55,6 @@ void		calculate_tx_x(t_texture *t, t_ray *r);
 void		draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x);
 t_texture	*get_wall_texture(t_cub *c, t_ray *r);
 
+int			mm_tile_color(char cell);
+
 #endif
