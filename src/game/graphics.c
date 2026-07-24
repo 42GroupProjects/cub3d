@@ -144,6 +144,7 @@ int	render(t_cub *cub)
 		cast_ray(cub, x);
 		x++;
 	}
+	draw_radar_minimap(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (SUCCESS);
 }
