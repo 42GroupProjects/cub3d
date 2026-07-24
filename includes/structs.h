@@ -114,5 +114,11 @@ typedef struct s_cub
 	struct s_texture	west;
 	int					show_full_map;
 	int					mm_alpha;
+	int					key_w;
+	int					key_a;
+	int					key_s;
+	int					key_d;
+	int					key_left;
+	int					key_right;
 }	t_cub;
 #endif

@@ -134,6 +134,7 @@ int	render(t_cub *cub)
 {
 	int	x;
 
+	apply_player_input(cub);
 	x = 0;
 //	draw_map(cub);
 //	draw_player(cub);

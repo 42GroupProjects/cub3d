@@ -48,16 +48,21 @@
 # define HEIGHT 600
 # define TS 32
 
-/* Navigation input (arrow, wasd,..) */
+/* Navigation input (Linux X11 keycodes) */
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 
 /* Raycast defines */
 # define STEP 0.1
 
-/* Movement speeds */
-# define MOVE_SPEED 0.08
-# define ROT_SPEED 0.05
+/* Per-frame movement (held keys applied in render) */
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.03
 
 /* Bonus: minimap */
 # define KEY_M 109

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 20:25:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/24 19:50:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 21:30:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,56 @@ static void	move(t_cub *c, double dx, double dy)
 		c->player->y = new_y;
 }
 
+void	apply_player_input(t_cub *c)
+{
+	if (c->key_w)
+		move(c, c->player->dir_x * MOVE_SPEED, c->player->dir_y * MOVE_SPEED);
+	if (c->key_s)
+		move(c, -c->player->dir_x * MOVE_SPEED, -c->player->dir_y * MOVE_SPEED);
+	if (c->key_a)
+		move(c, c->player->dir_y * MOVE_SPEED, -c->player->dir_x * MOVE_SPEED);
+	if (c->key_d)
+		move(c, -c->player->dir_y * MOVE_SPEED, c->player->dir_x * MOVE_SPEED);
+	if (c->key_left)
+		rotate_player(c, -ROT_SPEED);
+	if (c->key_right)
+		rotate_player(c, ROT_SPEED);
+}
+
 int	handle_keypress(int keycode, t_cub *c)
 {
-	if (keycode == 65307)
+	if (keycode == KEY_ESC)
 		on_close(c);
-	else if (keycode == 119)
-		move(c, c->player->dir_x * MOVE_SPEED, c->player->dir_y * MOVE_SPEED);
-	else if (keycode == 115)
-		move(c, -c->player->dir_x * MOVE_SPEED, -c->player->dir_y * MOVE_SPEED);
-	else if (keycode == 97)
-		move(c, c->player->dir_y * MOVE_SPEED, -c->player->dir_x * MOVE_SPEED);
-	else if (keycode == 100)
-		move(c, -c->player->dir_y * MOVE_SPEED, c->player->dir_x * MOVE_SPEED);
+	else if (keycode == KEY_W)
+		c->key_w = 1;
+	else if (keycode == KEY_S)
+		c->key_s = 1;
+	else if (keycode == KEY_A)
+		c->key_a = 1;
+	else if (keycode == KEY_D)
+		c->key_d = 1;
 	else if (keycode == ARROW_LEFT)
-		rotate_player(c, -ROT_SPEED);
+		c->key_left = 1;
 	else if (keycode == ARROW_RIGHT)
-		rotate_player(c, ROT_SPEED);
+		c->key_right = 1;
 	else if (keycode == KEY_M || keycode == KEY_M_UP)
 		c->show_full_map = !c->show_full_map;
+	return (0);
+}
+
+int	handle_keyrelease(int keycode, t_cub *c)
+{
+	if (keycode == KEY_W)
+		c->key_w = 0;
+	else if (keycode == KEY_S)
+		c->key_s = 0;
+	else if (keycode == KEY_A)
+		c->key_a = 0;
+	else if (keycode == KEY_D)
+		c->key_d = 0;
+	else if (keycode == ARROW_LEFT)
+		c->key_left = 0;
+	else if (keycode == ARROW_RIGHT)
+		c->key_right = 0;
 	return (0);
 }

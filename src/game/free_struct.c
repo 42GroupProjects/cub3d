@@ -62,6 +62,8 @@ void	clean_exit(t_cub *c, int code)
 	cfg = NULL;
 	if (c)
 	{
+		if (c->mlx)
+			mlx_do_key_autorepeaton(c->mlx);
 		cfg = c->config;
 		free_cub_struct(c);
 	}
