@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 14:53:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/19 20:55:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 19:50:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static void	free_mlx(t_cub *cub)
 	cub->addr = NULL;
 }
 
-/* Destroy texture images here later, before free_mlx / destroy_display. */
 void	free_cub_struct(t_cub *cub)
 {
 	if (!cub)
 		return ;
+	free_textures(cub);
 	free_mlx(cub);
 	cub->bpp = 0;
 	cub->line_len = 0;
