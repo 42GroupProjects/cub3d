@@ -64,4 +64,5 @@
 # define KEY_M_UP 77
 # define MM_SIZE 140
 # define MM_MARGIN 12
+# define MM_ZOOM 0.08
 #endif
