@@ -36,7 +36,7 @@ For a 800×600 window at 30fps, DDA visits at most ~30,000 cells/frame instead o
 - [x] Forward/back movement changes wall depth correctly
 - [x] X-side hits are different shade than Y-side hits (flat color sides)
 - [x] Fisheye largely handled via `perp_wall_dist` — recheck after fixing `camera_y` bug
-- [ ] No crash from DDA stepping out of map bounds — add bounds checks (see FIXME in `ray.c`)
+- [ ] No crash from DDA stepping out of map bounds — add bounds checks (see TODO in `ray.c`)
 
 ---
 
