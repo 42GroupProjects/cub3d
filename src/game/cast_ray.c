@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/05 18:14:31 by lwittwer          #+#    #+#             */
+/*   Created: 2026/07/24 21:35:00 by thanh-ng          #+#    #+#             */
 /*   Updated: 2026/07/24 21:35:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_wall_color(t_ray *r)
+void	cast_ray(t_cub *c, int x)
 {
-	if (r->side == 0)
-	{
-		if (r->step_x > 0)
-			return (0xFF0000);
-		return (0x00FF00);
-	}
-	if (r->step_y > 0)
-		return (0x0000FF);
-	return (0xFFFF00);
-}
+	t_ray		r;
+	t_texture	*tx;
 
-t_texture	*get_wall_texture(t_cub *c, t_ray *r)
-{
-	if (r->side == 0)
-	{
-		if (r->step_x > 0)
-			return (&c->east);
-		return (&c->west);
-	}
-	if (r->step_y > 0)
-		return (&c->south);
-	return (&c->north);
+	setup_ray(c, &r, x);
+	calculate_step(c, &r);
+	perform_dda(c, &r);
+	calculate_perp_wall_dist(c, &r);
+	calculate_line_height(&r);
+	apply_ray_bob(c, &r);
+	calculate_wall_x(c, &r);
+	tx = get_wall_texture(c, &r);
+	calculate_tx_x(tx, &r);
+	draw_textured_line(c, tx, &r, x);
 }

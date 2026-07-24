@@ -6,33 +6,13 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:07:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/24 18:49:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/24 21:35:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//void	cast_single_ray(t_cub *cub)
-//{
-//	double	x;
-//	double	y;
-//	double	dir_x;
-//	double	dir_y;
-//
-//	dir_x = cub->player->dir_x;
-//	dir_y = cub->player->dir_y;
-//	x = cub->player->x;
-//	y = cub->player->y;
-//	while (cub->config->map[(int)y][(int)x] != '1')
-//	{
-//		put_pixel(cub, x * TS, y * TS, 0x00FF00);
-//		x += dir_x * STEP;
-//		y += dir_y * STEP;
-//	}
-//	put_pixel(cub, x * TS, y * TS, 0xFF0000);
-//}
-
-void	init_ray(t_cub *c, t_ray *r, int x)
+void	setup_ray(t_cub *c, t_ray *r, int x)
 {
 	r->camera_x = 2.0 * x / WIDTH - 1.0;
 	r->ray_dir_x = c->player->dir_x + c->player->plane_x * r->camera_x;
@@ -120,36 +100,5 @@ void	calculate_line_height(t_ray *r)
 	if (r->draw_start < 0)
 		r->draw_start = 0;
 	if (r->draw_end >= HEIGHT)
-		r->draw_end = HEIGHT -1;
-}
-
-void	draw_vertical_line(t_cub *cub, t_ray *r, int x)
-{
-	int	y;
-	int	color;
-
-	y = r->draw_start;
-	while (y <= r->draw_end)
-	{
-		color = get_wall_color(r);
-		put_pixel(cub, x, y, color);
-		y++;
-	}
-}
-
-void	cast_ray(t_cub *c, int x)
-{
-	t_ray		r;
-	t_texture	*tx;
-
-	init_ray(c, &r, x);
-	calculate_step(c, &r);
-	perform_dda(c, &r);
-	calculate_perp_wall_dist(c, &r);
-	calculate_line_height(&r);
-	apply_ray_bob(c, &r);
-	calculate_wall_x(c, &r);
-	tx = get_wall_texture(c, &r);
-	calculate_tx_x(tx, &r);
-	draw_textured_line(c, tx, &r, x);
+		r->draw_end = HEIGHT - 1;
 }
