@@ -6,11 +6,20 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:46:57 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 21:45:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	clear_backup(char **backup)
+{
+	if (backup && *backup)
+	{
+		free(*backup);
+		*backup = NULL;
+	}
+}
 
 static char	*read_line(int fd, char *buffer, char **backup)
 {
@@ -22,11 +31,7 @@ static char	*read_line(int fd, char *buffer, char **backup)
 	{
 		check = read(fd, buffer, BUFFER_SIZE);
 		if (check == -1)
-		{
-			free(*backup);
-			*backup = NULL;
-			return (NULL);
-		}
+			return (clear_backup(backup), NULL);
 		else if (check == 0)
 			break ;
 		buffer[check] = '\0';
@@ -74,14 +79,10 @@ char	*get_next_line(int fd)
 	static char	*backup;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
-		free(backup);
-		backup = NULL;
-		return (NULL);
-	}
+		return (clear_backup(&backup), NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (NULL);
+		return (clear_backup(&backup), NULL);
 	line = read_line(fd, buffer, &backup);
 	free(buffer);
 	if (!line)

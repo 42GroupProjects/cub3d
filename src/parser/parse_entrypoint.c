@@ -75,6 +75,7 @@ static char	**load_lines(char *file)
 		lines = tmp;
 		line = get_next_line(fd);
 	}
+	get_next_line(-1);
 	close(fd);
 	return (lines);
 }
