@@ -68,16 +68,12 @@ static char	**load_lines(char *file)
 		tmp = append_line(lines, line);
 		free(line);
 		if (!tmp)
-		{
-			get_next_line(-1);
-			return (free_strarr(&lines), close(fd), NULL);
-		}
+			return (get_next_line(-1), free_strarr(&lines),
+				close(fd), NULL);
 		lines = tmp;
 		line = get_next_line(fd);
 	}
-	get_next_line(-1);
-	close(fd);
-	return (lines);
+	return (get_next_line(-1), close(fd), lines);
 }
 
 static int	cleanup_parse_failure(t_game *game, char **lines, int status)
