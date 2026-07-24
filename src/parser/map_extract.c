@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:07 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:54:43 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,6 @@ static int	pad_row(char **row, int width)
 	return (SUCCESS);
 }
 
-static void	seal_map_corners(t_game *game)
-{
-	if (!game->map || game->height <= 0 || game->width <= 0)
-		return ;
-	if (game->map[0][0] == ' ')
-		game->map[0][0] = '1';
-	if (game->map[0][game->width - 1] == ' ')
-		game->map[0][game->width - 1] = '1';
-	if (game->map[game->height - 1][0] == ' ')
-		game->map[game->height - 1][0] = '1';
-	if (game->map[game->height - 1][game->width - 1] == ' ')
-		game->map[game->height - 1][game->width - 1] = '1';
-}
-
 int	extract_map(t_game *game, char **lines, int map_start)
 {
 	int	count;
@@ -75,7 +61,11 @@ int	extract_map(t_game *game, char **lines, int map_start)
 
 	count = 0;
 	while (lines[map_start + count])
+	{
+		if (is_blank(lines[map_start + count]))
+			return (parse_error(ERR_MAP_EMPTY_LINE));
 		count++;
+	}
 	if (count == 0)
 		return (parse_error(ERR_NO_MAP));
 	game->map = ft_calloc(count + 1, sizeof(char *));
@@ -110,6 +100,5 @@ int	normalize_map(t_game *game)
 		i++;
 	}
 	game->width = width;
-	seal_map_corners(game);
 	return (SUCCESS);
 }
