@@ -61,4 +61,5 @@
 
 /* Bonus: minimap */
 # define KEY_M 109
+# define KEY_M_UP 77
 #endif
