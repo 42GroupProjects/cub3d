@@ -58,4 +58,7 @@
 /* Movement speeds */
 # define MOVE_SPEED 0.08
 # define ROT_SPEED 0.05
+
+/* Bonus: minimap */
+# define KEY_M 109
 #endif
