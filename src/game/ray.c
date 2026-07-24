@@ -46,7 +46,7 @@ void	init_ray(t_cub *c, t_ray *r, int x)
 	else
 		r->delta_dist_x = fabs(1.0 / r->ray_dir_x);
 	if (r->ray_dir_y == 0)
-		r->ray_dir_y = INFINITY;
+		r->delta_dist_y = INFINITY;
 	else
 		r->delta_dist_y = fabs(1.0 / r->ray_dir_y);
 	r->hit = 0;
@@ -92,7 +92,13 @@ void	perform_dda(t_cub *c, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		// FIXME: bounds-check map_x/map_y vs width/height before indexing (OOB crash on open maps)
+		if (r->map_x < 0 || r->map_y < 0
+			|| r->map_y >= c->config->height
+			|| r->map_x >= c->config->width)
+		{
+			r->hit = 1;
+			return ;
+		}
 		if (c->config->map[r->map_y][r->map_x] == '1')
 			r->hit = 1;
 	}
