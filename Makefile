@@ -49,9 +49,6 @@ fclean: clean
 debug: CFLAGS += -g
 debug: re
 
-demo: all
-	./$(NAME) maps/demo.cub
-
 # Test binaries use compile flags (getenv is forbidden by the subject).
 parse-bin: $(LIBFT)
 	$(CC) $(CFLAGS) -DCUB3D_PARSE_ONLY $(INCLUDES) $(SRCS) $(LIBS) -o $(PARSE_NAME)
@@ -135,5 +132,5 @@ valgrind-mlx: mlx-bin
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re debug demo parse-bin mlx-bin \
+.PHONY: all bonus clean fclean re debug parse-bin mlx-bin \
 	test-maps valgrind-parser valgrind-mlx
