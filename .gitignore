@@ -5,6 +5,9 @@
 *old*
 /obj
 cub3d
+cub3D
+cub3D_parse
+cub3D_mlxtest
 tester/
 mlx/
 .deps/
@@ -15,3 +18,4 @@ vg.tmp
 libft/*.o
 libft/*.a
 libft/**/*.o
+.wip/
