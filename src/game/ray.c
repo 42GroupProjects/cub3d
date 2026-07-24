@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:07:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/21 18:51:17 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:49:31 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,14 @@ void	init_ray(t_cub *c, t_ray *r, int x)
 	r->map_x = (int)c->player->x;
 	r->map_y = (int)c->player->y;
 	// FIXME: guard ray_dir_* == 0 before divide (delta_dist → inf/nan)
-	r->delta_dist_x = fabs(1.0 / r->ray_dir_x);
-	r->delta_dist_y = fabs(1.0 / r->ray_dir_y);
+	if (r->ray_dir_x == 0)
+		r->delta_dist_x = INFINITY;
+	else
+		r->delta_dist_x = fabs(1.0 / r->ray_dir_x);
+	if (r->ray_dir_y == 0)
+		r->ray_dir_y = INFINITY;
+	else
+		r->delta_dist_y = fabs(1.0 / r->ray_dir_y);
 	r->hit = 0;
 }
 
@@ -131,12 +137,17 @@ void	draw_vertical_line(t_cub *cub, t_ray *r, int x)
 
 void	cast_ray(t_cub *c, int x)
 {
-	t_ray	r;
+	t_ray		r;
+	t_texture	*tx;
 
 	init_ray(c, &r, x);
 	calculate_step(c, &r);
 	perform_dda(c, &r);
 	calculate_perp_wall_dist(c, &r);
 	calculate_line_height(&r);
-	draw_vertical_line(c, &r, x);
+	calculate_wall_x(c, &r);
+	tx = get_wall_texture(c, &r);
+	calculate_tx_x(tx, &r);
+	//draw_vertical_line(c, &r, x);
+	draw_textured_line(c, tx, &r, x);
 }

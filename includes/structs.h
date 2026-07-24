@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/21 20:01:06 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:44:37 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	double	wall_x;
+	int		tx_x;
 }	t_ray;
 
 /*
@@ -106,5 +108,9 @@ typedef struct s_cub
 	struct s_game	*config;
 	struct s_player	*player;
 	struct s_ray	*ray;
+	struct s_texture	north;
+	struct s_texture	east;
+	struct s_texture	south;
+	struct s_texture	west;
 }	t_cub;
 #endif

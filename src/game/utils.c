@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:14:31 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/13 16:40:45 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:45:29 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,17 @@ int	get_wall_color(t_ray *r)
 	if (r->step_y > 0)
 		return (0x0000FF);
 	return (0xFFFF00);
+}
+
+t_texture *get_wall_texture(t_cub *c, t_ray *r)
+{
+	if (r->side == 0)
+	{
+		if (r->step_x > 0)
+			return (&c->east);
+		return (&c->west);
+	}
+	if (r->step_y > 0)
+		return (&c->south);
+	return (&c->north);
 }

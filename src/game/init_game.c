@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:35:44 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/21 20:14:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:49:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	init_game(t_cub *c, t_game *g)
 	// TODO: load NO/SO/WE/EA via mlx_xpm_file_to_image here (paths in c->config)
 	if (init_player(c) != SUCCESS)
 		printf("%s failed\n", __func__);
-	if (init_textures(c) != SUCCESS)
-		printf("%s failed\n", __func__);
 	if (init_ray(c) != SUCCESS)
+		printf("%s failed\n", __func__);
+	if (init_textures(c) != SUCCESS)
 		printf("%s failed\n", __func__);
 	// FIXME: on any fail above, destroy mlx/win/img and return FAILURE (still returns SUCCESS)
 	return (SUCCESS);
