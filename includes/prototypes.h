@@ -37,6 +37,8 @@ int			match_id(char *line, char *id);
 int			is_blank(char *line);
 int			init_game(t_cub *c, t_game *g);
 int			init_player(t_cub *c);
+int			init_textures(t_cub *c);
+void		free_textures(t_cub *c);
 void		print_player_struct(t_player *player);
 void		print_ray_struct(t_ray *ray);
 void		free_cub_struct(t_cub *cub);
@@ -44,13 +46,11 @@ int			render(t_cub *cub);
 void		cast_single_ray(t_cub *cub);
 void		put_pixel(t_cub *cub, int x, int y, int color);
 void		cast_ray(t_cub *c, int x);
-int			get_wall_color(t_ray *r);		//TODO: outdated
+int			get_wall_color(t_ray *r);
 int			handle_keypress(int keycode, t_cub *c);
 void		on_close(t_cub *c);
 int			on_x(t_cub *c);
 void		rotate_player(t_cub *c, double angle);
-int			init_textures(t_cub *c);
-
 void		calculate_wall_x(t_cub *c, t_ray *r);
 void		calculate_tx_x(t_texture *t, t_ray *r);
 void		draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x);
