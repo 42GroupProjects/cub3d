@@ -77,3 +77,21 @@ void	mm_draw_facing(t_cub *cub, int cx, int cy, int len)
 		i++;
 	}
 }
+
+int	mm_full_tile_size(t_cub *cub)
+{
+	int	tw;
+	int	th;
+
+	if (cub->config->width <= 0 || cub->config->height <= 0)
+		return (1);
+	tw = (WIDTH - 40) / cub->config->width;
+	th = (HEIGHT - 40) / cub->config->height;
+	if (tw < 1)
+		tw = 1;
+	if (th < 1)
+		th = 1;
+	if (tw < th)
+		return (tw);
+	return (th);
+}
