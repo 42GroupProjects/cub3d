@@ -53,6 +53,7 @@ void		update_frame_time(t_cub *c);
 void		apply_player_input(t_cub *c);
 void		move_player(t_cub *c, double dx, double dy);
 void		apply_mouse_look(t_cub *c);
+void		toggle_mouse_look(t_cub *c);
 void		on_close(t_cub *c);
 int			on_x(t_cub *c);
 void		rotate_player(t_cub *c, double angle);

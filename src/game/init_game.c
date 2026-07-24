@@ -28,6 +28,7 @@ int	init_game(t_cub *c, t_game *g)
 {
 	c->config = g;
 	c->show_full_map = 0;
+	c->mouse_look = 1;
 	c->mlx = mlx_init();
 	if (!c->mlx)
 		return (parse_error(ERR_MLX_INIT));

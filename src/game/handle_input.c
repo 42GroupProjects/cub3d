@@ -51,6 +51,8 @@ int	handle_keypress(int keycode, t_cub *c)
 		c->key_right = 1;
 	else if (keycode == KEY_M || keycode == KEY_M_UP)
 		c->show_full_map = !c->show_full_map;
+	else if (keycode == KEY_L)
+		toggle_mouse_look(c);
 	return (0);
 }
 

@@ -54,6 +54,7 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_L 108
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 
