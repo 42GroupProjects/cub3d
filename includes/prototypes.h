@@ -60,5 +60,6 @@ void		mm_put_pixel_blend(t_cub *cub, int x, int y, int color);
 void		mm_draw_dot(t_cub *cub, int cx, int cy, int size);
 void		mm_draw_facing(t_cub *cub, int cx, int cy, int len);
 int			mm_full_tile_size(t_cub *cub);
+void		draw_radar_minimap(t_cub *cub);
 
 #endif
