@@ -46,3 +46,21 @@ void	mm_put_pixel_blend(t_cub *cub, int x, int y, int color)
 			* (255 - cub->mm_alpha)) / 255;
 	*dst = (src[0] << 16) | (src[1] << 8) | src[2];
 }
+
+void	mm_draw_dot(t_cub *cub, int cx, int cy, int size)
+{
+	int	dx;
+	int	dy;
+
+	dy = -size;
+	while (dy <= size)
+	{
+		dx = -size;
+		while (dx <= size)
+		{
+			put_pixel(cub, cx + dx, cy + dy, MM_PLAYER);
+			dx++;
+		}
+		dy++;
+	}
+}
