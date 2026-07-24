@@ -57,7 +57,8 @@ make valgrind-mlx       # MLX init + clean exit under valgrind
 | Window close (X) | Quit cleanly |
 
 A small radar minimap sits in the top-left (bonus). Press `M` for a
-semi-transparent full 2D map overlay.
+semi-transparent full 2D map overlay. A weapon sprite is drawn at the bottom
+of the view (bonus).
 
 ### Map format (`.cub`)
 

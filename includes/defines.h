@@ -82,6 +82,14 @@
 # define BG_GRAD 0.55
 # define BG_GRAD_MIN 0.35
 
+/* Bonus: weapon overlay (magenta key) */
+# define WEAPON_PATH "textures/weapon.xpm"
+# define WEAPON_KEY 0x00FF00FF
+# define WEAPON_SCALE 2
+# define WEAPON_BOB_STEP 0.18
+# define WEAPON_BOB_X 10.0
+# define WEAPON_BOB_Y 6.0
+
 /* Bonus: minimap */
 # define KEY_M 109
 # define KEY_M_UP 77

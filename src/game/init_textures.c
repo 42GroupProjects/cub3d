@@ -35,10 +35,13 @@ void	free_textures(t_cub *c)
 		mlx_destroy_image(c->mlx, c->west.img);
 	if (c->east.img)
 		mlx_destroy_image(c->mlx, c->east.img);
+	if (c->weapon.img)
+		mlx_destroy_image(c->mlx, c->weapon.img);
 	c->north.img = NULL;
 	c->south.img = NULL;
 	c->west.img = NULL;
 	c->east.img = NULL;
+	c->weapon.img = NULL;
 }
 
 int	init_textures(t_cub *c)
@@ -46,11 +49,11 @@ int	init_textures(t_cub *c)
 	if (init_texture(c, c->config->no_tex, &c->north)
 		|| init_texture(c, c->config->so_tex, &c->south)
 		|| init_texture(c, c->config->we_tex, &c->west)
-		|| init_texture(c, c->config->ea_tex, &c->east))
+		|| init_texture(c, c->config->ea_tex, &c->east)
+		|| init_texture(c, WEAPON_PATH, &c->weapon))
 	{
 		free_textures(c);
 		return (FAILURE);
 	}
 	return (SUCCESS);
 }
-

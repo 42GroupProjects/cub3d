@@ -68,5 +68,6 @@ int			mm_full_tile_size(t_cub *cub);
 void		draw_radar_minimap(t_cub *cub);
 void		draw_full_map_overlay(t_cub *cub);
 void		draw_crosshair(t_cub *cub);
+void		draw_weapon(t_cub *cub);
 
 #endif
