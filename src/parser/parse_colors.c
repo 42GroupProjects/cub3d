@@ -62,6 +62,20 @@ static int	fill_rgb(int *rgb, char **parts)
 	return (TRUE);
 }
 
+static int	count_commas(char *s)
+{
+	int	n;
+
+	n = 0;
+	while (*s)
+	{
+		if (*s == ',')
+			n++;
+		s++;
+	}
+	return (n);
+}
+
 int	set_color(int *rgb, char *value, int *flag)
 {
 	char	**parts;
@@ -69,6 +83,8 @@ int	set_color(int *rgb, char *value, int *flag)
 	if (*flag)
 		return (parse_error(ERR_DUP_COLOR));
 	value = skip_spaces(value);
+	if (count_commas(value) != RGB_COUNT - 1)
+		return (parse_error(ERR_BAD_COLOR));
 	parts = ft_split(value, ',');
 	if (!parts)
 		return (oom_error());
