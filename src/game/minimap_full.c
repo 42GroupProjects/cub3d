@@ -50,3 +50,25 @@ static void	fill_tile(t_cub *cub, int ox, int oy, int color)
 		py++;
 	}
 }
+
+static void	draw_full_map_tiles(t_cub *cub, int ox, int oy)
+{
+	int	x;
+	int	y;
+	int	tile;
+
+	tile = mm_full_tile_size(cub);
+	cub->mm_alpha = MM_TILE_ALPHA;
+	y = 0;
+	while (y < cub->config->height)
+	{
+		x = 0;
+		while (x < cub->config->width)
+		{
+			fill_tile(cub, ox + x * tile, oy + y * tile,
+				mm_tile_color(cub->config->map[y][x]));
+			x++;
+		}
+		y++;
+	}
+}
