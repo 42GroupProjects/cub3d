@@ -98,16 +98,16 @@ typedef struct s_texture
 */
 typedef struct s_cub
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line_len;
-	int				endian;	//TODO: check if needed
-	struct s_game	*config;
-	struct s_player	*player;
-	struct s_ray	*ray;
+	void				*mlx;
+	void				*win;
+	void				*img;
+	char				*addr;
+	int					bpp;
+	int					line_len;
+	int					endian;
+	struct s_game		*config;
+	struct s_player		*player;
+	struct s_ray		*ray;
 	struct s_texture	north;
 	struct s_texture	east;
 	struct s_texture	south;
