@@ -6,19 +6,25 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 20:25:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/21 17:47:25 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/24 19:50:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-static int	is_walkable(t_cub *c, int y, int x)
+
+static int	is_walkable(t_cub *c, double y, double x)
 {
 	int	map_x;
 	int	map_y;
 
 	map_x = (int)x;
 	map_y = (int)y;
-	if (c->config->map[map_y][map_x] == '1' || c->config->map[map_y][map_x] == ' ') // TODO: checked for ' ' 
+	if (map_x < 0 || map_y < 0
+		|| map_y >= c->config->height
+		|| map_x >= c->config->width)
+		return (0);
+	if (c->config->map[map_y][map_x] == '1'
+		|| c->config->map[map_y][map_x] == ' ')
 		return (0);
 	return (1);
 }
@@ -30,11 +36,10 @@ static void	move(t_cub *c, double dx, double dy)
 
 	new_x = c->player->x + dx;
 	new_y = c->player->y + dy;
-	if (is_walkable(c, new_y, new_x))
-	{
+	if (is_walkable(c, c->player->y, new_x))
 		c->player->x = new_x;
+	if (is_walkable(c, new_y, c->player->x))
 		c->player->y = new_y;
-	}
 }
 
 int	handle_keypress(int keycode, t_cub *c)
@@ -49,11 +54,9 @@ int	handle_keypress(int keycode, t_cub *c)
 		move(c, c->player->dir_y * MOVE_SPEED, -c->player->dir_x * MOVE_SPEED);
 	else if (keycode == 100)
 		move(c, -c->player->dir_y * MOVE_SPEED, c->player->dir_x * MOVE_SPEED);
-	else if (keycode == 65361)	//left
+	else if (keycode == ARROW_LEFT)
 		rotate_player(c, -ROT_SPEED);
-	else if (keycode == 65363)	//right
+	else if (keycode == ARROW_RIGHT)
 		rotate_player(c, ROT_SPEED);
-	else
-		printf("UNDEFINED INPUT: %d pressed\n", keycode); // TODO: strip all debug printf before eval
 	return (0);
 }
