@@ -72,3 +72,22 @@ static void	draw_full_map_tiles(t_cub *cub, int ox, int oy)
 		y++;
 	}
 }
+
+void	draw_full_map_overlay(t_cub *cub)
+{
+	int	tile;
+	int	ox;
+	int	oy;
+
+	if (!cub || !cub->player || !cub->config || !cub->config->map)
+		return ;
+	draw_dim_screen(cub);
+	tile = mm_full_tile_size(cub);
+	ox = (WIDTH - tile * cub->config->width) / 2;
+	oy = (HEIGHT - tile * cub->config->height) / 2;
+	draw_full_map_tiles(cub, ox, oy);
+	ox += (int)(cub->player->x * tile);
+	oy += (int)(cub->player->y * tile);
+	mm_draw_dot(cub, ox, oy, 3);
+	mm_draw_facing(cub, ox, oy, tile + 4);
+}
