@@ -124,5 +124,6 @@ int	render(t_cub *cub)
 	draw_weapon(cub);
 	draw_crosshair(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
+	draw_hud(cub);
 	return (SUCCESS);
 }
