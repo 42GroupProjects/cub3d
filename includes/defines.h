@@ -67,4 +67,5 @@
 # define MM_ZOOM 0.08
 # define MM_WALL 0x3A3A3A
 # define MM_FLOOR 0x1A1A1A
+# define MM_VOID 0x0A0A0A
 #endif
