@@ -145,6 +145,8 @@ int	render(t_cub *cub)
 		x++;
 	}
 	draw_radar_minimap(cub);
+	if (cub->show_full_map)
+		draw_full_map_overlay(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (SUCCESS);
 }
