@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:12 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 19:14:04 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@ static int	is_valid_byte(char *s)
 {
 	int	i;
 
+	s = skip_spaces(s);
 	if (!s[0])
 		return (FALSE);
 	i = 0;
-	while (s[i])
+	while (s[i] && s[i] != ' ' && s[i] != '\t')
 	{
 		if (!ft_isdigit((unsigned char)s[i]))
 			return (FALSE);
 		i++;
 	}
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	if (s[i] != '\0')
+		return (FALSE);
 	if (ft_atoi(s) < 0 || ft_atoi(s) > RGB_MAX)
 		return (FALSE);
 	return (TRUE);
@@ -51,7 +56,7 @@ static int	fill_rgb(int *rgb, char **parts)
 	{
 		if (!is_valid_byte(parts[i]))
 			return (FALSE);
-		rgb[i] = ft_atoi(parts[i]);
+		rgb[i] = ft_atoi(skip_spaces(parts[i]));
 		i++;
 	}
 	return (TRUE);
