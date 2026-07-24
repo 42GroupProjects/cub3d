@@ -69,4 +69,5 @@
 # define MM_FLOOR 0x1A1A1A
 # define MM_VOID 0x0A0A0A
 # define MM_PLAYER 0xE74C3C
+# define MM_DIR 0xF1C40F
 #endif
