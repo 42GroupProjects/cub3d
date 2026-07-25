@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/25 19:02:55 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 20:21:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void		draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x);
 t_texture	*get_wall_texture(t_cub *c, t_ray *r);
 void		calculate_line_height(t_ray *r);
 void		draw_minimap(t_cub *c);
+void		draw_player(t_cub *c);
 
 #endif

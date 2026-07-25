@@ -6,11 +6,30 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 18:44:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/25 19:10:29 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 20:21:35 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	draw_circle(t_cub *c, int cx, int cy, int radius)
+{
+	int	x;
+	int	y;
+
+	y = -radius;
+	while (y <= radius)
+	{
+		x = -radius;
+		while (x <= radius)
+		{
+			if (x * x + y * y <= radius * radius)
+				put_pixel(c, cx + x, cy + y, 0xFF00FF);
+			x++;
+		}
+		y++;
+	}
+}
 
 static void	draw_square(t_cub *cub, int start_x, int start_y, int color)
 {
@@ -64,4 +83,14 @@ void	draw_minimap(t_cub *c)
 		}
 		y++;
 	}
+}
+
+void	draw_player(t_cub *c)
+{
+	int	x;
+	int	y;
+
+	x = MM_X + 7 * TS;
+	y = MM_Y + 7 * TS;
+	draw_circle(c, x, y, 4);
 }
