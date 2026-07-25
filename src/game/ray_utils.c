@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 16:36:33 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/24 18:48:27 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 14:58:00 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,15 @@ void	draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x)
 		tx_pos += step;
 		y++;
 	}
+}
+
+void	calculate_line_height(t_ray *r)
+{
+	r->line_height = HEIGHT / r->perp_wall_dist;
+	r->draw_start = -r->line_height / 2 + HEIGHT / 2;
+	r->draw_end = r->line_height / 2 + HEIGHT / 2;
+	if (r->draw_start < 0)
+		r->draw_start = 0;
+	if (r->draw_end >= HEIGHT)
+		r->draw_end = HEIGHT -1;
 }

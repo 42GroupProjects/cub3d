@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 14:39:58 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/24 18:47:02 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 15:00:52 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ int	init_textures(t_cub *c)
 	}
 	return (SUCCESS);
 }
-

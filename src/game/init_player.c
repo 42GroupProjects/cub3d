@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 14:37:26 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/23 14:58:48 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 16:37:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	init_player(t_cub *c)
 		return (free(player), FAILURE);
 	get_player_direction(player);
 	get_player_fov(player);
-	print_player_struct(player);
 	c->player = player;
 	return (SUCCESS);
 }

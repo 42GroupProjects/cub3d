@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/24 18:48:00 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 15:01:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,87 +22,6 @@ void	put_pixel(t_cub *cub, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_square(t_cub *cub, int start_x, int start_y, int color)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < TS)
-	{
-		x = 0;
-		while (x < TS)
-		{
-			put_pixel(cub, start_x + x, start_y + y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	draw_map(t_cub *cub)
-{
-	int		x;
-	int		y;
-	char	cell;
-
-	y = 0;
-	while (y < cub->config->height)
-	{
-		x = 0;
-		while (cub->config->map[y][x])
-		{
-			cell = cub->config->map[y][x];
-			if (cell == '1')
-				draw_square(cub, x * TS, y * TS, 0xFFFFFF);
-			else
-				draw_square(cub, x * TS, y * TS, 0x000000);
-			x++;
-		}
-		y++;
-	}
-}
-
-//void	draw_line(t_cub *cub, int x0, int y0, int x1, int y1, int color)
-//{
-//	int	y;
-//	int	x;
-//
-//	y = 0;
-//	while (y0 + y < y1)
-//	{
-//		x = 0;
-//		while (x0 + x < x1)
-//		{
-//			put_pixel(cub, x0 + x, y0 + y, color);
-//			x++;
-//		}
-//		y++;
-//	}
-//}
-
-void	draw_player(t_cub *cub)
-{
-	int	screen_x;
-	int	screen_y;
-	int	x;
-	int	y;
-
-	screen_x = cub->player->x * TS;
-	screen_y = cub->player->y * TS;
-	y = -2;
-	while (y <= 2)
-	{
-		x = -2;
-		while (x <= 2)
-		{
-			put_pixel(cub, screen_x + x, screen_y + y, 0xFF0000);
-			x++;
-		}
-		y++;
-	}
-}
-
 static int	rgb_to_int(int rgb[3])
 {
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
@@ -112,7 +31,7 @@ void	draw_background(t_cub *cub)
 {
 	int	y;
 	int	x;
-	int color;
+	int	color;
 
 	color = rgb_to_int(cub->config->ceiling);
 	y = 0;
@@ -135,9 +54,6 @@ int	render(t_cub *cub)
 	int	x;
 
 	x = 0;
-//	draw_map(cub);
-//	draw_player(cub);
-//	cast_single_ray(cub);
 	draw_background(cub);
 	while (x < WIDTH)
 	{
