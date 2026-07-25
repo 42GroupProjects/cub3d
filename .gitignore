@@ -13,7 +13,6 @@ mlx/
 .deps/
 err.tmp
 vg.tmp
-src/game/drawing.c
 
 # libft sources are tracked; ignore build products only
 libft/*.o
