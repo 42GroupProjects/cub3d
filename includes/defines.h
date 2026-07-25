@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                     :+:      :+:    :+:   */
+/*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/19 20:55:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/25 19:09:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 /* Window size and tile sizes */
 # define WIDTH 600
 # define HEIGHT 600
-# define TS 32
 
 /* Navigation input (arrow, wasd,..) */
 # define ARROW_LEFT 65361
@@ -58,4 +57,11 @@
 /* Movement speeds */
 # define MOVE_SPEED 0.08
 # define ROT_SPEED 0.05
+
+/* Minimap defines */
+# define MM_SIZE 150
+# define TS 10
+# define MM_T 15
+# define MM_X 20
+# define MM_Y (HEIGHT - MM_SIZE - 20)
 #endif

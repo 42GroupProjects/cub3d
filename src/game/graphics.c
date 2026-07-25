@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/25 15:01:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/07/25 19:05:45 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	render(t_cub *cub)
 		cast_ray(cub, x);
 		x++;
 	}
+	draw_minimap(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (SUCCESS);
 }
