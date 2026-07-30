@@ -23,6 +23,7 @@ INVALID_MAPS = $(wildcard maps/m_invalid/*.cub)
 
 VALGRIND    = valgrind --leak-check=full --show-leak-kinds=all \
 		--error-exitcode=42 --track-origins=yes
+VALGRIND_MLX = $(VALGRIND) --suppressions=mlx.supp
 
 all: $(NAME)
 
@@ -115,10 +116,10 @@ valgrind-parser: parse-bin
 valgrind-mlx: mlx-bin
 	@echo "== valgrind MLX teardown maps/m_valid/01_minimal_N.cub =="; \
 	if command -v xvfb-run >/dev/null 2>&1; then \
-		xvfb-run -a $(VALGRIND) \
+		xvfb-run -a $(VALGRIND_MLX) \
 			./$(MLX_NAME) maps/m_valid/01_minimal_N.cub >/dev/null 2>vg.mlx.tmp; \
 	else \
-		$(VALGRIND) \
+		$(VALGRIND_MLX) \
 			./$(MLX_NAME) maps/m_valid/01_minimal_N.cub >/dev/null 2>vg.mlx.tmp; \
 	fi; \
 	rc=$$?; \

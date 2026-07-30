@@ -1,0 +1,16 @@
+# MiniLibX / X11 noise not under project control.
+# Origin: uninitialised stack in mlx_mouse_hide later reaches writev via XSync
+# when mlx_new_image creates an XShm image.
+{
+   mlx_xshm_image_writev_uninit
+   Memcheck:Param
+   writev(vector[0])
+   fun:__internal_syscall_cancel
+   fun:__syscall_cancel
+   fun:writev
+   ...
+   fun:mlx_int_new_xshm_image
+   fun:mlx_new_image
+   fun:init_game
+   fun:run_game
+}
