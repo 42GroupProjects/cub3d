@@ -8,7 +8,7 @@ Complete every item before opening the first lesson. This is not optional.
 
 ### 1. Lode's Raycasting Tutorial (MANDATORY)
 
-**URL:** <https://lodev.org/cgtutor/raycasting.html>
+**URL:** [https://lodev.org/cgtutor/raycasting.html](https://lodev.org/cgtutor/raycasting.html)
 
 Work through Parts 1–3:
 
@@ -20,7 +20,7 @@ Work through Parts 1–3:
 
 ### 2. Permadi's Tutorial (RECOMMENDED)
 
-**URL:** <https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/>
+**URL:** [https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)
 
 This gives the visual intuition that Lode's tutorial assumes. Permadi explains:
 
@@ -32,7 +32,7 @@ Read sections 1–9 for the geometric foundation.
 
 ### 3. MiniLibX Documentation
 
-**URL:** <https://harm-smits.github.io/42docs/libs/minilibx>
+**URL:** [https://harm-smits.github.io/42docs/libs/minilibx](https://harm-smits.github.io/42docs/libs/minilibx)
 
 Reference for all MLX function signatures, hook event codes, and image buffer usage. Keep this open while working on Module 01.
 
@@ -50,15 +50,17 @@ Reference for all MLX function signatures, hook event codes, and image buffer us
 #define KEY_DOWN    125
 ```
 
+
+
 ### 4. Aurelien Brabant MLX Guide (RECOMMENDED)
 
-**URL:** <https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx>
+**URL:** [https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx](https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx)
 
 Explains the offscreen image buffer pattern that is the core rendering technique for this project. After reading, you should understand why `mlx_pixel_put` is wrong and `mlx_put_image_to_window` on an offscreen buffer is right.
 
 ### 5. Game Engine Black Book: Wolfenstein 3D (OPTIONAL but inspiring)
 
-**URL:** <https://fabiensanglard.net/gebbwolf3d/>
+**URL:** [https://fabiensanglard.net/gebbwolf3d/](https://fabiensanglard.net/gebbwolf3d/)
 
 The Game Engine Black Book documents how John Carmack built the raycasting engine in Wolfenstein 3D. Chapter 5 is particularly relevant:
 
@@ -72,15 +74,19 @@ In cub3D we use floats because modern CPUs have hardware FPUs, but the **underly
 
 ---
 
+
+
 ## Install Checklist
 
-- [ ] MiniLibX is installed and `#include <mlx.h>` compiles
-- [ ] `gcc` with `-lmlx -framework OpenGL -framework AppKit` links without errors (macOS) OR `-lmlx -lX11 -lXext` (Linux)
-- [ ] `norminette` is installed and accessible from the terminal
-- [ ] `valgrind` or `leaks` is available for memory checking
-- [ ] Both partners have cloned this repository
+- [x] MiniLibX is installed and `#include <mlx.h>` compiles
+- [x] `gcc` with `-lmlx -framework OpenGL -framework AppKit` links without errors (macOS) OR `-lmlx -lX11 -lXext` (Linux)
+- [x] `norminette` is installed and accessible from the terminal
+- [x] `valgrind` or `leaks` is available for memory checking
+- [x] Both partners have cloned this repository
 
 ---
+
+
 
 ## Code References to Have Open (Do NOT copy)
 
