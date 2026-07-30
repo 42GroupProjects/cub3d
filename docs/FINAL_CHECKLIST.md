@@ -61,7 +61,7 @@ Verified via `make test-maps` (+ CI / Vesta invalid suite).
 - [ ] Wall textures loaded and sampled (N/S/E/W distinct) — XPMs in `textures/` ready
 - [ ] ←/→ rotate look (WASD move/strafe only; Q/E currently rotate)
 - [ ] Fix `camera_y` → `camera_x` in `ray.c`
-- [ ] Collision / 10×10 footprint (his plan) + OOB/`' '` walk guards
+- [ ] Collision / 10×10 footprint + OOB/`' '` walk guards
 - [ ] Norminette clean on `src/game/`
 - [ ] Drop debug `printf`s
 

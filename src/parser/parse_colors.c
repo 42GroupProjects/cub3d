@@ -6,15 +6,15 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:12 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/07/30 19:18:44 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	count_words(char **words)
+static int count_words(char **words)
 {
-	int	n;
+	int n;
 
 	n = 0;
 	while (words[n])
@@ -22,9 +22,9 @@ static int	count_words(char **words)
 	return (n);
 }
 
-static int	is_valid_byte(char *s)
+static int is_valid_byte(char *s)
 {
-	int	i;
+	int i;
 
 	s = skip_spaces(s);
 	if (!s[0])
@@ -45,9 +45,9 @@ static int	is_valid_byte(char *s)
 	return (TRUE);
 }
 
-static int	fill_rgb(int *rgb, char **parts)
+static int fill_rgb(int *rgb, char **parts)
 {
-	int	i;
+	int i;
 
 	if (count_words(parts) != RGB_COUNT)
 		return (FALSE);
@@ -62,9 +62,9 @@ static int	fill_rgb(int *rgb, char **parts)
 	return (TRUE);
 }
 
-static int	count_commas(char *s)
+static int count_commas(char *s)
 {
-	int	n;
+	int n;
 
 	n = 0;
 	while (*s)
@@ -76,9 +76,9 @@ static int	count_commas(char *s)
 	return (n);
 }
 
-int	set_color(int *rgb, char *value, int *flag)
+int set_color(int *rgb, char *value, int *flag)
 {
-	char	**parts;
+	char **parts;
 
 	if (*flag)
 		return (parse_error(ERR_DUP_COLOR));
