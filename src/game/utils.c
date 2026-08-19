@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 18:14:31 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/25 16:56:44 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 12:01:53 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 * - side == 1: horizontal wall (north or south)
 * step_x and step_y indicate which side of the wall was hit.
 *
-*           DDA hits a wall
+*           DDA hiMM_TS a wall
 *                |
 *         Was the last step.
 *        /                    \

@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/24 18:44:37 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 15:36:43 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,17 @@ typedef struct s_ray
 }	t_ray;
 
 /*
+** Minimap raycast struct
+*/
+typedef struct s_mm_ray
+{
+	double	dir_x;
+	double	dir_y;
+	double	x;
+	double	y;
+}	t_mm_ray;
+
+/*
 ** Texture struct
 */
 typedef struct s_texture
@@ -105,9 +116,12 @@ typedef struct s_cub
 	int					bpp;
 	int					line_len;
 	int					endian;
+	int					show_minimap;
+	int					show_rays;
 	struct s_game		*config;
 	struct s_player		*player;
 	struct s_ray		*ray;
+	struct s_mm_ray		mm_ray;
 	struct s_texture	north;
 	struct s_texture	east;
 	struct s_texture	south;

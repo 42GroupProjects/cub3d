@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/25 19:09:10 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 15:46:14 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@
 /* Navigation input (arrow, wasd,..) */
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
+# define MM_TOGGLE 109
+# define RAY_TOGGLE 114
+# define M_LEFT 97
+# define M_RIGHT 100
+# define M_UP 119
+# define M_DOWN 115
 
 /* Raycast defines */
 # define STEP 0.1
@@ -59,9 +65,11 @@
 # define ROT_SPEED 0.05
 
 /* Minimap defines */
-# define MM_SIZE 150
-# define TS 10
+# define MM_TS 10
 # define MM_T 15
+# define MM_SIZE (MM_T * MM_TS)
 # define MM_X 20
 # define MM_Y (HEIGHT - MM_SIZE - 20)
+# define MM_RAY_LENGTH 7
+# define MM_RAYS 60
 #endif

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 20:25:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/24 19:50:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/08/19 12:22:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,21 @@ int	handle_keypress(int keycode, t_cub *c)
 {
 	if (keycode == 65307)
 		on_close(c);
-	else if (keycode == 119)
+	else if (keycode == M_UP)
 		move(c, c->player->dir_x * MOVE_SPEED, c->player->dir_y * MOVE_SPEED);
-	else if (keycode == 115)
+	else if (keycode == M_DOWN)
 		move(c, -c->player->dir_x * MOVE_SPEED, -c->player->dir_y * MOVE_SPEED);
-	else if (keycode == 97)
+	else if (keycode == M_LEFT)
 		move(c, c->player->dir_y * MOVE_SPEED, -c->player->dir_x * MOVE_SPEED);
-	else if (keycode == 100)
+	else if (keycode == M_RIGHT)
 		move(c, -c->player->dir_y * MOVE_SPEED, c->player->dir_x * MOVE_SPEED);
 	else if (keycode == ARROW_LEFT)
 		rotate_player(c, -ROT_SPEED);
 	else if (keycode == ARROW_RIGHT)
 		rotate_player(c, ROT_SPEED);
+	else if (keycode == MM_TOGGLE)
+		c->show_minimap = !c->show_minimap;
+	else if (keycode == RAY_TOGGLE)
+		c->show_rays = !c->show_rays;
 	return (0);
 }
