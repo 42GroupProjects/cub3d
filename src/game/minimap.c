@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 18:44:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/19 16:09:20 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:24:47 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,18 @@ void	draw_minimap(t_cub *c)
 	}
 }
 
+void	get_mm_player_pos(t_cub *c, int *x, int *y)
+{
+	(void)c;
+	*x = MM_X + 7 * MM_TS + MM_TS / 2;
+	*y = MM_Y + 7 * MM_TS + MM_TS / 2;
+}
+
 void	draw_player(t_cub *c)
 {
 	int	x;
 	int	y;
 
-	x = (MM_X + 7 * MM_TS) + (0.5 * MM_TS);
-	y = (MM_Y + 7 * MM_TS) + (0.5 * MM_TS);
+	get_mm_player_pos(c, &x, &y);
 	draw_circle(c, x, y, 4);
 }

@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 11:46:51 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/19 16:10:41 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:33:34 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,86 @@ void	draw_mm_ray(t_cub *c, t_mm_ray *r)
 	int	end_x;
 	int	end_y;
 
-	start_x = (MM_X + 7 * MM_TS) + (0.5 * MM_TS);
-	start_y = (MM_Y + 7 * MM_TS) + (0.5 * MM_TS);
-	end_x = start_x + (r->x - c->player->x) * MM_TS;
-	end_y = start_y + (r->y - c->player->y) * MM_TS;
+//	start_x = MM_X + MM_CENTER * MM_TS + ((c->player->x - floor(c->player->x)) * MM_TS);
+//	start_y = MM_Y + MM_CENTER * MM_TS + ((c->player->y - floor(c->player->y)) * MM_TS);
+//	start_x = (MM_X + 7 * MM_TS) + (0.5 * MM_TS);
+//	start_y = (MM_Y + 7 * MM_TS) + (0.5 * MM_TS);
+//	start_x = MM_X + MM_CENTER * MM_TS + (MM_TS / 2);
+//	start_y = MM_Y + MM_CENTER * MM_TS + (MM_TS / 2);
+	get_mm_player_pos(c, &start_x, &start_y);
+	end_x = start_x + (r->hit_x - c->player->x) * MM_TS;
+	end_y = start_y + (r->hit_y - c->player->y) * MM_TS;
 	draw_line(c, start_x, start_y, end_x, end_y, 0xFF0000);
 }
 
 void	perform_mm_ray(t_cub *c, t_mm_ray *r)
 {
-	double	step;
-
-	step = 0.05;
-	while (1)
+	if (r->ray_dir_x < 0)
 	{
-		r->x += r->dir_x * step;
-		r->y += r->dir_y * step;
-		if (fabs(r->x - c->player->x) > 7 || fabs(r->y - c->player->y) > 7)
+		r->step_x = -1;
+		r->side_dist_x = (c->player->x - r->map_x) * r->delta_dist_x;
+	}
+	else
+	{
+		r->step_x = 1;
+		r->side_dist_x = (r->map_x + 1.0 - c->player->x) * r->delta_dist_x;
+	}
+	if (r->ray_dir_y < 0)
+	{
+		r->step_y = -1;
+		r->side_dist_y = (c->player->y - r->map_y) *r->delta_dist_y;
+	}
+	else
+	{
+		r->step_y = 1;
+		r->side_dist_y = (r->map_y + 1.0 - c->player->y) * r->delta_dist_y;
+	}
+	while (!r->hit)
+	{
+		if (r->side_dist_x < r->side_dist_y)
+		{
+			r->side_dist_x += r->delta_dist_x;
+			r->map_x += r->step_x;
+			r->side = 0;
+		}
+		else
+		{
+			r->side_dist_y += r->delta_dist_y;
+			r->map_y += r->step_y;
+			r->side = 1;
+		}
+		if (abs(r->map_x - (int)c->player->x) > 7
+			|| abs(r->map_y - (int)c->player->y) > 7)
 			break;
-		if (c->config->map[(int)r->y][(int)r->x] == '1')
-			break;
+	//	if (abs(r->map_x - (int)c->player->x) > MM_CENTER
+	//		|| abs(r->map_y - (int)c->player->y) > MM_CENTER)
+	//		break;
+		if (c->config->map[r->map_y][r->map_x] == '1')
+			r->hit = 1;
+	}
+//	if (r->side == 0)
+//	{
+//		r->hit_x = r->map_x;
+//		r->hit_y = c->player->y + (r->hit_x - c->player->x) * r->ray_dir_y / r->ray_dir_x;
+//	}
+//	else
+//	{
+//		r->hit_y = r->map_y;
+//		r->hit_x = c->player->x + (r->hit_y - c->player->y) * r->ray_dir_x / r->ray_dir_y;
+//	}
+	if (r->side == 0)
+	{
+		r->hit_x = r->map_x;
+		if (r->ray_dir_x < 0)
+			r->hit_x += 1.0;
+		r->hit_y = c->player->y + (r->hit_x - c->player->x) * r->ray_dir_y / r->ray_dir_x;
+	}
+	else
+	{
+		r->hit_y = r->map_y;
+		if (r->ray_dir_y < 0)
+			r->hit_y += 1.0;
+		r->hit_x = c->player->x + (r->hit_y - c->player->y) * r->ray_dir_x / r->ray_dir_y;
 	}
 }
 
@@ -86,10 +146,19 @@ void	init_mm_ray(t_cub *c, t_mm_ray *r, int i)
 	double	camera_x;
 
 	camera_x = 2.0 * i / MM_RAYS - 1.0;
-	r->dir_x = c->player->dir_x + c->player->plane_x * camera_x;
-	r->dir_y = c->player->dir_y + c->player->plane_y * camera_x;
-	r->x = c->player->x;
-	r->y = c->player->y;
+	r->ray_dir_x = c->player->dir_x + c->player->plane_x * camera_x;
+	r->ray_dir_y = c->player->dir_y + c->player->plane_y * camera_x;
+	r->map_x = (int)c->player->x;
+	r->map_y = (int)c->player->y;
+	if (r->ray_dir_x == 0)
+		r->delta_dist_x = INFINITY;
+	else
+		r->delta_dist_x = fabs(1.0 / r->ray_dir_x);
+	if (r->ray_dir_y == 0)
+		r->delta_dist_y = INFINITY;
+	else
+		r->delta_dist_y = fabs(1.0 / r->ray_dir_y);
+	r->hit = 0;
 }
 
 void	draw_minimap_rays(t_cub *c)

@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/19 15:46:14 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 16:33:39 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@
 # define STEP 0.1
 
 /* Movement speeds */
-# define MOVE_SPEED 0.08
+# define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 
 /* Minimap defines */
@@ -72,4 +72,5 @@
 # define MM_Y (HEIGHT - MM_SIZE - 20)
 # define MM_RAY_LENGTH 7
 # define MM_RAYS 60
+# define MM_CENTER (MM_TS / 2)
 #endif

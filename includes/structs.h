@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/19 15:36:43 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:02:56 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,20 @@ typedef struct s_ray
 */
 typedef struct s_mm_ray
 {
-	double	dir_x;
-	double	dir_y;
-	double	x;
-	double	y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		hit;
+	double	hit_x;
+	double	hit_y;
 }	t_mm_ray;
 
 /*
