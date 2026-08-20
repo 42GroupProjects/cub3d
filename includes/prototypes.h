@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/19 17:23:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/20 16:29:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void		draw_player(t_cub *c);
 void		draw_ray_minimap(t_cub *c, t_ray *r);
 void		draw_minimap_rays(t_cub *c);
 void		get_mm_player_pos(t_cub *c, int *x, int *y);
+void		draw_mm_frame(t_cub *c);
 
 #endif
