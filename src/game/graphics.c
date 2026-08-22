@@ -67,5 +67,6 @@ int	render(t_cub *cub)
 		draw_player(cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
+	usleep(1000);
 	return (SUCCESS);
 }
