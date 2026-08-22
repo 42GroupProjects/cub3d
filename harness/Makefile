@@ -97,24 +97,25 @@ valgrind-parser: parse-bin
 
 valgrind-mlx: mlx-bin
 	@echo "== valgrind MLX teardown maps/m_valid/01_minimal_N.cub =="; \
+	cd $(ROOT) && \
 	if command -v xvfb-run >/dev/null 2>&1; then \
 		xvfb-run -a $(VALGRIND) \
-			$(MLX_NAME) $(ROOT)/maps/m_valid/01_minimal_N.cub \
-			>/dev/null 2>$(ROOT)/vg.mlx.tmp; \
+			./cub3D_mlxtest maps/m_valid/01_minimal_N.cub \
+			>/dev/null 2>vg.mlx.tmp; \
 	else \
 		$(VALGRIND) \
-			$(MLX_NAME) $(ROOT)/maps/m_valid/01_minimal_N.cub \
-			>/dev/null 2>$(ROOT)/vg.mlx.tmp; \
+			./cub3D_mlxtest maps/m_valid/01_minimal_N.cub \
+			>/dev/null 2>vg.mlx.tmp; \
 	fi; \
 	rc=$$?; \
 	if [ $$rc -eq 42 ]; then \
-		echo "FAIL: valgrind reported issues"; cat $(ROOT)/vg.mlx.tmp; \
-		rm -f $(ROOT)/vg.mlx.tmp; exit 1; \
+		echo "FAIL: valgrind reported issues"; cat vg.mlx.tmp; \
+		rm -f vg.mlx.tmp; exit 1; \
 	elif [ $$rc -ne 0 ]; then \
-		echo "FAIL: expected success (rc=$$rc)"; cat $(ROOT)/vg.mlx.tmp; \
-		rm -f $(ROOT)/vg.mlx.tmp; exit 1; \
+		echo "FAIL: expected success (rc=$$rc)"; cat vg.mlx.tmp; \
+		rm -f vg.mlx.tmp; exit 1; \
 	fi; \
-	rm -f $(ROOT)/vg.mlx.tmp; \
+	rm -f vg.mlx.tmp; \
 	echo "valgrind-mlx: OK (ignore X11 still-reachable if any in manual runs)"
 
 clean:
