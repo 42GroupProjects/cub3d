@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:56:55 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/06/21 13:30:15 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:34:46 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ static char	*getoutput(char *save)
 		return (NULL);
 	j = 0;
 	while (j < i)
-	{
-		output[j] = save[j];
-		j++;
-	}
+		output[j] = save[j++];
 	return (output);
 }
 

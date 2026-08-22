@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/22 17:11:03 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 21:31:10 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define BITS_IN_BYTE 8
 # define PATH_BUFFER_SIZE 256
 # define STRING_BUFFER_SIZE 32
-# define GREEN "\033[0;32m"
+# define GREEN "\033[0;32m" //TODO: CHECK
 # define CYAN "\033[1;96m"
 # define RESET "\033[0m"
 
@@ -71,9 +71,7 @@
 /* Minimap defines */
 # define MM_TS 10
 # define MM_T 25
-# define MM_SIZE (MM_T * MM_TS)
 # define MM_X 20
-# define MM_Y (HEIGHT - MM_SIZE - 20)
 # define MM_FLOOR_COLOR 0x59633b
 # define MM_PLAYER_COLOR 0xFF00FF
 #endif

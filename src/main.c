@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:42 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/07/24 18:45:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/08/22 21:40:18 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	usage(void)
 }
 
 #ifndef CUB3D_PARSE_ONLY
+
 static int	run_game(t_game *game)
 {
 	t_cub	cub;
@@ -26,6 +27,7 @@ static int	run_game(t_game *game)
 	if (init_game(&cub, game) != SUCCESS)
 		return (FAILURE);
 #ifdef CUB3D_QUIT_AFTER_INIT
+
 	clean_exit(&cub, 0);
 #endif
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
@@ -46,8 +48,7 @@ int	main(int argc, char **argv)
 		return (usage(), 1);
 	if (parse_config(&game, argv[1]) != SUCCESS)
 		return (1);
-	print_config(&game);
-#ifdef CUB3D_PARSE_ONLY
+	#ifdef CUB3D_PARSE_ONLY
 	return (free_config(&game), 0);
 #else
 	if (run_game(&game) != SUCCESS)

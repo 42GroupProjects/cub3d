@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:57:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2025/05/22 16:43:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:33:51 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (arr);
 }
-
