@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/22 16:53:11 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 23:30:27 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	render(t_cub *cub)
 {
 	int	x;
 
+	apply_player_input(cub);
 	x = 0;
 	draw_background(cub);
 	while (x < WIDTH)

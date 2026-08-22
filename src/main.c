@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 19:02:42 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/22 22:30:00 by thanh-ng         ###   ########.fr       */
+/*   Updated: 2026/08/22 23:30:13 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	run_game(t_game *game)
 	if (init_game(&cub, game) != SUCCESS)
 		return (FAILURE);
 	mlx_hook(cub.win, 2, 1L << 0, handle_keypress, &cub);
+	mlx_hook(cub.win, 3, 1L << 1, handle_keyrelease, &cub);
 	mlx_loop_hook(cub.mlx, render, &cub);
 	mlx_hook(cub.win, 17, 0, on_x, &cub);
 	mlx_loop(cub.mlx);

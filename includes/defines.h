@@ -47,6 +47,7 @@
 /* Navigation input (arrow, wasd,..) */
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
+# define KEY_ESC 65307
 # define MM_TOGGLE 109
 # define M_LEFT 97
 # define M_RIGHT 100

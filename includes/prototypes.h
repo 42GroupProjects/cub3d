@@ -41,6 +41,8 @@ int			render(t_cub *cub);
 void		put_pixel(t_cub *cub, int x, int y, int color);
 void		cast_ray(t_cub *c, int x);
 int			handle_keypress(int keycode, t_cub *c);
+int			handle_keyrelease(int keycode, t_cub *c);
+void		apply_player_input(t_cub *c);
 void		on_close(t_cub *c);
 int			on_x(t_cub *c);
 void		rotate_player(t_cub *c, double angle);

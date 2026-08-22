@@ -108,6 +108,12 @@ typedef struct s_cub
 	int					show_minimap;
 	int					start_x;
 	int					start_y;
+	int					key_w;
+	int					key_a;
+	int					key_s;
+	int					key_d;
+	int					key_left;
+	int					key_right;
 	struct s_game		*config;
 	struct s_player		*player;
 	struct s_ray		*ray;
