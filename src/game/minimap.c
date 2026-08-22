@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/25 18:44:57 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/20 17:40:56 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:04:07 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	draw_minimap_tile(t_cub *c, int map_x, int map_y, int x, int y)
 	else if (c->config->map[map_y][map_x] == '1')
 		color = BLACK;
 	else if (c->config->map[map_y][map_x] == '0')
-		color = MM_COLOR;
+		color = MM_FLOOR_COLOR;
 	else
 		color = BLACK;
 	draw_square(c, MM_X + x * MM_TS, MM_Y + y * MM_TS, color);
@@ -54,8 +54,8 @@ void	draw_minimap(t_cub *c)
 	int	x;
 	int	y;
 
-	start_x = (int)c->player->x - 7;
-	start_y = (int)c->player->y - 7;
+	start_x = (int)c->player->x - (MM_T / 2);
+	start_y = (int)c->player->y - (MM_T / 2);
 	y = 0;
 	while (y < MM_T)
 	{
@@ -69,39 +69,31 @@ void	draw_minimap(t_cub *c)
 	}
 }
 
-static void	draw_rect(t_cub *c, int x, int y, int width, int height)
-{
-	int	i;
-	int	j;
-	int	color;
-
-	color = 0x000000;
-	i = 0;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-		{
-			put_pixel(c, x + j, y + i, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_mm_frame(t_cub *c)
+static void	draw_circle(t_cub *c, int cx, int cy, int radius)
 {
 	int	x;
 	int	y;
-	int	w;
-	int	h;
 
-	x = MM_X;
-	y = MM_Y;
-	w = MM_SIZE;
-	h = MM_SIZE;
-	draw_rect(c, x - MM_BORDER, y - MM_BORDER, w + MM_BORDER * 2, MM_BORDER);
-	draw_rect(c, x - MM_BORDER, y + h, w + MM_BORDER * 2, MM_BORDER);
-	draw_rect(c, x - MM_BORDER, y, MM_BORDER, h);
-	draw_rect(c, x + w, y, MM_BORDER, h);
+	y = -radius;
+	while (y <= radius)
+	{
+		x = -radius;
+		while (x <= radius)
+		{
+			if (x * x + y * y <= radius * radius)
+				put_pixel(c, cx + x, cy + y, MM_PLAYER_COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_player(t_cub *c)
+{
+	int	x;
+	int	y;
+
+	x = MM_X + (int)(MM_T / 2) * MM_TS;
+	y = MM_Y + (int)(MM_T / 2) * MM_TS;
+	draw_circle(c, x, y, 4);
 }

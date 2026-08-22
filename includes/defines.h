@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/20 17:40:31 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:07:28 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,10 @@
 
 /* Minimap defines */
 # define MM_TS 10
-# define MM_T 15
+# define MM_T 25
 # define MM_SIZE (MM_T * MM_TS)
 # define MM_X 20
 # define MM_Y (HEIGHT - MM_SIZE - 20)
-# define MM_RAY_LENGTH 7
-# define MM_RAYS 60
-# define MM_CENTER (MM_TS / 2)
-# define MM_BORDER 8
-# define MM_COLOR 0x59633b
+# define MM_FLOOR_COLOR 0x59633b
+# define MM_PLAYER_COLOR 0xFF00FF
 #endif
