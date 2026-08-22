@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:46:38 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/21 21:43:03 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 16:31:02 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	render(t_cub *cub)
 	if (cub->show_minimap)
 	{
 		draw_minimap(cub);
-		draw_player(cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (SUCCESS);
