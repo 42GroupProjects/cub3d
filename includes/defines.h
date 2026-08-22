@@ -39,9 +39,6 @@
 # define BITS_IN_BYTE 8
 # define PATH_BUFFER_SIZE 256
 # define STRING_BUFFER_SIZE 32
-# define GREEN "\033[0;32m" //TODO: CHECK
-# define CYAN "\033[1;96m"
-# define RESET "\033[0m"
 
 /* Window size and tile sizes */
 # define WIDTH 1600
