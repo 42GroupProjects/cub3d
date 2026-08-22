@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 17:07:48 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/19 14:51:08 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 23:25:00 by thanh-ng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,46 +54,16 @@ void	calculate_step(t_cub *c, t_ray *r)
 	}
 }
 
-void	perform_dda(t_cub *c, t_ray *r)
-{
-	while (r->hit == 0)
-	{
-		if (r->side_dist_x < r->side_dist_y)
-		{
-			r->side_dist_x += r->delta_dist_x;
-			r->map_x += r->step_x;
-			r->side = 0;
-		}
-		else
-		{
-			r->side_dist_y += r->delta_dist_y;
-			r->map_y += r->step_y;
-			r->side = 1;
-		}
-		if (r->map_x < 0 || r->map_y < 0
-			|| r->map_y >= c->config->height
-			|| r->map_x >= c->config->width)
-		{
-			r->hit = 1;
-			return ;
-		}
-		if (c->config->map[r->map_y][r->map_x] == '1')
-			r->hit = 1;
-	}
-}
-
 void	calculate_perp_wall_dist(t_cub *c, t_ray *r)
 {
 	if (r->side == 0)
-	{
 		r->perp_wall_dist = (r->map_x - c->player->x
 				+ (1 - r->step_x) / 2.0) / r->ray_dir_x;
-	}
 	else
-	{
 		r->perp_wall_dist = (r->map_y - c->player->y
 				+ (1 - r->step_y) / 2.0) / r->ray_dir_y;
-	}
+	if (r->perp_wall_dist < 0.0)
+		r->perp_wall_dist = -r->perp_wall_dist;
 }
 
 void	cast_ray(t_cub *c, int x)

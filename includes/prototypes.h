@@ -40,6 +40,7 @@ void		free_cub_struct(t_cub *cub);
 int			render(t_cub *cub);
 void		put_pixel(t_cub *cub, int x, int y, int color);
 void		cast_ray(t_cub *c, int x);
+void		perform_dda(t_cub *c, t_ray *r);
 int			handle_keypress(int keycode, t_cub *c);
 int			handle_keyrelease(int keycode, t_cub *c);
 void		apply_player_input(t_cub *c);

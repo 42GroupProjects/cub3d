@@ -28,6 +28,10 @@ void	calculate_tx_x(t_texture *tx, t_ray *r)
 		r->tx_x = tx->width - r->tx_x - 1;
 	if (r->side == 1 && r->ray_dir_y > 0)
 		r->tx_x = tx->width - r->tx_x - 1;
+	if (r->tx_x < 0)
+		r->tx_x = 0;
+	if (r->tx_x >= tx->width)
+		r->tx_x = tx->width - 1;
 }
 
 static int	get_texture_pixel(t_texture *t, int x, int y)
@@ -65,11 +69,15 @@ void	draw_textured_line(t_cub *c, t_texture *t, t_ray *r, int x)
 
 void	calculate_line_height(t_ray *r)
 {
-	r->line_height = HEIGHT / r->perp_wall_dist;
+	if (r->perp_wall_dist < 0.0001)
+		r->perp_wall_dist = 0.0001;
+	r->line_height = (int)(HEIGHT / r->perp_wall_dist);
+	if (r->line_height < 1)
+		r->line_height = 1;
 	r->draw_start = -r->line_height / 2 + HEIGHT / 2;
 	r->draw_end = r->line_height / 2 + HEIGHT / 2;
 	if (r->draw_start < 0)
 		r->draw_start = 0;
 	if (r->draw_end >= HEIGHT)
-		r->draw_end = HEIGHT -1;
+		r->draw_end = HEIGHT - 1;
 }
