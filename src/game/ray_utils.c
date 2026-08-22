@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 16:36:33 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/07/25 14:58:00 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 19:30:12 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	calculate_wall_x(t_cub *c, t_ray *r)
 void	calculate_tx_x(t_texture *tx, t_ray *r)
 {
 	r->tx_x = (int)(r->wall_x * tx->width);
-	if (r->side == 0 && r->ray_dir_y > 0)
+	if (r->side == 0 && r->ray_dir_x < 0)
 		r->tx_x = tx->width - r->tx_x - 1;
-	if (r->side == 1 && r->ray_dir_y < 0)
+	if (r->side == 1 && r->ray_dir_y > 0)
 		r->tx_x = tx->width - r->tx_x - 1;
 }
 
