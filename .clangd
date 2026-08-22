@@ -1,0 +1,8 @@
+CompileFlags:
+  Add:
+    - -Iincludes
+    - -Ilibft
+    - -I/usr/local/include
+    - -Wall
+    - -Wextra
+    - -Werror

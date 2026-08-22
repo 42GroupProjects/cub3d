@@ -48,10 +48,10 @@ jobs:
         run: make -C tester invalid
 
       - name: Run local map suites
-        run: make test-maps
+        run: make -C harness test-maps
 
       - name: Run parser under valgrind
-        run: make valgrind-parser
+        run: make -C harness valgrind-parser
 
       - name: Run MLX init teardown under valgrind
-        run: make valgrind-mlx
+        run: make -C harness valgrind-mlx
