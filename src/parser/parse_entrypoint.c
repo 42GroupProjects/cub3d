@@ -75,8 +75,7 @@ static char	**load_lines(char *file)
 		lines = tmp;
 		line = get_next_line(fd);
 	}
-	close(fd);
-	return (lines);
+	return (get_next_line(-1), close(fd), lines);
 }
 
 static int	cleanup_parse_failure(t_game *game, char **lines, int status)

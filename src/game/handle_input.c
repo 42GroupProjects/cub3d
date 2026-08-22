@@ -12,20 +12,35 @@
 
 #include "cub3d.h"
 
-static int	is_walkable(t_cub *c, double y, double x)
+static int	cell_blocked(t_cub *c, int map_x, int map_y)
 {
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)x;
-	map_y = (int)y;
 	if (map_x < 0 || map_y < 0
 		|| map_y >= c->config->height
 		|| map_x >= c->config->width)
-		return (0);
+		return (1);
 	if (c->config->map[map_y][map_x] == '1'
 		|| c->config->map[map_y][map_x] == ' ')
-		return (0);
+		return (1);
+	return (0);
+}
+
+static int	is_walkable(t_cub *c, double y, double x)
+{
+	double	dx;
+	double	dy;
+
+	dy = -COLLISION_PAD;
+	while (dy <= COLLISION_PAD)
+	{
+		dx = -COLLISION_PAD;
+		while (dx <= COLLISION_PAD)
+		{
+			if (cell_blocked(c, (int)(x + dx), (int)(y + dy)))
+				return (0);
+			dx += 2.0 * COLLISION_PAD;
+		}
+		dy += 2.0 * COLLISION_PAD;
+	}
 	return (1);
 }
 
