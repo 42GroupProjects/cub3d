@@ -6,7 +6,7 @@
 /*   By: thanh-ng <thanh-ng@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 20:55:00 by thanh-ng          #+#    #+#             */
-/*   Updated: 2026/08/22 17:07:28 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:11:03 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@
 # define RESET "\033[0m"
 
 /* Window size and tile sizes */
-# define WIDTH 600
-# define HEIGHT 600
+# define WIDTH 1600
+# define HEIGHT 900
 
 /* Navigation input (arrow, wasd,..) */
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 # define MM_TOGGLE 109
-# define RAY_TOGGLE 114
 # define M_LEFT 97
 # define M_RIGHT 100
 # define M_UP 119

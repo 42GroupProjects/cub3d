@@ -6,7 +6,7 @@
 /*   By: lwittwer <lwittwer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 20:25:49 by lwittwer          #+#    #+#             */
-/*   Updated: 2026/08/19 12:22:39 by lwittwer         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:09:25 by lwittwer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,5 @@ int	handle_keypress(int keycode, t_cub *c)
 		rotate_player(c, ROT_SPEED);
 	else if (keycode == MM_TOGGLE)
 		c->show_minimap = !c->show_minimap;
-	else if (keycode == RAY_TOGGLE)
-		c->show_rays = !c->show_rays;
 	return (0);
 }
